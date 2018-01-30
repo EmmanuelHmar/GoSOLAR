@@ -1,6 +1,6 @@
 # Stellar
 
-Create custom GoSolar for GSU. 
+Create a student registration system. Custom GoSolar. 
 
 Team members: Glenn, Amber, Gabby, Hamed, E
 
