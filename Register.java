@@ -128,7 +128,9 @@ public class Register extends javax.swing.JFrame {
                 login_buttonActionPerformed(evt);
             }
         });
-
+        
+         
+        // Panel Layout
         javax.swing.GroupLayout main_panelLayout = new javax.swing.GroupLayout(main_panel);
         main_panel.setLayout(main_panelLayout);
         main_panelLayout.setHorizontalGroup(
