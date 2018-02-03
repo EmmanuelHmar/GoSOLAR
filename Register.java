@@ -18,13 +18,13 @@ import javax.swing.JOptionPane;
 public class Register extends javax.swing.JFrame {
     //Creates Registration form
     public Register() {
-        initComponents();
+        register_form();
         staricon();
         setTitle("Stellar Registration");
     }
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    
+    private void register_form() {
 
         main_panel = new javax.swing.JPanel();
         register_title = new javax.swing.JLabel();
@@ -51,61 +51,61 @@ public class Register extends javax.swing.JFrame {
 
         main_panel.setBackground(new java.awt.Color(33, 16, 27));
 
-        register_title.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        register_title.setFont(new java.awt.Font("Dialog", 1, 18)); 
         register_title.setForeground(new java.awt.Color(255, 255, 255));
         register_title.setText("Registration");
 
-        firstname_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        firstname_label.setFont(new java.awt.Font("Century Gothic", 1, 14));
         firstname_label.setForeground(new java.awt.Color(255, 255, 255));
         firstname_label.setText("First Name:");
 
         firstname_input.setBackground(new java.awt.Color(33, 16, 27));
-        firstname_input.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        firstname_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
         firstname_input.setForeground(new java.awt.Color(255, 255, 255));
         firstname_input.setBorder(null);
         firstname_input.setSelectionColor(new java.awt.Color(255, 153, 102));
 
-        lastname_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lastname_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
         lastname_label.setForeground(new java.awt.Color(255, 255, 255));
         lastname_label.setText("Last Name:");
 
         lastname_input.setBackground(new java.awt.Color(33, 16, 27));
-        lastname_input.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        lastname_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
         lastname_input.setForeground(new java.awt.Color(255, 255, 255));
         lastname_input.setBorder(null);
         lastname_input.setSelectionColor(new java.awt.Color(255, 153, 102));
 
-        id_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        id_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
         id_label.setForeground(new java.awt.Color(255, 255, 255));
         id_label.setText("Student ID:");
 
         id_input.setBackground(new java.awt.Color(33, 16, 27));
-        id_input.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        id_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
         id_input.setForeground(new java.awt.Color(255, 255, 255));
         id_input.setBorder(null);
         id_input.setSelectionColor(new java.awt.Color(255, 153, 102));
 
-        pass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        pass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
         pass_label.setForeground(new java.awt.Color(255, 255, 255));
         pass_label.setText("Password:");
 
         pass_input.setBackground(new java.awt.Color(33, 16, 27));
-        pass_input.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        pass_input.setFont(new java.awt.Font("DialogInput", 0, 18));
         pass_input.setForeground(new java.awt.Color(255, 255, 255));
         pass_input.setBorder(null);
         pass_input.setSelectionColor(new java.awt.Color(255, 153, 102));
 
-        confirmpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        confirmpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14));
         confirmpass_label.setForeground(new java.awt.Color(255, 255, 255));
         confirmpass_label.setText("Confirm Password:");
 
         confirmpass_input.setBackground(new java.awt.Color(33, 16, 27));
-        confirmpass_input.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
+        confirmpass_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
         confirmpass_input.setForeground(new java.awt.Color(255, 255, 255));
         confirmpass_input.setBorder(null);
         confirmpass_input.setSelectionColor(new java.awt.Color(255, 153, 102));
 
-        register_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        register_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
         register_button.setText("Register");
         register_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -121,7 +121,7 @@ public class Register extends javax.swing.JFrame {
         login_label.setForeground(new java.awt.Color(255, 255, 255));
         login_label.setText("Already Registered? Login here:");
 
-        login_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        login_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
         login_button.setText("Login");
         login_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -230,12 +230,12 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
+    private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_login_buttonActionPerformed
+    }
     
     //Compares the passwords
-    private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_buttonActionPerformed
+    private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {
      String firstname = firstname_input.getText();
      String lastname = lastname_input.getText();
      String studentid = id_input.getText();
@@ -253,9 +253,6 @@ public class Register extends javax.swing.JFrame {
          confirmpass_input.setText("");
         }
      
-     
-     
-     
   
      //Compares firstpass with secondpass
      if (secondpass.equals(firstpass)){
@@ -266,23 +263,21 @@ public class Register extends javax.swing.JFrame {
          pass_input.setText("");
          confirmpass_input.setText("");
      }
-     
-  
-       
-    }//GEN-LAST:event_register_buttonActionPerformed
+   
+    }
 
-    private void login_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_buttonMouseClicked
+    private void login_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         Login log = new Login();
         log.setVisible(true);
         log.pack();
         log.setLocationRelativeTo(null);
         log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_login_buttonMouseClicked
+    }
 
-    private void register_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_register_buttonMouseClicked
+    private void register_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_register_buttonMouseClicked
+    }
 
     /**
      * @param args the command line arguments
@@ -320,8 +315,6 @@ public class Register extends javax.swing.JFrame {
     
     }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField confirmpass_input;
     private javax.swing.JLabel confirmpass_label;
     private javax.swing.JSeparator confirmpass_line;
@@ -342,5 +335,5 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JSeparator pass_line;
     private javax.swing.JButton register_button;
     private javax.swing.JLabel register_title;
-    // End of variables declaration//GEN-END:variables
+    
 }
