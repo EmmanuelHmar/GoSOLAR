@@ -26,11 +26,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel pass_label;
     private javax.swing.JSeparator pass_line;
     private javax.swing.JButton register_button;  
-    
-    /**
-     * @param args the command line arguments
-     */
-    
+ 
     
     //Login form
     public Login() {
@@ -111,7 +107,6 @@ public class Login extends javax.swing.JFrame {
         });
         
         
-        
        //Panel Layout
         javax.swing.GroupLayout main_panelLayout = new javax.swing.GroupLayout(main_panel);
         main_panel.setLayout(main_panelLayout);
@@ -185,16 +180,12 @@ public class Login extends javax.swing.JFrame {
     }
     
     
-    
-    
     //Handling 
     
     private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
     }                                               
-                                         
-
-    
+ 
     
     //Method used to set the icon of the program to be a star
     public void staricon(){
