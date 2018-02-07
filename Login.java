@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package stellar;
-
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.EventQueue;
+import java.sql.*;
+import javax.swing.*;
 
-/**
- *
- * @author aturn
- * ~Documentation goes here~
- */
 public class Login extends javax.swing.JFrame {
     
     private javax.swing.JTextField id_input;
@@ -26,14 +19,17 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel pass_label;
     private javax.swing.JSeparator pass_line;
     private javax.swing.JButton register_button;  
+    Connection connection=null;
  
     
     //Login form
     public Login() {
         login_form();
+		connection= DatabaseConnection.dbConnector();
         staricon();
         setTitle("Stellar Login");
         setLocationRelativeTo(null);
+        
     }
 
    
@@ -49,6 +45,42 @@ public class Login extends javax.swing.JFrame {
         pass_input = new javax.swing.JPasswordField();
         pass_line = new javax.swing.JSeparator();
         login_button = new javax.swing.JButton();
+        login_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try{
+					String query="select * from students where student_id=? and passqord=?";
+					PreparedStatement pst= connection.prepareStatement(query);
+					pst.setString(1,id_input.getText());
+					pst.setString(2,pass_input.getText());
+					ResultSet rs= pst.executeQuery();
+					int count=0;
+					while(rs.next()){
+						count= count+1;
+					}
+					if (count == 1)
+					{
+							JOptionPane.showMessageDialog(null, "Username and password is correct");
+							
+					}
+					else if (count >1)
+					{
+						JOptionPane.showMessageDialog(null, "Duplicate Username and password");
+
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Username or password is not correct Try Again");
+
+					}
+					rs.close();
+					pst.close();
+					}
+
+				catch(Exception e1)
+				{
+					JOptionPane.showMessageDialog(null, e1);
+				}
+        	}
+        });
         newuser_label = new javax.swing.JLabel();
         register_button = new javax.swing.JButton();
 
