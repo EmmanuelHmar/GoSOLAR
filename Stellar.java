@@ -1,5 +1,6 @@
+package stellar;
 
-public class Stellar {
+ public class Stellar {
 
     /**
      * @param args the command line arguments

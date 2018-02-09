@@ -1,3 +1,5 @@
+package stellar;
+
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
@@ -19,13 +21,16 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel pass_label;
     private javax.swing.JSeparator pass_line;
     private javax.swing.JButton register_button;  
+    
     Connection connection=null;
  
     
     //Login form
     public Login() {
         login_form();
-		connection= DatabaseConnection.dbConnector();
+             
+        //Connects to the database
+        connection= DatabaseConnection.dbConnector();
         staricon();
         setTitle("Stellar Login");
         setLocationRelativeTo(null);
@@ -45,35 +50,65 @@ public class Login extends javax.swing.JFrame {
         pass_input = new javax.swing.JPasswordField();
         pass_line = new javax.swing.JSeparator();
         login_button = new javax.swing.JButton();
+        
+        //Login Button Handling
         login_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		try{
-					String query="select * from students where student_id=? and passqord=?";
+					
+                               if (id_input.getText().isEmpty() | pass_input.getText().isEmpty()){
+                               
+                                   JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                               } else {
+                            
+                            
+                                        String query="select * from students where student_id=? and passqord=?";
 					PreparedStatement pst= connection.prepareStatement(query);
 					pst.setString(1,id_input.getText());
 					pst.setString(2,pass_input.getText());
 					ResultSet rs= pst.executeQuery();
 					int count=0;
-					while(rs.next()){
-						count= count+1;
+                                        
+                                        while(rs.next()){
+						count= count+1;    
+                                                
+                                                
 					}
 					if (count == 1)
+                                            
 					{
-							JOptionPane.showMessageDialog(null, "Username and password is correct");
+                                            
+                                             StellarDashboard stellardash= new StellarDashboard() ;
+                                             stellardash.setVisible(true);
+                                             stellardash.pack();
+                                             stellardash.setLocationRelativeTo(null);
+                                             stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                             dispose();
+							//JOptionPane.showMessageDialog(null, "Username and password is correct");
+                                                        
 							
 					}
 					else if (count >1)
 					{
 						JOptionPane.showMessageDialog(null, "Duplicate Username and password");
+                                                id_input.setText("");
+                                                pass_input.setText("");
+
 
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "Username or password is not correct Try Again");
+						JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
+                                                id_input.setText("");
+                                                pass_input.setText("");
 
 					}
+                       
+                                        
 					rs.close();
 					pst.close();
 					}
+                               }
+                        
 
 				catch(Exception e1)
 				{
@@ -134,7 +169,7 @@ public class Login extends javax.swing.JFrame {
         });
         register_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                register_buttonActionPerformed(evt);
+               
             }
         });
         
@@ -214,16 +249,17 @@ public class Login extends javax.swing.JFrame {
     
     //Handling 
     
-    private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
-    }                                               
+   private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                                
  
+       
+    }                                               
     
     //Method used to set the icon of the program to be a star
     public void staricon(){
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
     
     }
+    
     
                    
                     

@@ -1,16 +1,27 @@
-import java.sql.*;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package stellar;
+
+/**
+ *
+ * @author aturn
+ */import java.sql.*;
 import javax.swing.*;
 
 public class DatabaseConnection {
 	Connection conn=null;
 public static Connection dbConnector()
 {
+    
+   
 	try {
 		Class.forName("org.sqlite.JDBC");
-		Connection conn=DriverManager.getConnection("jdbc:sqlite:/Users/hamedouldhamou/Desktop/TEST/DataBase.db");
-		JOptionPane.showMessageDialog(null, "Connection Successful");
+		Connection conn=DriverManager.getConnection("jdbc:sqlite:C:\\Mydir\\DataBase.db");
+		//JOptionPane.showMessageDialog(null, "Connection Successful");
 		return conn;
-		
 	}
 	catch(Exception e)
 	{
