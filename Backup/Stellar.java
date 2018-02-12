@@ -1,3 +1,4 @@
+package stellar;
 
 public class Stellar {
 
@@ -22,14 +23,14 @@ public class Stellar {
             java.util.logging.Logger.getLogger(Stellar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Stellar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-        
+        }
+
         //Creates and displays the windows
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
-             }
+            }
         });
     }
-    
+
 }
