@@ -10,6 +10,7 @@ import javax.swing.*;
 
 public class Login extends javax.swing.JFrame {
     
+    //Variables
     private javax.swing.JTextField id_input;
     private javax.swing.JLabel id_label;
     private javax.swing.JSeparator id_line;
@@ -21,14 +22,15 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel pass_label;
     private javax.swing.JSeparator pass_line;
     private javax.swing.JButton register_button;  
-    
     Connection connection=null;
  
     
-    //Login form
-    public Login() {
+    /**Constructor that calls the login_form method, the method for the star icon,
+     * sets the title to "Stellar Login", and sets the windows location to be in the center of the screen.
+     */
+        public Login() {
         login_form();
-             
+        
         //Connects to the database
         connection= DatabaseConnection.dbConnector();
         staricon();
@@ -37,7 +39,7 @@ public class Login extends javax.swing.JFrame {
         
     }
 
-   
+        
     @SuppressWarnings("unchecked")                          
     private void login_form() {
 
@@ -51,7 +53,10 @@ public class Login extends javax.swing.JFrame {
         pass_line = new javax.swing.JSeparator();
         login_button = new javax.swing.JButton();
         
-        //Login Button Handling
+        /**Login Button Handling. Checks the username and password. if they're correct, the dashboard will open.
+         * If the password or username is incorrect, they fields will reset. if the fields are empty they will be a message saying that
+         * the fields are empty.
+         */
         login_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		try{

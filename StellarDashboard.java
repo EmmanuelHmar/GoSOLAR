@@ -51,11 +51,16 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         menu_panel.setBackground(new java.awt.Color(204, 204, 204));
 
-        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stellar/graphics/door12.png"))); // NOI18N
+        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("door12.png")));
         logout_button.setText("Logout");
         logout_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logout_buttonMouseClicked(evt);
+            }
+        });
+        logout_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_buttonActionPerformed(evt);
             }
         });
 
@@ -170,6 +175,10 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_logout_buttonMouseClicked
+
+    private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logout_buttonActionPerformed
 
     /**
      * @param args the command line arguments
