@@ -82,7 +82,7 @@ public class Login extends javax.swing.JFrame {
 					if (count == 1)
                                             
 					{
-                                            
+                                            //Calls the dashboard method and sets/displays the studentname as the input of the student id.
                                              StellarDashboard stellardash= new StellarDashboard() ;
                                              stellardash.setVisible(true);
                                              stellardash.pack();
@@ -253,7 +253,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     
-    //Handling 
+    //Handling
     
    private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                                
  

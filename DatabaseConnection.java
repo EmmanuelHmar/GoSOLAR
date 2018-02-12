@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stellar;
 
-/**
- *
- * @author aturn
- */import java.sql.*;
+import java.sql.*;
 import javax.swing.*;
 
 public class DatabaseConnection {
