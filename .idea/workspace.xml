@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ce0a869-f923-4d9f-a310-c8653a89e52f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/Stellar.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Backup/DataBase.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Backup/DatabaseConnection.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Backup/Login.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Backup/Stellar.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Backup/StellarDashboard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Backup/sqlite-jdbc4-3.8.2-SNAPSHOT.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Backup/star-icon.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -302,12 +291,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1518472982042</updated>
-      <workItem from="1518472984293" duration="544000" />
+      <workItem from="1518472984293" duration="662000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="544000" />
+    <option name="totallyTimeSpent" value="662000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
