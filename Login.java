@@ -88,7 +88,8 @@ public class Login extends javax.swing.JFrame {
                                              stellardash.pack();
                                              stellardash.setLocationRelativeTo(null);
                                              stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                             StellarDashboard.studentname.setText(id_input.getText());
+                                             System.out.println(id_input.getText());
+                                             StellarDashboard.firstname.setText(id_input.getText());
                                              dispose();
 					     //JOptionPane.showMessageDialog(null, "Username and password is correct");
                                                         
