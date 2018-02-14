@@ -95,7 +95,7 @@ public class Login extends javax.swing.JFrame {
                                                 studentEmail = rs.getString("email");
                                                 Major = rs.getString("major");
                                                 GPA = rs.getString("GPA");
-                                                Year = rs.getString("");
+                                                //Year = rs.getString("");
                                                 //Standing = rs.getString("");
                                               
 					}
@@ -112,10 +112,10 @@ public class Login extends javax.swing.JFrame {
                                              stellardash.setLocationRelativeTo(null);
                                              stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                              StellarDashboard.firstname.setText(firstName);
-                                               StellarDashboard.lastname.setText(lastName);
-                                               StellarDashboard.studentidnum.setText(studentIDnum);
-                                               StellarDashboard.studentid.setText(studentID);
-                                               StellarDashboard.email.setText(studentEmail);
+                                             StellarDashboard.lastname.setText(lastName);
+                                             StellarDashboard.studentidnum.setText(studentIDnum);
+                                             StellarDashboard.studentid.setText(studentID);
+                                             StellarDashboard.email.setText(studentEmail);
                                                StellarDashboard.major.setText(Major);
                                                StellarDashboard.gpa.setText(GPA);
                                                StellarDashboard.year.setText(Year);
