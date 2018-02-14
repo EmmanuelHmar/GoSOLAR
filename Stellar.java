@@ -24,12 +24,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton register_button;
     Connection connection = null;
 
+public class Stellar {
 
     /**
      * Constructor that calls the login_form method, the method for the star icon,
      * sets the title to "Stellar Login", and sets the windows location to be in the center of the screen.
      */
-    public Login() {
+
+  public Login() {
         login_form();
 
         //Connects to the database
@@ -124,7 +126,37 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, e1);
                 }
             }
+=======
+
+    //The main method calls the Login class and makes it visible. It also gives the window a "Nimbus look". The Nimbus look is optional.
+    public static void main(String[] args) {
+        Login log = new Login();
+        //For the Nimbus Look
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Stellar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Stellar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Stellar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Stellar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+
+        //Creates and displays the windows
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Login().setVisible(true);
+            }
         });
+  
         newuser_label = new javax.swing.JLabel();
         register_button = new javax.swing.JButton();
 
