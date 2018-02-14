@@ -62,22 +62,28 @@ public class Login extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
 
-                    if (id_input.getText().isEmpty() | pass_input.getText().isEmpty()) {
+                    String passText = new String(pass_input.getPassword());
+                    String firstName = "";
+                    String lastName = "";
+
+                    if (id_input.getText().isEmpty() | passText.isEmpty()) {
 
                         JOptionPane.showMessageDialog(null, "Please fill in all fields");
                     } else {
 
 
-                        String query = "select * from students where student_id=? and passqord=?";
-                        PreparedStatement pst = connection.prepareStatement(query);
-                        pst.setString(1, id_input.getText());
-                        pst.setString(2, pass_input.getText());
-                        ResultSet rs = pst.executeQuery();
+                        String query = "select * from students  where student_id=? and passqord=?";
+                        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+                        preparedStatement.setString(1, id_input.getText());
+                        preparedStatement.setString(2, passText);
+                        ResultSet rs = preparedStatement.executeQuery();
                         int count = 0;
 
                         while (rs.next()) {
                             count = count + 1;
-
+                            firstName = rs.getString("firs_name");
+                            lastName = rs.getString("last_name");
 
                         }
                         if (count == 1)
@@ -90,7 +96,9 @@ public class Login extends javax.swing.JFrame {
                             stellardash.setLocationRelativeTo(null);
                             stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             System.out.println(id_input.getText());
-                            StellarDashboard.firstname.setText(id_input.getText());
+                            StellarDashboard.firstname.setText(firstName);
+                            StellarDashboard.lastname.setText(lastName);
+
                             dispose();
                             //JOptionPane.showMessageDialog(null, "Username and password is correct");
 
@@ -110,7 +118,7 @@ public class Login extends javax.swing.JFrame {
 
 
                         rs.close();
-                        pst.close();
+                        preparedStatement.close();
                     }
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(null, e1);
