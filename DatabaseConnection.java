@@ -1,5 +1,3 @@
-package stellar;
-
 import java.sql.*;
 import javax.swing.*;
 

@@ -1,13 +1,23 @@
 package stellar;
 
+<<<<<<< HEAD
  public class Stellar {
+=======
+public class Stellar {
+>>>>>>> fixed name and deprecated getText
 
     /**
      * @param args the command line arguments
      */
+<<<<<<< HEAD
     
      //The main method calls the Login class and makes it visible. It also gives the window a "Nimbus look". The Nimbus look is optional.
      public static void main(String[] args) {
+=======
+
+    //The main method calls the Login class and makes it visible. It also gives the window a "Nimbus look". The Nimbus look is optional.
+    public static void main(String[] args) {
+>>>>>>> fixed name and deprecated getText
         Login log = new Login();
         //For the Nimbus Look
         try {
@@ -35,5 +45,9 @@ package stellar;
              }
         });
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fixed name and deprecated getText
 }

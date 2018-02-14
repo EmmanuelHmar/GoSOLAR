@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+
+import java.awt.Toolkit;
+import javax.swing.JFrame;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.EventQueue;
+import java.sql.*;
+>>>>>>> fixed name and deprecated getText
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
