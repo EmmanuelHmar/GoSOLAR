@@ -95,7 +95,7 @@ public class Login extends javax.swing.JFrame {
                                                 studentEmail = rs.getString("email");
                                                 Major = rs.getString("major");
                                                 GPA = rs.getString("GPA");
-                                                //Year = rs.getString("");
+                                                Year = rs.getString("");
                                                 //Standing = rs.getString("");
                                               
 					}
