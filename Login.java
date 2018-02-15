@@ -79,7 +79,7 @@ public class Login extends javax.swing.JFrame {
                                } else {
                             
                             
-                                        String query="select * from students where student_id=? and passqord=?";
+                                        String query="select * from students where student_id=? and password=?";
 					PreparedStatement pst= connection.prepareStatement(query);
 					pst.setString(1,id_input.getText());
 					pst.setString(2, passText);
@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
                                         
                                         while(rs.next()){
 						count= count+1;
-                                                firstName = rs.getString("firs_name");
+                                                firstName = rs.getString("first_name");
                                                 lastName = rs.getString("last_name");
                                                 studentIDnum = rs.getString("panther_num");
                                                 studentID = rs.getString("student_id");
