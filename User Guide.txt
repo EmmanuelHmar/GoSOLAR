@@ -1,0 +1,4 @@
+How to Operate and run the Program
+
+1) Change the database location to the location of the database. 
+2) Example userid: ehmar1 password: pass
