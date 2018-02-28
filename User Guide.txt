@@ -1,4 +1,6 @@
-How to Operate and run the Program
+Program Name: StellarHow
 
-1) Change the database location to the location of the database. 
+UESR GUIDE
+
+1) Change the database location to the location of the database in the file DatabaseConnection.java to the database location. 
 2) Example userid: ehmar1 password: pass

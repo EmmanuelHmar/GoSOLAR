@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="DataBase.db">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.3">
+    <root id="1"/>
+    <schema id="2" parent="1" name="main">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <table id="3" parent="2" name="classes"/>
+    <table id="4" parent="2" name="classesTaken"/>
+    <table id="5" parent="2" name="sqlite_master">
+      <System>1</System>
+    </table>
+    <table id="6" parent="2" name="students"/>
+    <table id="7" parent="2" name="teacher"/>
+    <table id="8" parent="2" name="teacher_class"/>
+    <column id="9" parent="3" name="class_id">
+      <DataType>TEXT|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="10" parent="3" name="class_name">
+      <Position>1</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="11" parent="3" name="description">
+      <Position>2</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <index id="12" parent="3" name="sqlite_autoindex_classes_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>class_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="13" parent="3">
+      <ColNames>class_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_classes_1</UnderlyingIndexName>
+    </key>
+    <column id="14" parent="4" name="panther_num">
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="4" name="class_id">
+      <Position>1</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="4" name="semesterTaken">
+      <Position>2</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <foreign-key id="17" parent="4">
+      <ColNames>panther_num</ColNames>
+      <RefTableName>students</RefTableName>
+      <RefColNames>panther_num</RefColNames>
+    </foreign-key>
+    <foreign-key id="18" parent="4">
+      <ColNames>class_id</ColNames>
+      <RefTableName>classes</RefTableName>
+      <RefColNames>class_id</RefColNames>
+    </foreign-key>
+    <column id="19" parent="5" name="type">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="20" parent="5" name="name">
+      <Position>1</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="21" parent="5" name="tbl_name">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="22" parent="5" name="rootpage">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="23" parent="5" name="sql">
+      <Position>4</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="24" parent="6" name="panther_num">
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="6" name="firs_name">
+      <Position>1</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="26" parent="6" name="last_name">
+      <Position>2</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="27" parent="6" name="email">
+      <Position>3</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="28" parent="6" name="student_id">
+      <Position>4</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="29" parent="6" name="passqord">
+      <Position>5</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="30" parent="6" name="GPA">
+      <Position>6</Position>
+      <DataType>INTEGER|0</DataType>
+    </column>
+    <column id="31" parent="6" name="bday">
+      <Position>7</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="32" parent="6" name="major">
+      <Position>8</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <key id="33" parent="6">
+      <ColNames>panther_num</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="7" name="teacher_id">
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="7" name="teacher_first_name">
+      <Position>1</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <column id="36" parent="7" name="teacher_last_name">
+      <Position>2</Position>
+      <DataType>TEXT|0</DataType>
+    </column>
+    <key id="37" parent="7">
+      <ColNames>teacher_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="38" parent="8" name="CRN">
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="8" name="teacher_id">
+      <Position>1</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="8" name="class_id">
+      <Position>2</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="8" name="semester">
+      <Position>3</Position>
+      <DataType>TEXT|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="42" parent="8">
+      <ColNames>CRN</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="43" parent="8">
+      <ColNames>teacher_id</ColNames>
+      <RefTableName>teacher</RefTableName>
+      <RefColNames>teacher_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="44" parent="8">
+      <ColNames>class_id</ColNames>
+      <RefTableName>classes</RefTableName>
+      <RefColNames>class_id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
