@@ -59,6 +59,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         home_menu = new javax.swing.JMenu();
         registration_menu = new javax.swing.JMenu();
         schedule_menu = new javax.swing.JMenuItem();
+        settings_menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,7 +77,12 @@ public class StellarDashboard extends javax.swing.JFrame {
                 logout_buttonActionPerformed(evt);
             }
         });
+        settings_menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            	settings_buttonMouseClicked(evt);
 
+            }
+        });
         javax.swing.GroupLayout menu_panelLayout = new javax.swing.GroupLayout(menu_panel);
         menu_panel.setLayout(menu_panelLayout);
         menu_panelLayout.setHorizontalGroup(
@@ -401,6 +407,9 @@ public class StellarDashboard extends javax.swing.JFrame {
         registration_menu.add(schedule_menu);
 
         menubar.add(registration_menu);
+        
+        settings_menu.setText("Settings");
+        menubar.add(settings_menu);
 
         setJMenuBar(menubar);
 
@@ -458,6 +467,14 @@ public class StellarDashboard extends javax.swing.JFrame {
             //dispose();
     }//GEN-LAST:event_update_buttonMouseClicked
 
+    private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { //M1
+    	Settings2 sett = new Settings2();
+        sett.setVisible(true);
+        sett.pack();
+        sett.setLocationRelativeTo(null);
+        sett.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }    
+    
     /**
      * @param args the command line arguments
      */
@@ -509,5 +526,6 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel welcome_text;
     public static javax.swing.JLabel year;
     private javax.swing.JLabel year_label;
+    private javax.swing.JMenu settings_menu;
     // End of variables declaration//GEN-END:variables
 }
