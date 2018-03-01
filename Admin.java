@@ -6,6 +6,7 @@ import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+//TODO: Current update class not working
 /**
  * @author aturn
  */
@@ -95,16 +96,16 @@ public class Admin extends javax.swing.JFrame {
         update_spanel = new javax.swing.JScrollPane();
         updateclass_table = new javax.swing.JTable();
         updateclass_label = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        updateClassTitle_label = new javax.swing.JLabel();
+        updateClassTitle_input = new javax.swing.JTextField();
+        updateClassID_label = new javax.swing.JLabel();
+        updateClassID_input = new javax.swing.JTextField();
+        updateClassCredit_label = new javax.swing.JLabel();
+        updateClassCredit_input = new javax.swing.JTextField();
+        updateClassSubject_label = new javax.swing.JLabel();
+        updateClassSubject_input = new javax.swing.JTextField();
+        classUpdateClear = new javax.swing.JButton();
+        classUpdateButton = new javax.swing.JButton();
         classinstructor_tab = new javax.swing.JPanel();
         classinstructor_spanel = new javax.swing.JScrollPane();
         classinstructor_table = new javax.swing.JTable();
@@ -597,38 +598,46 @@ public class Admin extends javax.swing.JFrame {
         updateclass_label.setForeground(new java.awt.Color(51, 51, 51));
         updateclass_label.setText("Update Class:");
 
-        jLabel22.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel22.setText("Class Title:");
+        updateClassTitle_label.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassTitle_label.setText("Class Title:");
 
-        jTextField17.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField17.setForeground(new java.awt.Color(51, 51, 51));
-        jTextField17.addActionListener(new java.awt.event.ActionListener() {
+        updateClassTitle_input.setBackground(new java.awt.Color(255, 255, 255));
+        updateClassTitle_input.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassTitle_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField17ActionPerformed(evt);
             }
         });
 
-        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("Class ID:");
+        updateClassID_label.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassID_label.setText("Class ID:");
 
-        jTextField18.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField18.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassID_input.setBackground(new java.awt.Color(255, 255, 255));
+        updateClassID_input.setForeground(new java.awt.Color(51, 51, 51));
 
-        jLabel24.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel24.setText("Credit:");
+        updateClassCredit_label.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassCredit_label.setText("Credit:");
 
-        jTextField19.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField19.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassCredit_input.setBackground(new java.awt.Color(255, 255, 255));
+        updateClassCredit_input.setForeground(new java.awt.Color(51, 51, 51));
 
-        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText("Subject:");
+        updateClassSubject_label.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassSubject_label.setText("Subject:");
 
-        jTextField20.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField20.setForeground(new java.awt.Color(51, 51, 51));
+        updateClassSubject_input.setBackground(new java.awt.Color(255, 255, 255));
+        updateClassSubject_input.setForeground(new java.awt.Color(51, 51, 51));
 
-        jButton9.setText("Clear");
+        classUpdateClear.setText("Clear");
 
-        jButton10.setText("Update");
+        classUpdateButton.setText("Update");
+        classUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                updateClasses_buttonActionPerformed(evt);
+            }
+
+        });
+
 
         javax.swing.GroupLayout update_tabLayout = new javax.swing.GroupLayout(update_tab);
         update_tab.setLayout(update_tabLayout);
@@ -639,20 +648,20 @@ public class Admin extends javax.swing.JFrame {
                                 .addGap(200, 200, 200)
                                 .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel22)
-                                                .addComponent(jLabel23)
-                                                .addComponent(jLabel24)
-                                                .addComponent(jLabel25)
-                                                .addComponent(jTextField17)
-                                                .addComponent(jTextField18)
-                                                .addComponent(jTextField19)
-                                                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(updateClassTitle_label)
+                                                .addComponent(updateClassID_label)
+                                                .addComponent(updateClassCredit_label)
+                                                .addComponent(updateClassSubject_label)
+                                                .addComponent(updateClassTitle_input)
+                                                .addComponent(updateClassID_input)
+                                                .addComponent(updateClassCredit_input)
+                                                .addComponent(updateClassSubject_input, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(updateclass_label)
                                         .addGroup(update_tabLayout.createSequentialGroup()
                                                 .addGap(132, 132, 132)
-                                                .addComponent(jButton9)
+                                                .addComponent(classUpdateClear)
                                                 .addGap(30, 30, 30)
-                                                .addComponent(jButton10)))
+                                                .addComponent(classUpdateButton)))
                                 .addGap(200, 200, 200))
         );
         update_tabLayout.setVerticalGroup(
@@ -662,25 +671,25 @@ public class Admin extends javax.swing.JFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(updateclass_label)
                                 .addGap(31, 31, 31)
-                                .addComponent(jLabel22)
+                                .addComponent(updateClassTitle_label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(updateClassTitle_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel23)
+                                .addComponent(updateClassID_label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(updateClassID_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel24)
+                                .addComponent(updateClassCredit_label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(updateClassCredit_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel25)
+                                .addComponent(updateClassSubject_label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(updateClassSubject_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton9)
-                                        .addComponent(jButton10))
+                                        .addComponent(classUpdateClear)
+                                        .addComponent(classUpdateButton))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -984,6 +993,31 @@ public class Admin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_addstudents_buttonActionPerformed
 
+    private void updateClasses_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudents_buttonActionPerformed
+        // TODO add your handling code here:
+        Statement statement = null;
+
+        try {
+            statement = connection.createStatement();
+
+            String title = updateClassTitle_input.getText().trim().toUpperCase();
+            String id = updateClassID_input.getText().trim().toUpperCase();
+            int credit = Integer.parseInt(updateClassID_input.getText());
+            String subject = updateClassSubject_input.getText().trim().toUpperCase();
+
+            String sql = "INSERT or REPLACE INTO classes " + "(class_id,class_name,class_credit,class_subj) "
+                    + "VALUES('" + title + "','" + id + "','" + credit + "','" + subject + "') ";
+
+            statement.execute(sql);
+
+            JOptionPane.showMessageDialog(null, "Updated Successfully!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private void stellarnum_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stellarnum_inputActionPerformed
         // TODO add your handling code here:
         System.out.println("TEST STellar");
@@ -1112,16 +1146,16 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel teacherFirstName_label;
     private javax.swing.JTextField studentGpa_input;
     private javax.swing.JLabel studentGpa_label;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField20;
+    private javax.swing.JButton classUpdateButton;
+    private javax.swing.JButton classUpdateClear;
+    private javax.swing.JLabel updateClassTitle_label;
+    private javax.swing.JLabel updateClassID_label;
+    private javax.swing.JLabel updateClassCredit_label;
+    private javax.swing.JLabel updateClassSubject_label;
+    private javax.swing.JTextField updateClassTitle_input;
+    private javax.swing.JTextField updateClassID_input;
+    private javax.swing.JTextField updateClassCredit_input;
+    private javax.swing.JTextField updateClassSubject_input;
     private javax.swing.JTextField studentLastName_input;
     private javax.swing.JLabel studentLastName_label;
     private javax.swing.JTextField teacherLastName_input;
