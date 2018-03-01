@@ -6,20 +6,26 @@
 package stellar;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author aturn
  */
 public class Admin extends javax.swing.JFrame {
+
+    Connection connection = null;
 
     /**
      * Creates new form Admin
      */
     public Admin() {
-       initComponents();
+        initComponents();
+
+        //Connects to the database
+        connection = DatabaseConnection.dbConnector();
         staricon();
         setTitle("Stellar: Administrator");
         setLocationRelativeTo(null);
@@ -135,15 +141,15 @@ public class Admin extends javax.swing.JFrame {
         addclass_tab.setForeground(new java.awt.Color(51, 51, 51));
 
         classes_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String[]{
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         addclass_spanel.setViewportView(classes_table);
 
@@ -189,61 +195,73 @@ public class Admin extends javax.swing.JFrame {
         });
 
         addclass_button.setText("Add");
+        addclass_button.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                addclass_buttonActionPerformed(evt);
+            }
+
+        });
+        fname_input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fname_inputActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addclass_tabLayout = new javax.swing.GroupLayout(addclass_tab);
         addclass_tab.setLayout(addclass_tabLayout);
         addclass_tabLayout.setHorizontalGroup(
-            addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addclass_tabLayout.createSequentialGroup()
-                .addComponent(addclass_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addclass_tabLayout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(classtitle_label)
-                                .addComponent(classid_label)
-                                .addComponent(credit_label)
-                                .addComponent(subject_label)
-                                .addComponent(classtitle_input)
-                                .addComponent(classid_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                                .addComponent(credit_input)
-                                .addComponent(subject_input))
-                            .addComponent(addclass_label)))
-                    .addGroup(addclass_tabLayout.createSequentialGroup()
-                        .addGap(332, 332, 332)
-                        .addComponent(clearclass_button)
-                        .addGap(30, 30, 30)
-                        .addComponent(addclass_button)))
-                .addGap(0, 243, Short.MAX_VALUE))
+                addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(addclass_tabLayout.createSequentialGroup()
+                                .addComponent(addclass_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(addclass_tabLayout.createSequentialGroup()
+                                                .addGap(200, 200, 200)
+                                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(classtitle_label)
+                                                                .addComponent(classid_label)
+                                                                .addComponent(credit_label)
+                                                                .addComponent(subject_label)
+                                                                .addComponent(classtitle_input)
+                                                                .addComponent(classid_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                                                                .addComponent(credit_input)
+                                                                .addComponent(subject_input))
+                                                        .addComponent(addclass_label)))
+                                        .addGroup(addclass_tabLayout.createSequentialGroup()
+                                                .addGap(332, 332, 332)
+                                                .addComponent(clearclass_button)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(addclass_button)))
+                                .addGap(0, 243, Short.MAX_VALUE))
         );
         addclass_tabLayout.setVerticalGroup(
-            addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addclass_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-            .addGroup(addclass_tabLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(addclass_label)
-                .addGap(31, 31, 31)
-                .addComponent(classtitle_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(classtitle_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(classid_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(classid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(credit_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(credit_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(subject_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(subject_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearclass_button)
-                    .addComponent(addclass_button))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(addclass_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+                        .addGroup(addclass_tabLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(addclass_label)
+                                .addGap(31, 31, 31)
+                                .addComponent(classtitle_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(classtitle_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(classid_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(classid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(credit_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(credit_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(subject_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(subject_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(clearclass_button)
+                                        .addComponent(addclass_button))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         admin_tab.addTab("Add Class", addclass_tab);
@@ -251,15 +269,15 @@ public class Admin extends javax.swing.JFrame {
         teachers_tab.setBackground(new java.awt.Color(255, 255, 255));
 
         teachers_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String[]{
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         teacher_spanel.setViewportView(teachers_table);
 
@@ -308,55 +326,55 @@ public class Admin extends javax.swing.JFrame {
         javax.swing.GroupLayout teachers_tabLayout = new javax.swing.GroupLayout(teachers_tab);
         teachers_tab.setLayout(teachers_tabLayout);
         teachers_tabLayout.setHorizontalGroup(
-            teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teachers_tabLayout.createSequentialGroup()
-                .addComponent(teacher_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200)
-                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(fname_label)
-                        .addComponent(lname_label)
-                        .addComponent(prefix_label)
-                        .addComponent(teacherid_label)
-                        .addComponent(fname_input)
-                        .addComponent(lname_input)
-                        .addComponent(prefix_input)
-                        .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addteacher_label)
-                    .addGroup(teachers_tabLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(clearteacher_button)
-                        .addGap(30, 30, 30)
-                        .addComponent(teacher_button)))
-                .addGap(200, 200, 200))
+                teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(teachers_tabLayout.createSequentialGroup()
+                                .addComponent(teacher_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(200, 200, 200)
+                                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(fname_label)
+                                                .addComponent(lname_label)
+                                                .addComponent(prefix_label)
+                                                .addComponent(teacherid_label)
+                                                .addComponent(fname_input)
+                                                .addComponent(lname_input)
+                                                .addComponent(prefix_input)
+                                                .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(addteacher_label)
+                                        .addGroup(teachers_tabLayout.createSequentialGroup()
+                                                .addGap(132, 132, 132)
+                                                .addComponent(clearteacher_button)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(teacher_button)))
+                                .addGap(200, 200, 200))
         );
         teachers_tabLayout.setVerticalGroup(
-            teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(teacher_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-            .addGroup(teachers_tabLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(addteacher_label)
-                .addGap(31, 31, 31)
-                .addComponent(fname_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lname_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(prefix_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(prefix_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(teacherid_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearteacher_button)
-                    .addComponent(teacher_button))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(teacher_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+                        .addGroup(teachers_tabLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(addteacher_label)
+                                .addGap(31, 31, 31)
+                                .addComponent(fname_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lname_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(prefix_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(prefix_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(teacherid_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(clearteacher_button)
+                                        .addComponent(teacher_button))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         admin_tab.addTab("Teachers", teachers_tab);
@@ -364,15 +382,15 @@ public class Admin extends javax.swing.JFrame {
         students_tab.setBackground(new java.awt.Color(255, 255, 255));
 
         student_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String[]{
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         student_spanel.setViewportView(student_table);
 
@@ -415,6 +433,7 @@ public class Admin extends javax.swing.JFrame {
                 clearstudent_buttonMouseClicked(evt);
             }
         });
+
 
         addstudents_button.setText("Add");
         addstudents_button.addActionListener(new java.awt.event.ActionListener() {
@@ -467,92 +486,92 @@ public class Admin extends javax.swing.JFrame {
         javax.swing.GroupLayout students_tabLayout = new javax.swing.GroupLayout(students_tab);
         students_tab.setLayout(students_tabLayout);
         students_tabLayout.setHorizontalGroup(
-            students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(students_tabLayout.createSequentialGroup()
-                .addComponent(student_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(students_tabLayout.createSequentialGroup()
-                        .addGap(349, 349, 349)
-                        .addComponent(clearstudent_button)
-                        .addGap(30, 30, 30)
-                        .addComponent(addstudents_button))
-                    .addGroup(students_tabLayout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bday_label)
-                            .addComponent(year_label)
-                            .addComponent(major_label)
-                            .addComponent(gpa_label)
-                            .addComponent(email_label)
-                            .addComponent(firstname_label)
-                            .addComponent(lastname_label)
-                            .addComponent(studentid_label)
-                            .addComponent(password_label)
-                            .addComponent(firstname_input)
-                            .addComponent(lastname_input)
-                            .addComponent(studentid_input)
-                            .addComponent(password_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                            .addComponent(addstudent_label)
-                            .addComponent(stellarnum_label)
-                            .addComponent(stellarnum_input)
-                            .addComponent(email_input)
-                            .addComponent(gpa_input)
-                            .addComponent(major_input)
-                            .addComponent(year_input)
-                            .addComponent(bday_input))))
-                .addContainerGap())
+                students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(students_tabLayout.createSequentialGroup()
+                                .addComponent(student_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(students_tabLayout.createSequentialGroup()
+                                                .addGap(349, 349, 349)
+                                                .addComponent(clearstudent_button)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(addstudents_button))
+                                        .addGroup(students_tabLayout.createSequentialGroup()
+                                                .addGap(200, 200, 200)
+                                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(bday_label)
+                                                        .addComponent(year_label)
+                                                        .addComponent(major_label)
+                                                        .addComponent(gpa_label)
+                                                        .addComponent(email_label)
+                                                        .addComponent(firstname_label)
+                                                        .addComponent(lastname_label)
+                                                        .addComponent(studentid_label)
+                                                        .addComponent(password_label)
+                                                        .addComponent(firstname_input)
+                                                        .addComponent(lastname_input)
+                                                        .addComponent(studentid_input)
+                                                        .addComponent(password_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                                                        .addComponent(addstudent_label)
+                                                        .addComponent(stellarnum_label)
+                                                        .addComponent(stellarnum_input)
+                                                        .addComponent(email_input)
+                                                        .addComponent(gpa_input)
+                                                        .addComponent(major_input)
+                                                        .addComponent(year_input)
+                                                        .addComponent(bday_input))))
+                                .addContainerGap())
         );
         students_tabLayout.setVerticalGroup(
-            students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(student_spanel)
-            .addGroup(students_tabLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(addstudent_label)
-                .addGap(31, 31, 31)
-                .addComponent(firstname_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(firstname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lastname_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lastname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(studentid_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(studentid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(password_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stellarnum_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stellarnum_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(email_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(gpa_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gpa_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(major_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(major_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(year_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(year_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bday_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bday_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearstudent_button)
-                    .addComponent(addstudents_button))
-                .addGap(31, 31, 31))
+                students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(student_spanel)
+                        .addGroup(students_tabLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(addstudent_label)
+                                .addGap(31, 31, 31)
+                                .addComponent(firstname_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(firstname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lastname_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lastname_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(studentid_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(studentid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(password_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(stellarnum_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stellarnum_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(email_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(gpa_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(gpa_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(major_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(major_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(year_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(year_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bday_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bday_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(clearstudent_button)
+                                        .addComponent(addstudents_button))
+                                .addGap(31, 31, 31))
         );
 
         admin_tab.addTab("Students", students_tab);
@@ -560,15 +579,15 @@ public class Admin extends javax.swing.JFrame {
         update_tab.setBackground(new java.awt.Color(255, 255, 255));
 
         updateclass_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String[]{
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         update_spanel.setViewportView(updateclass_table);
 
@@ -612,55 +631,55 @@ public class Admin extends javax.swing.JFrame {
         javax.swing.GroupLayout update_tabLayout = new javax.swing.GroupLayout(update_tab);
         update_tab.setLayout(update_tabLayout);
         update_tabLayout.setHorizontalGroup(
-            update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(update_tabLayout.createSequentialGroup()
-                .addComponent(update_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200)
-                .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel22)
-                        .addComponent(jLabel23)
-                        .addComponent(jLabel24)
-                        .addComponent(jLabel25)
-                        .addComponent(jTextField17)
-                        .addComponent(jTextField18)
-                        .addComponent(jTextField19)
-                        .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(updateclass_label)
-                    .addGroup(update_tabLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jButton9)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton10)))
-                .addGap(200, 200, 200))
+                update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(update_tabLayout.createSequentialGroup()
+                                .addComponent(update_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(200, 200, 200)
+                                .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel22)
+                                                .addComponent(jLabel23)
+                                                .addComponent(jLabel24)
+                                                .addComponent(jLabel25)
+                                                .addComponent(jTextField17)
+                                                .addComponent(jTextField18)
+                                                .addComponent(jTextField19)
+                                                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(updateclass_label)
+                                        .addGroup(update_tabLayout.createSequentialGroup()
+                                                .addGap(132, 132, 132)
+                                                .addComponent(jButton9)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(jButton10)))
+                                .addGap(200, 200, 200))
         );
         update_tabLayout.setVerticalGroup(
-            update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(update_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-            .addGroup(update_tabLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(updateclass_label)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(update_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+                        .addGroup(update_tabLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(updateclass_label)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton9)
+                                        .addComponent(jButton10))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         admin_tab.addTab("Update Class", update_tab);
@@ -668,15 +687,15 @@ public class Admin extends javax.swing.JFrame {
         classinstructor_tab.setBackground(new java.awt.Color(255, 255, 255));
 
         classinstructor_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String[]{
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         classinstructor_spanel.setViewportView(classinstructor_table);
 
@@ -737,68 +756,68 @@ public class Admin extends javax.swing.JFrame {
         javax.swing.GroupLayout classinstructor_tabLayout = new javax.swing.GroupLayout(classinstructor_tab);
         classinstructor_tab.setLayout(classinstructor_tabLayout);
         classinstructor_tabLayout.setHorizontalGroup(
-            classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                .addComponent(classinstructor_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                        .addGap(336, 336, 336)
-                        .addComponent(clearinstructors_button)
-                        .addGap(30, 30, 30)
-                        .addComponent(addinstructor_button))
-                    .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(classtime_label)
-                            .addComponent(crn_label)
-                            .addComponent(teachid_label)
-                            .addComponent(clasid_label)
-                            .addComponent(semester_label)
-                            .addComponent(crn_input)
-                            .addComponent(teachid_input)
-                            .addComponent(clasid_input)
-                            .addComponent(semester_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                            .addComponent(classinstructor_label)
-                            .addComponent(days_label)
-                            .addComponent(days_input)
-                            .addComponent(classtime_input))))
-                .addContainerGap())
+                classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
+                                .addComponent(classinstructor_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
+                                                .addGap(336, 336, 336)
+                                                .addComponent(clearinstructors_button)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(addinstructor_button))
+                                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
+                                                .addGap(200, 200, 200)
+                                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(classtime_label)
+                                                        .addComponent(crn_label)
+                                                        .addComponent(teachid_label)
+                                                        .addComponent(clasid_label)
+                                                        .addComponent(semester_label)
+                                                        .addComponent(crn_input)
+                                                        .addComponent(teachid_input)
+                                                        .addComponent(clasid_input)
+                                                        .addComponent(semester_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                                                        .addComponent(classinstructor_label)
+                                                        .addComponent(days_label)
+                                                        .addComponent(days_input)
+                                                        .addComponent(classtime_input))))
+                                .addContainerGap())
         );
         classinstructor_tabLayout.setVerticalGroup(
-            classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(classinstructor_spanel)
-            .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(classinstructor_label)
-                .addGap(31, 31, 31)
-                .addComponent(crn_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(crn_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(teachid_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(teachid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(clasid_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clasid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(semester_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(semester_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(days_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(days_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(classtime_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(classtime_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearinstructors_button)
-                    .addComponent(addinstructor_button))
-                .addContainerGap(284, Short.MAX_VALUE))
+                classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(classinstructor_spanel)
+                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(classinstructor_label)
+                                .addGap(31, 31, 31)
+                                .addComponent(crn_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(crn_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(teachid_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(teachid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(clasid_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clasid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(semester_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(semester_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(days_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(days_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(classtime_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(classtime_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(clearinstructors_button)
+                                        .addComponent(addinstructor_button))
+                                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         admin_tab.addTab("Class Instructors", classinstructor_tab);
@@ -814,48 +833,47 @@ public class Admin extends javax.swing.JFrame {
         javax.swing.GroupLayout admin_panelLayout = new javax.swing.GroupLayout(admin_panel);
         admin_panel.setLayout(admin_panelLayout);
         admin_panelLayout.setHorizontalGroup(
-            admin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(admin_tab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, admin_panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logout_button)
-                .addGap(17, 17, 17))
+                admin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(admin_tab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, admin_panelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(logout_button)
+                                .addGap(17, 17, 17))
         );
         admin_panelLayout.setVerticalGroup(
-            admin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, admin_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logout_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(admin_tab, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                admin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, admin_panelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(logout_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(admin_tab, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(admin_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(admin_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(admin_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 841, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(admin_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 841, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void logout_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_buttonMouseClicked
-       int logout_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+        int logout_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
 
-        if (logout_con == 0){
+        if (logout_con == 0) {
             Login log = new Login();
             log.setVisible(true);
             log.pack();
             log.setLocationRelativeTo(null);
             log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
-
         }
     }//GEN-LAST:event_logout_buttonMouseClicked
 
@@ -879,51 +897,81 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField17ActionPerformed
 
+    private void addclass_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudents_buttonActionPerformed
+        // TODO add your handling code here:
+        Statement statement = null;
+
+        try {
+            statement = connection.createStatement();
+
+            String title = classtitle_input.getText().trim().toUpperCase();
+            String id = classid_input.getText().trim().toUpperCase();
+            int credit = Integer.parseInt(credit_input.getText());
+            String subject = subject_input.getText().trim().toUpperCase();
+
+            String sql = "INSERT INTO classes " + "(class_id,class_name,class_credit,class_subj) "
+                    + "VALUES('" + title + "','" + id + "','" + credit + "','" + subject + "') ";
+
+            statement.execute(sql);
+
+            JOptionPane.showMessageDialog(null, "Added Successfully!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
+        }
+//        System.out.println("Add Class Button");
+
+    }
+
     private void addstudents_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudents_buttonActionPerformed
         // TODO add your handling code here:
+        System.out.println("TEST STellar");
+
     }//GEN-LAST:event_addstudents_buttonActionPerformed
 
     private void stellarnum_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stellarnum_inputActionPerformed
         // TODO add your handling code here:
+        System.out.println("TEST STellar");
     }//GEN-LAST:event_stellarnum_inputActionPerformed
 
     private void clearclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearclass_buttonMouseClicked
-       classtitle_input.setText("");
-       classid_input.setText("");
-       credit_input.setText("");
-       subject_input.setText("");
+        classtitle_input.setText("");
+        classid_input.setText("");
+        credit_input.setText("");
+        subject_input.setText("");
     }//GEN-LAST:event_clearclass_buttonMouseClicked
 
     private void clearteacher_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearteacher_buttonMouseClicked
-       fname_input.setText("");
-       lname_input.setText("");
-       teacherid_input.setText("");
-       prefix_input.setText("");
-       
+        fname_input.setText("");
+        lname_input.setText("");
+        teacherid_input.setText("");
+        prefix_input.setText("");
+
     }//GEN-LAST:event_clearteacher_buttonMouseClicked
 
     private void clearstudent_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearstudent_buttonMouseClicked
-       firstname_input.setText("");
-       lastname_input.setText("");
-       studentid_input.setText("");
-       stellarnum_input.setText("");
-       email_input.setText("");
-       gpa_input.setText("");
-       major_input.setText("");
-       year_input.setText("");
-       bday_input.setText("");
-       password_input.setText("");
-       
+        firstname_input.setText("");
+        lastname_input.setText("");
+        studentid_input.setText("");
+        stellarnum_input.setText("");
+        email_input.setText("");
+        gpa_input.setText("");
+        major_input.setText("");
+        year_input.setText("");
+        bday_input.setText("");
+        password_input.setText("");
+
     }//GEN-LAST:event_clearstudent_buttonMouseClicked
 
     private void clearinstructors_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearinstructors_buttonMouseClicked
-       crn_input.setText("");
-       teachid_input.setText("");
-       clasid_input.setText("");
-       semester_input.setText("");
-       days_input.setText("");
-       classtime_input.setText("");
-      
+        crn_input.setText("");
+        teachid_input.setText("");
+        clasid_input.setText("");
+        semester_input.setText("");
+        days_input.setText("");
+        classtime_input.setText("");
+
     }//GEN-LAST:event_clearinstructors_buttonMouseClicked
 
     /**
@@ -933,7 +981,7 @@ public class Admin extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -960,10 +1008,10 @@ public class Admin extends javax.swing.JFrame {
             }
         });
     }
-    
-      public void staricon(){
-    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
-    
+
+    public void staricon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
