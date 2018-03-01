@@ -1,3 +1,4 @@
+package stellar;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -5,7 +6,10 @@ import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import net.proteanit.sql.DbUtils;
 //TODO: Current update class not working
 /**
  * @author aturn
@@ -13,6 +17,9 @@ import java.awt.event.ActionListener;
 public class Admin extends javax.swing.JFrame {
 
     Connection connection = null;
+    ResultSet rs = null;  
+    PreparedStatement pst = null;
+    
 
     /**
      * Creates new form Admin
@@ -25,7 +32,11 @@ public class Admin extends javax.swing.JFrame {
         staricon();
         setTitle("Stellar: Administrator");
         setLocationRelativeTo(null);
-    }
+        fetchStudents();
+        fetchTeachers();
+        fetchClasses();
+        fetchClassInstructor();    
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1134,6 +1145,73 @@ public class Admin extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
 
     }
+    
+    public void fetchStudents (){
+
+        try{
+        
+            String stdTable = "select * from students";
+            pst = connection.prepareStatement(stdTable);
+            rs = pst.executeQuery();
+            student_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        
+        }
+    
+     }
+       public void fetchTeachers (){
+
+        try{
+        
+            String teachTable = "select * from teacher";
+            pst = connection.prepareStatement(teachTable);
+            rs = pst.executeQuery();
+            teachers_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        
+        }
+    
+     }
+    
+      public void fetchClasses(){
+
+        try{
+            String classTable = "select * from classes";
+            pst = connection.prepareStatement(classTable);
+            rs = pst.executeQuery();
+           classes_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        
+        }
+    
+     }
+      
+      
+       public void fetchClassInstructor(){
+
+        try{
+        
+           String cinstructTable = "select * from classes, teacher, teacher_class where teacher.teacher_id =1 and teacher_class.semester='Spring 2020' and classes.class_id='CSC1100'";
+            pst = connection.prepareStatement(cinstructTable);
+            rs = pst.executeQuery();
+            classinstructor_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        
+        }
+    
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addClass_button;
