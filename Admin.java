@@ -182,6 +182,11 @@ public class Admin extends javax.swing.JFrame {
         addclass_label.setText("Add Class:");
 
         clearclass_button.setText("Clear");
+        clearclass_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearclass_buttonMouseClicked(evt);
+            }
+        });
 
         addclass_button.setText("Add");
 
@@ -292,6 +297,11 @@ public class Admin extends javax.swing.JFrame {
         teacherid_input.setForeground(new java.awt.Color(51, 51, 51));
 
         clearteacher_button.setText("Clear");
+        clearteacher_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearteacher_buttonMouseClicked(evt);
+            }
+        });
 
         teacher_button.setText("Add");
 
@@ -400,6 +410,11 @@ public class Admin extends javax.swing.JFrame {
         password_input.setForeground(new java.awt.Color(51, 51, 51));
 
         clearstudent_button.setText("Clear");
+        clearstudent_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearstudent_buttonMouseClicked(evt);
+            }
+        });
 
         addstudents_button.setText("Add");
         addstudents_button.addActionListener(new java.awt.event.ActionListener() {
@@ -699,6 +714,11 @@ public class Admin extends javax.swing.JFrame {
         semester_input.setForeground(new java.awt.Color(51, 51, 51));
 
         clearinstructors_button.setText("Clear");
+        clearinstructors_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearinstructors_buttonMouseClicked(evt);
+            }
+        });
 
         addinstructor_button.setText("Add");
 
@@ -866,6 +886,45 @@ public class Admin extends javax.swing.JFrame {
     private void stellarnum_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stellarnum_inputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_stellarnum_inputActionPerformed
+
+    private void clearclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearclass_buttonMouseClicked
+       classtitle_input.setText("");
+       classid_input.setText("");
+       credit_input.setText("");
+       subject_input.setText("");
+    }//GEN-LAST:event_clearclass_buttonMouseClicked
+
+    private void clearteacher_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearteacher_buttonMouseClicked
+       fname_input.setText("");
+       lname_input.setText("");
+       teacherid_input.setText("");
+       prefix_input.setText("");
+       
+    }//GEN-LAST:event_clearteacher_buttonMouseClicked
+
+    private void clearstudent_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearstudent_buttonMouseClicked
+       firstname_input.setText("");
+       lastname_input.setText("");
+       studentid_input.setText("");
+       stellarnum_input.setText("");
+       email_input.setText("");
+       gpa_input.setText("");
+       major_input.setText("");
+       year_input.setText("");
+       bday_input.setText("");
+       password_input.setText("");
+       
+    }//GEN-LAST:event_clearstudent_buttonMouseClicked
+
+    private void clearinstructors_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearinstructors_buttonMouseClicked
+       crn_input.setText("");
+       teachid_input.setText("");
+       clasid_input.setText("");
+       semester_input.setText("");
+       days_input.setText("");
+       classtime_input.setText("");
+      
+    }//GEN-LAST:event_clearinstructors_buttonMouseClicked
 
     /**
      * @param args the command line arguments
