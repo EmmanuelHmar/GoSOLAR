@@ -1,6 +1,42 @@
-Program Name: StellarHow
+Group: Team ONE
+Program Name: Stellar
 
-UESR GUIDE
 
-1) Change the database location to the location of the database in the file DatabaseConnection.java to the database location. 
-2) Example userid: ehmar1 password: pass
+
+USER GUIDE - How to Operate the Program
+
+Summary: 
+1) Need to manually set the database location on the DatabaseConnection.java file
+2) Included sample usernames and passwords
+
+
+Step 1: 
+The database file has to be set manually in the DatabaseConnection.java file. 
+
+1) On line 23: Connection conn = DriverManager.getConnection("jdbc:sqlite:D:\\IdeaProjects\\Stellar\\src\\stellar\\DataBase.db");
+2) Change the database location to where it is in the drive. 
+3) For example, if the DataBase.db was located in Drive H:\Stellar folder then it would say,
+Connection conn = DriverManager.getConnection(jdbc:sqlite:H:\\Stellar\\DataBase.db");
+
+
+Step 2: 
+
+Once the database has been setup then it can now be run properly. 
+1) Run Stellar.java 
+2) Gui opens, use one these id and password to login to the system. 
+
+ex. username: gturner28
+	pass: pass
+
+username = ehmar1
+password = pass
+
+
+
+
+Possibly Required Step: 
+If using Intellij then the jar file must be added to the dependencies. 
+
+Steps: 
+1) Go to project structure -> Modules -> Dependencies
+2) Click the '+' button on the right then browse to the project location and onto the .jar file .
