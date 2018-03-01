@@ -1,6 +1,8 @@
 package stellar;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -49,11 +51,13 @@ public class StellarDashboard extends javax.swing.JFrame {
         messages_label = new javax.swing.JLabel();
         finances_panel = new javax.swing.JPanel();
         finances_label = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        sidemenu = new javax.swing.JPanel();
+        addclass_button = new javax.swing.JButton();
+        update_button = new javax.swing.JButton();
+        schedule_button = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         home_menu = new javax.swing.JMenu();
         registration_menu = new javax.swing.JMenu();
-        addclass_menu = new javax.swing.JMenuItem();
         schedule_menu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,7 +82,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         menu_panelLayout.setHorizontalGroup(
             menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu_panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(1377, Short.MAX_VALUE)
                 .addComponent(logout_button)
                 .addGap(19, 19, 19))
         );
@@ -206,7 +210,7 @@ public class StellarDashboard extends javax.swing.JFrame {
                         .addComponent(year))
                     .addComponent(studentinfo_label)
                     .addComponent(classes_label))
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE))
         );
         studentInformation_panelLayout.setVerticalGroup(
             studentInformation_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +245,7 @@ public class StellarDashboard extends javax.swing.JFrame {
                 .addComponent(info_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(classes_label)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
 
         messages_panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -282,14 +286,14 @@ public class StellarDashboard extends javax.swing.JFrame {
             .addGroup(finances_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(finances_label)
-                .addContainerGap(641, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         finances_panelLayout.setVerticalGroup(
             finances_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(finances_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(finances_label)
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout dash_panelLayout = new javax.swing.GroupLayout(dash_panel);
@@ -297,62 +301,101 @@ public class StellarDashboard extends javax.swing.JFrame {
         dash_panelLayout.setHorizontalGroup(
             dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dash_panelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dash_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(studentInformation_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dash_panelLayout.createSequentialGroup()
-                                .addComponent(studentInformation_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(messages_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(finances_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(dash_panelLayout.createSequentialGroup()
-                                .addComponent(term_text)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                            .addComponent(finances_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(messages_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(dash_panelLayout.createSequentialGroup()
-                        .addComponent(welcome_text)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(firstname)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lastname)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exclaim_text, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(24, 24, 24)
+                        .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(term_text)
+                            .addGroup(dash_panelLayout.createSequentialGroup()
+                                .addComponent(welcome_text)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(firstname)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lastname)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(exclaim_text, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         dash_panelLayout.setVerticalGroup(
             dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dash_panelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(welcome_text)
-                        .addComponent(firstname)
-                        .addComponent(exclaim_text)
-                        .addComponent(lastname))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(welcome_text)
+                    .addComponent(lastname)
+                    .addComponent(firstname)
+                    .addComponent(exclaim_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(term_text)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(dash_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(dash_panelLayout.createSequentialGroup()
                         .addComponent(messages_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(finances_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(studentInformation_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(111, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finances_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(studentInformation_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        addclass_button.setText("Add/Drop Classes");
+        addclass_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addclass_buttonMouseClicked(evt);
+            }
+        });
+
+        update_button.setText("Update Student Information");
+        update_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                update_buttonMouseClicked(evt);
+            }
+        });
+
+        schedule_button.setText("View Schedule");
+
+        javax.swing.GroupLayout sidemenuLayout = new javax.swing.GroupLayout(sidemenu);
+        sidemenu.setLayout(sidemenuLayout);
+        sidemenuLayout.setHorizontalGroup(
+            sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidemenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addclass_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(update_button, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(sidemenuLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(schedule_button, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        sidemenuLayout.setVerticalGroup(
+            sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidemenuLayout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(addclass_button, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(update_button, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(sidemenuLayout.createSequentialGroup()
+                    .addGap(53, 53, 53)
+                    .addComponent(schedule_button, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(729, Short.MAX_VALUE)))
         );
 
         home_menu.setText("Home");
         menubar.add(home_menu);
 
         registration_menu.setText("Registration");
-
-        addclass_menu.setText("Add/Drop Classes");
-        registration_menu.add(addclass_menu);
 
         schedule_menu.setText("Schedule");
         registration_menu.add(schedule_menu);
@@ -366,15 +409,22 @@ public class StellarDashboard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menu_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(dash_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(sidemenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dash_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menu_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dash_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(dash_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sidemenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -398,36 +448,28 @@ public class StellarDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_logout_buttonActionPerformed
 
+    private void addclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addclass_buttonMouseClicked
+        ClassRegistration cr = new ClassRegistration();
+            cr.setVisible(true);
+            cr.pack();
+            cr.setLocationRelativeTo(null);
+            cr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //dispose();
+    }//GEN-LAST:event_addclass_buttonMouseClicked
+
+    private void update_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_buttonMouseClicked
+        Admin ad = new Admin();
+            ad.setVisible(true);
+            ad.pack();
+            ad.setLocationRelativeTo(null);
+            ad.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //dispose();
+    }//GEN-LAST:event_update_buttonMouseClicked
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        // Sets the Nimbus look and feel
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StellarDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StellarDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StellarDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StellarDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-               new StellarDashboard().setVisible(true);
-            }
-        });
-    }
+    
     
     //Method used to set the icon of the program to be a star
     public void staricon(){
@@ -435,8 +477,11 @@ public class StellarDashboard extends javax.swing.JFrame {
     
     }
 
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem addclass_menu;
+    private javax.swing.JButton addclass_button;
     private javax.swing.JLabel classes_label;
     private javax.swing.JPanel dash_panel;
     public static javax.swing.JLabel email;
@@ -449,7 +494,6 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel gpa_label;
     private javax.swing.JMenu home_menu;
     private javax.swing.JSeparator info_line;
-    private javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel lastname;
     private javax.swing.JButton logout_button;
     public static javax.swing.JLabel major;
@@ -459,7 +503,9 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel messages_label;
     private javax.swing.JPanel messages_panel;
     private javax.swing.JMenu registration_menu;
+    private javax.swing.JButton schedule_button;
     private javax.swing.JMenuItem schedule_menu;
+    private javax.swing.JPanel sidemenu;
     private javax.swing.JPanel studentInformation_panel;
     public static javax.swing.JLabel studentid;
     private javax.swing.JLabel studentid_label;
@@ -467,6 +513,7 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel studentidnum_label;
     private javax.swing.JLabel studentinfo_label;
     private javax.swing.JLabel term_text;
+    private javax.swing.JButton update_button;
     private javax.swing.JLabel welcome_text;
     public static javax.swing.JLabel year;
     private javax.swing.JLabel year_label;

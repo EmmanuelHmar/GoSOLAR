@@ -95,7 +95,7 @@ public class Login extends javax.swing.JFrame {
                                                 studentEmail = rs.getString("email");
                                                 Major = rs.getString("major");
                                                 GPA = rs.getString("GPA");
-                                                //Year = rs.getString("");
+                                                Year = rs.getString("school_year");
                                                 //Standing = rs.getString("");
                                               
 					}
@@ -159,39 +159,40 @@ public class Login extends javax.swing.JFrame {
         
         //Setting the background and fonts
 
-        main_panel.setBackground(new java.awt.Color(33, 16, 27));
+        main_panel.setBackground(new java.awt.Color(255, 248, 234));
         main_panel.setMaximumSize(new java.awt.Dimension(680, 500));
         main_panel.setMinimumSize(new java.awt.Dimension(680, 500));
 
         login_title.setFont(new java.awt.Font("Dialog", 1, 18)); 
-        login_title.setForeground(new java.awt.Color(255, 255, 255));
+        login_title.setForeground(new java.awt.Color(51, 51, 51));
         login_title.setText("Login");
 
         id_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
-        id_label.setForeground(new java.awt.Color(255, 255, 255));
+        id_label.setForeground(new java.awt.Color(51, 51, 51));
         id_label.setText("Student ID:");
 
-        id_input.setBackground(new java.awt.Color(33, 16, 27));
+        id_input.setBackground(new java.awt.Color(255, 248, 234));
         id_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
-        id_input.setForeground(new java.awt.Color(255, 255, 255));
+        id_input.setForeground(new java.awt.Color(51, 51, 51));
         id_input.setBorder(null);
-        id_input.setCaretColor(new java.awt.Color(255, 255, 255));
-        id_input.setSelectionColor(new java.awt.Color(255, 153, 102));
+        id_input.setCaretColor(new java.awt.Color(51, 51, 51));
+        id_input.setSelectionColor(new java.awt.Color(255, 215, 73));
 
         pass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
-        pass_label.setForeground(new java.awt.Color(255, 255, 255));
+        pass_label.setForeground(new java.awt.Color(51, 51, 51));
         pass_label.setText("Password:");
 
-        pass_input.setBackground(new java.awt.Color(33, 16, 27));
+        pass_input.setBackground(new java.awt.Color(255, 248, 234));
         pass_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
-        pass_input.setForeground(new java.awt.Color(255, 255, 255));
+        pass_input.setForeground(new java.awt.Color(51, 51, 51));
         pass_input.setBorder(null);
-        pass_input.setSelectionColor(new java.awt.Color(255, 153, 102));
+        pass_input.setCaretColor(new java.awt.Color(51, 51, 51));
+        pass_input.setSelectionColor(new java.awt.Color(255, 215, 73));
 
         login_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
         login_button.setText("Login");
 
-        newuser_label.setForeground(new java.awt.Color(255, 255, 255));
+        newuser_label.setForeground(new java.awt.Color(51, 51, 51));
         newuser_label.setText("New User? Register here:");
 
         register_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
