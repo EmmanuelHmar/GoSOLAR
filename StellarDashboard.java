@@ -448,14 +448,6 @@ public class StellarDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_logout_buttonActionPerformed
 
-    private void addclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addclass_buttonMouseClicked
-        ClassRegistration cr = new ClassRegistration();
-            cr.setVisible(true);
-            cr.pack();
-            cr.setLocationRelativeTo(null);
-            cr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //dispose();
-    }//GEN-LAST:event_addclass_buttonMouseClicked
 
     private void update_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_buttonMouseClicked
         Admin ad = new Admin();
