@@ -7,9 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 //TODO: Current update class not working
-/**
- * @author aturn
- */
+
 public class Admin extends javax.swing.JFrame {
 
     Connection connection = null;
