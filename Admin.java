@@ -1,16 +1,22 @@
-package stellar;
-
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-//TODO: Current update class not working
-
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import net.proteanit.sql.DbUtils;
+/**
+ * @author aturn
+ */
 public class Admin extends javax.swing.JFrame {
 
     Connection connection = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
 
     /**
      * Creates new form Admin
@@ -23,6 +29,10 @@ public class Admin extends javax.swing.JFrame {
         staricon();
         setTitle("Stellar: Administrator");
         setLocationRelativeTo(null);
+        fetchStudents();
+        fetchTeachers();
+        fetchClasses();
+        fetchClassInstructor();
     }
 
     /**
@@ -118,6 +128,11 @@ public class Admin extends javax.swing.JFrame {
         semester_input = new javax.swing.JTextField();
         clearinstructors_button = new javax.swing.JButton();
         addinstructor_button = new javax.swing.JButton();
+        addinstructor_button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                addInstructor_buttonActionPerformed(evt);
+            }
+        });
         days_label = new javax.swing.JLabel();
         days_input = new javax.swing.JTextField();
         classtime_label = new javax.swing.JLabel();
@@ -831,7 +846,7 @@ public class Admin extends javax.swing.JFrame {
 
         admin_tab.addTab("Class Instructors", classinstructor_tab);
 
-        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stellar/door12.png"))); // NOI18N
+        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("door12.png"))); // NOI18N
         logout_button.setText("Logout");
         logout_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -925,6 +940,8 @@ public class Admin extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Added Successfully!");
 
+            fetchClasses();
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
@@ -948,6 +965,7 @@ public class Admin extends javax.swing.JFrame {
             statement.execute(sql);
 
             JOptionPane.showMessageDialog(null, "Added Successfully!");
+            fetchTeachers();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -965,7 +983,7 @@ public class Admin extends javax.swing.JFrame {
             statement = connection.createStatement();
 
             String firstName = studentFirstName_input.getText().trim().toUpperCase();
-            String lastName = studentLastName_input.getText().trim().toUpperCase();
+            String lastName =  studentLastName_input.getText().trim().toUpperCase();
             String studentID = studentId_input.getText();
             String password = studentPassword_input.getText().trim().toUpperCase();
             String email = studentEmail_input.getText().trim();
@@ -983,6 +1001,7 @@ public class Admin extends javax.swing.JFrame {
             statement.execute(sql);
 
             JOptionPane.showMessageDialog(null, "Added Successfully!");
+            fetchStudents();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -1009,6 +1028,35 @@ public class Admin extends javax.swing.JFrame {
             statement.execute(sql);
 
             JOptionPane.showMessageDialog(null, "Updated Successfully!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void addInstructor_buttonActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        Statement statement = null;
+
+        try {
+            statement = connection.createStatement();
+
+            String crn = crn_input.getText().trim().toUpperCase();
+            int id = Integer.parseInt(teachid_input.getText());
+            String class_id = clasid_input.getText().trim().toUpperCase();
+            String semester = semester_input.getText().trim().toUpperCase();
+            String day = days_input.getText().trim().toUpperCase();
+            String time = classtime_input.getText().trim().toUpperCase();
+
+
+            String sql = "INSERT INTO teacher_class " + "(CRN,teacher_id,class_id,semester,day,class_time) "
+                    + "VALUES('" + crn + "','" + id + "','" + class_id + "','" + semester + "','" + day + "','" + time + "') ";
+
+            statement.execute(sql);
+
+            JOptionPane.showMessageDialog(null, "Added Successfully!");
+            fetchClassInstructor();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -1097,6 +1145,73 @@ public class Admin extends javax.swing.JFrame {
 
     public void staricon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
+
+    }
+
+    public void fetchStudents (){
+
+        try{
+
+            String stdTable = "select * from students";
+            pst = connection.prepareStatement(stdTable);
+            rs = pst.executeQuery();
+            student_table.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
+    public void fetchTeachers (){
+
+        try{
+
+            String teachTable = "select * from teacher";
+            pst = connection.prepareStatement(teachTable);
+            rs = pst.executeQuery();
+            teachers_table.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
+
+    public void fetchClasses(){
+
+        try{
+            String classTable = "select * from classes";
+            pst = connection.prepareStatement(classTable);
+            rs = pst.executeQuery();
+            classes_table.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
+
+
+    public void fetchClassInstructor(){
+
+        try{
+
+            String cinstructTable = "select * from classes, teacher, teacher_class";
+            pst = connection.prepareStatement(cinstructTable);
+            rs = pst.executeQuery();
+            classinstructor_table.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+
+        }
 
     }
 

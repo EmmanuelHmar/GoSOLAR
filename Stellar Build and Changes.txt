@@ -1,6 +1,7 @@
 March 15
 
-- Fixed the main window wrongly closing from the change password window
+- Fixed the main window wrongly closing from the change password window on Settings2.java and StellarDashboard.java
+- Fixed password login limit attempts on Login.java
 - 
 
 TODO: 
