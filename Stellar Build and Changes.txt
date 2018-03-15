@@ -1,0 +1,9 @@
+March 15
+
+- Fixed the main window wrongly closing from the change password window
+- 
+
+TODO: 
+
+1) Need regex for password
+2) Currently can change to the same password
