@@ -27,6 +27,7 @@ public class Settings2 extends javax.swing.JFrame {
 	    private javax.swing.JSeparator pass_line;
 	    private javax.swing.JSeparator rep_line;
 	    private javax.swing.JLabel rep_pass;
+	    private StellarDashboard dashboard;
 	    Connection connection = null;
 
 
@@ -34,10 +35,11 @@ public class Settings2 extends javax.swing.JFrame {
 	     * Constructor that calls the login_form method, the method for the star icon,
 	     * sets the title to "Stellar Login", and sets the windows location to be in the center of the screen.
 	     */
-	    public Settings2() {
+	    public Settings2(StellarDashboard dashboard) {
+	    	this.dashboard = dashboard;
 	        settings_form();
 
-	        //Connects to the database
+			//Connects to the database
 	        connection = DatabaseConnection.dbConnector();
 	        staricon();
 	        setTitle("Stellar Settings");
@@ -66,14 +68,12 @@ public class Settings2 extends javax.swing.JFrame {
 	        conf_button = new javax.swing.JButton();
 	        cancel_button = new javax.swing.JButton();
 
-	        /**
-	         * 
-	         */
-	        cancel_button.addActionListener(new ActionListener() {
+			cancel_button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	            	dispose();
 	            }
 	        });
+
 	        conf_button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	                try {
@@ -115,6 +115,9 @@ public class Settings2 extends javax.swing.JFrame {
 	                        	
 	                        	//Calls the dashboard method and sets/displays the studentname as the input of the student id.
 	                        	JOptionPane.showMessageDialog(null, "Please re-logg in with your new password.");
+
+	                        	dashboard.dispose();
+
 	                        	Login log = new Login();
 	                            log.setVisible(true);
 	                            log.pack();
@@ -122,10 +125,7 @@ public class Settings2 extends javax.swing.JFrame {
 	                            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	                            dispose();
 
-	                           
-	                                
 
-	                           
 	                            //JOptionPane.showMessageDialog(null, "Username and password is correct");
 	                        } else if (count > 1) {
 
@@ -152,7 +152,6 @@ public class Settings2 extends javax.swing.JFrame {
 	                            oldp_input.setText("");
 	                            newp_input.setText("");
 	                            rep_input.setText("");
-
 	                        }
 
 
@@ -165,7 +164,7 @@ public class Settings2 extends javax.swing.JFrame {
 	            }
 	        });
 
-	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 	        //Setting the background and fonts
 
@@ -224,10 +223,6 @@ public class Settings2 extends javax.swing.JFrame {
 
 	        cancel_button.setFont(new java.awt.Font("Century Gothic", 1, 12));
 	        cancel_button.setText("Cancel");
-
-	        
-
-
 
 
 	        //Panel Layout

@@ -1,5 +1,3 @@
-package stellar;
-
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -354,7 +352,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         addclass_button.setText("Add/Drop Classes");
         addclass_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addclass_buttonMouseClicked(evt);
+//                addclass_buttonMouseClicked(evt);
             }
         });
 
@@ -468,18 +466,14 @@ public class StellarDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_update_buttonMouseClicked
 
     private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { //M1
-    	Settings2 sett = new Settings2();
+    	Settings2 sett = new Settings2(this);
         sett.setVisible(true);
         sett.pack();
         sett.setLocationRelativeTo(null);
-        sett.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }    
     
-    /**
-     * @param args the command line arguments
-     */
-    
-    
+
     //Method used to set the icon of the program to be a star
     public void staricon(){
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
