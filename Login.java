@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+package stellar;
+>>>>>>> fixed name on dashboard
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -88,20 +92,35 @@ public class Login extends javax.swing.JFrame {
                         System.exit(0);
                     }
 
-                    if (id_input.getText().isEmpty() | pass_input.getText().isEmpty()) {
+                    String passText = new String(pass_input.getPassword());
+                    String firstName = "";
+                    String lastName = "";
+
+                    if (id_input.getText().isEmpty() | passText.isEmpty()) {
 
                         JOptionPane.showMessageDialog(null, "Please fill in all fields");
                     } else {
 
+<<<<<<< HEAD
                         String query = "select * from students where student_id=? and password=?";
                         PreparedStatement pst = connection.prepareStatement(query);
                         pst.setString(1, id_input.getText());
                         pst.setString(2, passText);
                         ResultSet rs = pst.executeQuery();
+=======
+
+                        String query = "select * from students  where student_id=? and passqord=?";
+                        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+                        preparedStatement.setString(1, id_input.getText());
+                        preparedStatement.setString(2, passText);
+                        ResultSet rs = preparedStatement.executeQuery();
+>>>>>>> fixed name on dashboard
                         int count = 0;
 
                         while (rs.next()) {
                             count = count + 1;
+<<<<<<< HEAD
                             firstName = rs.getString("first_name");
                             lastName = rs.getString("last_name");
                             studentIDnum = rs.getString("panther_num");
@@ -111,6 +130,10 @@ public class Login extends javax.swing.JFrame {
                             GPA = rs.getString("GPA");
                             Year = rs.getString("school_year");
                             //Standing = rs.getString("");
+=======
+                            firstName = rs.getString("firs_name");
+                            lastName = rs.getString("last_name");
+>>>>>>> fixed name on dashboard
 
                         }
 
@@ -121,6 +144,7 @@ public class Login extends javax.swing.JFrame {
                             stellardash.pack();
                             stellardash.setLocationRelativeTo(null);
                             stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
                             StellarDashboard.firstname.setText(firstName);
                             StellarDashboard.lastname.setText(lastName);
                             StellarDashboard.studentidnum.setText(studentIDnum);
@@ -129,6 +153,12 @@ public class Login extends javax.swing.JFrame {
                             StellarDashboard.major.setText(Major);
                             StellarDashboard.gpa.setText(GPA);
                             StellarDashboard.year.setText(Year);
+=======
+                            System.out.println(id_input.getText());
+                            StellarDashboard.firstname.setText(firstName);
+                            StellarDashboard.lastname.setText(lastName);
+
+>>>>>>> fixed name on dashboard
                             dispose();
                             //JOptionPane.showMessageDialog(null, "Username and password is correct");
 
@@ -148,8 +178,12 @@ public class Login extends javax.swing.JFrame {
                         }
 
                         rs.close();
+<<<<<<< HEAD
                         pst.close();
 //                        }
+=======
+                        preparedStatement.close();
+>>>>>>> fixed name on dashboard
                     }
 
                 } catch (Exception e1) {
