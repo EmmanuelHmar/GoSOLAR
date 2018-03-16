@@ -1,5 +1,3 @@
-package stellar;
-
  public class Stellar {
 
     /**
