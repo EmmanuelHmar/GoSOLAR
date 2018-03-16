@@ -1,329 +1,338 @@
+package stellar;
+
 import java.awt.Toolkit;
-import javax.swing.JFrame;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.EventQueue;
-import java.sql.*;
-import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 
 public class Settings2 extends javax.swing.JFrame {
+	
+	
+	
 
-    /**
-     * Creates new form Settings
-     */
-		private javax.swing.JTextField id_input;
-	    private javax.swing.JLabel id_label;
-	    private javax.swing.JTextField oldp_input;
-	    private javax.swing.JLabel old_pass;
-	    private javax.swing.JSeparator id_line;
-	    private javax.swing.JSeparator oldp_line;
-	    private javax.swing.JButton conf_button;
-	    private javax.swing.JButton cancel_button;
-	    private javax.swing.JLabel sett_title;
-	    private javax.swing.JPanel main_panel;
-	    private javax.swing.JPasswordField newp_input;
-	    private javax.swing.JPasswordField rep_input;
-	    private javax.swing.JLabel new_pass;
-	    private javax.swing.JSeparator pass_line;
-	    private javax.swing.JSeparator rep_line;
-	    private javax.swing.JLabel rep_pass;
-	    private StellarDashboard dashboard;
-	    Connection connection = null;
+    
+    private javax.swing.JButton cancel_button;
+    private javax.swing.JButton conf_button;
+    private javax.swing.JTextField id_input;
+    private javax.swing.JLabel id_label;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JPasswordField newp_input;
+    private javax.swing.JLabel newpass_label;
+    private javax.swing.JPasswordField oldp_input;
+    private javax.swing.JLabel oldpass_label;
+    private javax.swing.JPasswordField rep_input;
+    private javax.swing.JLabel repeatnewpass_label;
+    Connection connection = null;
+	
+	
+	
+	
+	
 
+    public Settings2() {
+    	connection = DatabaseConnection.dbConnector();
+        settings_form();
+        setTitle("Change Password");
+        setLocationRelativeTo(null);
+        staricon();
+    }
 
-	    /**
-	     * Constructor that calls the login_form method, the method for the star icon,
-	     * sets the title to "Stellar Login", and sets the windows location to be in the center of the screen.
-	     */
-	    public Settings2(StellarDashboard dashboard) {
-	    	this.dashboard = dashboard;
-	        settings_form();
+   
+    @SuppressWarnings("unchecked")
+    private void settings_form() {
 
-			//Connects to the database
-	        connection = DatabaseConnection.dbConnector();
-	        staricon();
-	        setTitle("Stellar Settings");
-	        setLocationRelativeTo(null);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        id_label = new javax.swing.JLabel();
+        id_input = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        oldpass_label = new javax.swing.JLabel();
+        oldp_input = new javax.swing.JPasswordField();
+        jSeparator2 = new javax.swing.JSeparator();
+        newpass_label = new javax.swing.JLabel();
+        newp_input = new javax.swing.JPasswordField();
+        jSeparator3 = new javax.swing.JSeparator();
+        repeatnewpass_label = new javax.swing.JLabel();
+        rep_input = new javax.swing.JPasswordField();
+        jSeparator4 = new javax.swing.JSeparator();
+        conf_button = new javax.swing.JButton();
+        cancel_button = new javax.swing.JButton();
+        
+        
+        cancel_button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+            }
+        });
+        conf_button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	
+                    String npassText = new String(newp_input.getPassword());
+                    String repText = new String(rep_input.getPassword());
+                    String idText = new String(id_input.getText());
+                    String firstName = "";
+                    String lastName = "";
+                    
+                    if (oldp_input.getText().isEmpty() | npassText.isEmpty() | repText.isEmpty()) {
 
-	    }
-
-
-	    @SuppressWarnings("unchecked")
-	    private void settings_form() {
-
-	        main_panel = new javax.swing.JPanel();
-	        sett_title = new javax.swing.JLabel();
-	        id_label = new javax.swing.JLabel();
-	        id_input = new javax.swing.JTextField();
-	        old_pass = new javax.swing.JLabel();
-	        oldp_input = new javax.swing.JTextField();
-	        id_line = new javax.swing.JSeparator();
-	        oldp_line = new javax.swing.JSeparator();
-	        new_pass = new javax.swing.JLabel();
-	        rep_pass = new javax.swing.JLabel();
-	        newp_input = new javax.swing.JPasswordField();
-	        rep_input = new javax.swing.JPasswordField();
-	        pass_line = new javax.swing.JSeparator();
-	        rep_line = new javax.swing.JSeparator();
-	        conf_button = new javax.swing.JButton();
-	        cancel_button = new javax.swing.JButton();
-
-			cancel_button.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	            	dispose();
-	            }
-	        });
-
-	        conf_button.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                try {
-	                	
-	                    String npassText = new String(newp_input.getPassword());
-	                    String repText = new String(rep_input.getPassword());
-	                    String idText = new String(id_input.getText());
-	                    String firstName = "";
-	                    String lastName = "";
-	                    
-	                    if (oldp_input.getText().isEmpty() | npassText.isEmpty() | repText.isEmpty()) {
-
-	                        JOptionPane.showMessageDialog(null, "Please fill in all fields");
-	                    } else {
+                        JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                    } else {
 
 
-	                    	String query="select * from students where student_id=? and password=?";
-	    					PreparedStatement pst= connection.prepareStatement(query);
-	    					pst.setString(1,id_input.getText());
-	    					pst.setString(2, oldp_input.getText());
-	    					ResultSet rs= pst.executeQuery();
-	    					int count=0;
+                    	String query="select * from students where student_id=? and password=?";
+    					PreparedStatement pst= connection.prepareStatement(query);
+    					pst.setString(1,id_input.getText());
+    					pst.setString(2, oldp_input.getText());
+    					ResultSet rs= pst.executeQuery();
+    					int count=0;
 
-	                        while (rs.next()) {
-	                            count = count + 1;
+                        while (rs.next()) {
+                            count = count + 1;
 
-	                        }
-	                        if (count == 1 && npassText.equals(repText) && npassText.length()>=4)
+                        }
+                        if (count == 1 && npassText.equals(repText) && npassText.length()>=4)
 
-	                        {
+                        {
 
-	                        	String update = "update students set password = ? where student_id = ?";
-	                            PreparedStatement preparedStmt = connection.prepareStatement(update);
-	                            preparedStmt.setString   (1, npassText);
-	                            preparedStmt.setString(2, idText);
+                        	String update = "update students set password = ? where student_id = ?";
+                            PreparedStatement preparedStmt = connection.prepareStatement(update);
+                            preparedStmt.setString   (1, npassText);
+                            preparedStmt.setString(2, idText);
 
-	                            preparedStmt.executeUpdate();
-	                            
-	                        	
-	                        	//Calls the dashboard method and sets/displays the studentname as the input of the student id.
-	                        	JOptionPane.showMessageDialog(null, "Please re-logg in with your new password.");
+                            preparedStmt.executeUpdate();
+                            
+                        	
+                        	//Calls the dashboard method and sets/displays the studentname as the input of the student id.
+                        	JOptionPane.showMessageDialog(null, "Please re-logg in with your new password.");
+                        	Login log = new Login();
+                            log.setVisible(true);
+                            log.pack();
+                            log.setLocationRelativeTo(null);
+                            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+                            //dispose();
+                            System.exit(0);
 
-	                        	dashboard.dispose();
+                           
+                                
 
-	                        	Login log = new Login();
-	                            log.setVisible(true);
-	                            log.pack();
-	                            log.setLocationRelativeTo(null);
-	                            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	                            dispose();
+                           
+                            //JOptionPane.showMessageDialog(null, "Username and password is correct");
+                        } else if (count > 1) {
 
+                            JOptionPane.showMessageDialog(null, "Duplicate Username and password");
+                            oldp_input.setText("");
+                            newp_input.setText("");
+                            rep_input.setText("");
+                            
 
-	                            //JOptionPane.showMessageDialog(null, "Username and password is correct");
-	                        } else if (count > 1) {
+                        } 
+                        else if (npassText.length()>=4 == false) {
+                            JOptionPane.showMessageDialog(null, "The new password is too short.");
+                            newp_input.setText("");
+                            rep_input.setText("");
+                    
+                        
+                    }else if (npassText.equals(repText) == false) {
+                            JOptionPane.showMessageDialog(null, "The new password does not match.");
+                            newp_input.setText("");
+                            rep_input.setText("");
+                    }
+                        else {
+                            JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
+                            oldp_input.setText("");
+                            newp_input.setText("");
+                            rep_input.setText("");
 
-	                            JOptionPane.showMessageDialog(null, "Duplicate Username and password");
-	                            oldp_input.setText("");
-	                            newp_input.setText("");
-	                            rep_input.setText("");
-	                            
+                        }
+    					rs.close();
+    					pst.close();
+                    }
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, e1);
+                }
+                
+                
+                
+                
+              
+            }
+        });
+        
+        
+       
+        
 
-	                        } 
-	                        else if (npassText.length()>=4 == false) {
-	                            JOptionPane.showMessageDialog(null, "The new password is too short.");
-	                            newp_input.setText("");
-	                            rep_input.setText("");
-	                    
-	                        
-	                    }else if (npassText.equals(repText) == false) {
-	                            JOptionPane.showMessageDialog(null, "The new password does not match.");
-	                            newp_input.setText("");
-	                            rep_input.setText("");
-	                    }
-	                        else {
-	                            JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
-	                            oldp_input.setText("");
-	                            newp_input.setText("");
-	                            rep_input.setText("");
-	                        }
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-	    					rs.close();
-	    					pst.close();
-	                    }
-	                } catch (Exception e1) {
-	                    JOptionPane.showMessageDialog(null, e1);
-	                }
-	            }
-	        });
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); 
+        jLabel1.setForeground(new java.awt.Color(14, 17, 45));
+        jLabel1.setText("Change Password");
 
-//	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        id_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
+        id_label.setForeground(new java.awt.Color(11, 2, 23));
+        id_label.setText("Student ID:");
 
-	        //Setting the background and fonts
+        id_input.setBackground(new java.awt.Color(255, 255, 255));
+        id_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
+        id_input.setBorder(null);
+        id_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
-	        main_panel.setBackground(new java.awt.Color(255, 248, 234));
-	        main_panel.setMaximumSize(new java.awt.Dimension(680, 500));
-	        main_panel.setMinimumSize(new java.awt.Dimension(680, 500));
+        oldpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
+        oldpass_label.setForeground(new java.awt.Color(11, 2, 23));
+        oldpass_label.setText("Old Password:");
 
-	        sett_title.setFont(new java.awt.Font("Dialog", 1, 18));
-	        sett_title.setForeground(new java.awt.Color(51, 51, 51));
-	        sett_title.setText("Change Password");
-	        
-	        id_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
-	        id_label.setForeground(new java.awt.Color(51, 51, 51));
-	        id_label.setText("Student ID:");
+        oldp_input.setBackground(new java.awt.Color(255, 255, 255));
+        oldp_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
+        oldp_input.setBorder(null);
+        oldp_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
-	        id_input.setBackground(new java.awt.Color(255, 248, 234));
-	        id_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
-	        id_input.setForeground(new java.awt.Color(51, 51, 51));
-	        id_input.setBorder(null);
-	        id_input.setCaretColor(new java.awt.Color(51, 51, 51));
-	        id_input.setSelectionColor(new java.awt.Color(255, 215, 73));
+        newpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14));
+        newpass_label.setForeground(new java.awt.Color(11, 2, 23));
+        newpass_label.setText("New Password:");
 
-	        old_pass.setFont(new java.awt.Font("Century Gothic", 1, 14));
-	        old_pass.setForeground(new java.awt.Color(51, 51, 51));
-	        old_pass.setText("Old Password:");
+        newp_input.setBackground(new java.awt.Color(255, 255, 255));
+        newp_input.setFont(new java.awt.Font("DialogInput", 0, 18));
+        newp_input.setBorder(null);
+        newp_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
-	        oldp_input.setBackground(new java.awt.Color(255, 248, 234));
-	        oldp_input.setFont(new java.awt.Font("DialogInput", 0, 18));
-	        oldp_input.setForeground(new java.awt.Color(51, 51, 51));
-	        oldp_input.setBorder(null);
-	        oldp_input.setCaretColor(new java.awt.Color(51, 51, 51));
-	        oldp_input.setSelectionColor(new java.awt.Color(255, 153, 102));
+        repeatnewpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
+        repeatnewpass_label.setForeground(new java.awt.Color(11, 2, 23));
+        repeatnewpass_label.setText("Repeat New Password:");
 
-	        new_pass.setFont(new java.awt.Font("Century Gothic", 1, 14));
-	        new_pass.setForeground(new java.awt.Color(51, 51, 51));
-	        new_pass.setText("New Password:");
+        rep_input.setBackground(new java.awt.Color(255, 255, 255));
+        rep_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
+        rep_input.setBorder(null);
+        rep_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
-	        newp_input.setBackground(new java.awt.Color(255, 248, 234));
-	        newp_input.setFont(new java.awt.Font("DialogInput", 0, 18));
-	        newp_input.setForeground(new java.awt.Color(51, 51, 51));
-	        newp_input.setBorder(null);
-	        newp_input.setSelectionColor(new java.awt.Color(255, 153, 102));
-	        
-	        rep_pass.setFont(new java.awt.Font("Century Gothic", 1, 14));
-	        rep_pass.setForeground(new java.awt.Color(51, 51, 51));
-	        rep_pass.setText("Repeat New Password:");
-	        
-	        rep_input.setBackground(new java.awt.Color(255, 248, 234));
-	        rep_input.setFont(new java.awt.Font("DialogInput", 0, 18));
-	        rep_input.setForeground(new java.awt.Color(51, 51, 51));
-	        rep_input.setBorder(null);
-	        rep_input.setSelectionColor(new java.awt.Color(255, 153, 102));
+        conf_button.setBackground(new java.awt.Color(14, 17, 45));
+        conf_button.setFont(new java.awt.Font("Century Gothic", 1, 12));
+        conf_button.setForeground(new java.awt.Color(255, 255, 255));
+        conf_button.setText("Confirm");
 
-	        conf_button.setFont(new java.awt.Font("Century Gothic", 1, 12));
-	        conf_button.setText("Confirm");
+        cancel_button.setBackground(new java.awt.Color(14, 17, 45));
+        cancel_button.setFont(new java.awt.Font("Century Gothic", 1, 12));
+        cancel_button.setForeground(new java.awt.Color(255, 255, 255));
+        cancel_button.setText("Cancel");
+        cancel_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_buttonActionPerformed(evt);
+            }
+        });
 
-	        cancel_button.setFont(new java.awt.Font("Century Gothic", 1, 12));
-	        cancel_button.setText("Cancel");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(182, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(171, 171, 171))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(repeatnewpass_label)
+                            .addComponent(newpass_label)
+                            .addComponent(oldpass_label)
+                            .addComponent(id_label)
+                            .addComponent(id_input)
+                            .addComponent(jSeparator1)
+                            .addComponent(oldp_input)
+                            .addComponent(jSeparator2)
+                            .addComponent(newp_input)
+                            .addComponent(jSeparator3)
+                            .addComponent(rep_input, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                            .addComponent(jSeparator4)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cancel_button)
+                            .addComponent(conf_button))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(63, 63, 63)
+                .addComponent(id_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(id_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(oldpass_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(oldp_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newpass_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newp_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(repeatnewpass_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rep_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(conf_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancel_button)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
-	        //Panel Layout
-	        javax.swing.GroupLayout main_panelLayout = new javax.swing.GroupLayout(main_panel);
-	        main_panel.setLayout(main_panelLayout);
-	        main_panelLayout.setHorizontalGroup(
-	                main_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                        .addGroup(main_panelLayout.createSequentialGroup()
-	                                .addGroup(main_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                                        .addGroup(main_panelLayout.createSequentialGroup()
-	                                                .addGap(138, 138, 138)
-	                                                .addGroup(main_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                                                        .addComponent(id_label)
-	                                                        .addComponent(id_input)
-	                                                		.addComponent(new_pass)
-	                                                        .addComponent(rep_pass)
-	                                                        .addComponent(old_pass)
-	                                                        .addComponent(oldp_input)
-	                                                        .addComponent(id_line)
-	                                                        .addComponent(oldp_line)
-	                                                        .addComponent(newp_input, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-	                                                        .addComponent(rep_input, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-	                                                        .addComponent(pass_line)
-	                                                        .addComponent(rep_line)))
-	                                        .addGroup(main_panelLayout.createSequentialGroup()
-	                                                .addGap(237, 237, 237)
-	                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                                                ))
-	                                .addContainerGap(122, Short.MAX_VALUE))
-	                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_panelLayout.createSequentialGroup()
-	                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                                .addGroup(main_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_panelLayout.createSequentialGroup()
-	                                                .addComponent(sett_title)
-	                                                .addGap(316, 316, 316))
-	                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_panelLayout.createSequentialGroup()
-	                                                .addComponent(conf_button, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                                .addGap(270, 270, 270))
-	                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_panelLayout.createSequentialGroup()
-	                                        		.addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                        		.addGap(270, 270, 270))))
-	        );
-	        main_panelLayout.setVerticalGroup(
-	                main_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                        .addGroup(main_panelLayout.createSequentialGroup()
-	                                .addContainerGap()
-	                                .addComponent(sett_title)
-	                                .addGap(50, 50, 50)
-	                                .addComponent(id_label)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(id_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(id_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(old_pass)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(oldp_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(oldp_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(new_pass)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(newp_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                                .addComponent(pass_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(rep_pass)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                                .addComponent(rep_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                                .addComponent(rep_line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addGap(18, 18, 18)
-	                                .addComponent(conf_button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addGap(18, 18, 18)
-	                                .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addGap(18, 18, 18)
-	                                .addGroup(main_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE))
-	                                .addContainerGap(162, Short.MAX_VALUE))
-	        );
+        pack();
+    }                      
 
-	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-	        getContentPane().setLayout(layout);
-	        layout.setHorizontalGroup(
-	                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                        .addComponent(main_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	        );
-	        layout.setVerticalGroup(
-	                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                        .addComponent(main_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	        );
+    private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
 
-	        pack();
-	    }
-
-
-
-
-
-	    //Method used to set the icon of the program to be a star
-	    public void staricon() {
-	        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
-
-	    }
+   
+    
+    public void staricon(){
+    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
+    
+    }
+    
+    
+    
+    
+    private class ChangePassword extends StellarDashboard{
+    	
+    	
+    	
+    }
+              
 }
