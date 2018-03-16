@@ -443,9 +443,9 @@ public class StellarDashboard extends javax.swing.JFrame {
         if (logout_con == 0){
             Login log = new Login();
             log.setVisible(true);
-            log.pack();
-            log.setLocationRelativeTo(null);
-            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            log.pack();
+//            log.setLocationRelativeTo(null);
+//            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
 
         }
@@ -475,7 +475,7 @@ public class StellarDashboard extends javax.swing.JFrame {
     
 
     //Method used to set the icon of the program to be a star
-    public void staricon(){
+    private void staricon(){
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
     
     }

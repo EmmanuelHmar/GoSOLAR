@@ -894,9 +894,9 @@ public class Admin extends javax.swing.JFrame {
         if (logout_con == 0) {
             Login log = new Login();
             log.setVisible(true);
-            log.pack();
-            log.setLocationRelativeTo(null);
-            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            log.pack();
+//            log.setLocationRelativeTo(null);
+//            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         }
     }//GEN-LAST:event_logout_buttonMouseClicked
