@@ -443,7 +443,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         if (logout_con == 0){
             Login log = new Login();
             log.setVisible(true);
-//            log.pack();
+//            log.pack(); //This 3 seems to be unnecessary
 //            log.setLocationRelativeTo(null);
 //            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
@@ -461,8 +461,7 @@ public class StellarDashboard extends javax.swing.JFrame {
             ad.setVisible(true);
             ad.pack();
             ad.setLocationRelativeTo(null);
-            ad.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //dispose();
+            ad.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Dispose just closes the admin, not the entire program
     }//GEN-LAST:event_update_buttonMouseClicked
 
     private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { //M1
@@ -470,7 +469,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         sett.setVisible(true);
         sett.pack();
         sett.setLocationRelativeTo(null);
-        sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Dispose just closes the pw window, not the entire program
     }    
     
 
@@ -478,10 +477,7 @@ public class StellarDashboard extends javax.swing.JFrame {
     private void staricon(){
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
     
-    }
-
-    
-    
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addclass_button;
