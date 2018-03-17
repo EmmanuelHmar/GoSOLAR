@@ -79,10 +79,8 @@ public class Login extends javax.swing.JFrame {
                     }
 
                     if (id_input.getText().isEmpty() | pass_input.getText().isEmpty()) {
-
                         JOptionPane.showMessageDialog(null, "Please fill in all fields");
                     } else {
-
                         String query = "select * from students where student_id=? and password=?";
                         PreparedStatement pst = connection.prepareStatement(query);
                         pst.setString(1, id_input.getText());
