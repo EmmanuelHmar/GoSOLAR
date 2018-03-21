@@ -8,9 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import net.proteanit.sql.DbUtils;
-/**
- * @author aturn
- */
+
 public class Admin extends javax.swing.JFrame {
 
     Connection connection = null;
