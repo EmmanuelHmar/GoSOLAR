@@ -10,6 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import net.proteanit.sql.DbUtils;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.JLabel;
 //TODO: Current update class not working
 
 public class Admin extends javax.swing.JFrame {
@@ -73,25 +79,16 @@ public class Admin extends javax.swing.JFrame {
         studentFirstName_label = new javax.swing.JLabel();
         studentFirstName_input = new javax.swing.JTextField();
         studentLastName_label = new javax.swing.JLabel();
-        studentLastName_input = new javax.swing.JTextField();
         studentId_label = new javax.swing.JLabel();
-        studentId_input = new javax.swing.JTextField();
         studentPassword_label = new javax.swing.JLabel();
-        studentPassword_input = new javax.swing.JTextField();
         clearstudent_button = new javax.swing.JButton();
         addstudents_button = new javax.swing.JButton();
         stellarnum_label = new javax.swing.JLabel();
-        stellarnum_input = new javax.swing.JTextField();
         studentEmail_label = new javax.swing.JLabel();
-        studentEmail_input = new javax.swing.JTextField();
         studentGpa_label = new javax.swing.JLabel();
-        studentGpa_input = new javax.swing.JTextField();
         studentMajor_label = new javax.swing.JLabel();
-        studentMajor_input = new javax.swing.JTextField();
         studentYear_label = new javax.swing.JLabel();
-        studentYear_input = new javax.swing.JTextField();
         studentBday_label = new javax.swing.JLabel();
-        studentBday_input = new javax.swing.JTextField();
         update_tab = new javax.swing.JPanel();
         update_spanel = new javax.swing.JScrollPane();
         updateclass_table = new javax.swing.JTable();
@@ -420,20 +417,11 @@ public class Admin extends javax.swing.JFrame {
         studentLastName_label.setForeground(new java.awt.Color(51, 51, 51));
         studentLastName_label.setText("Last Name:");
 
-        studentLastName_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentLastName_input.setForeground(new java.awt.Color(51, 51, 51));
-
         studentId_label.setForeground(new java.awt.Color(51, 51, 51));
         studentId_label.setText("Student ID:");
 
-        studentId_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentId_input.setForeground(new java.awt.Color(51, 51, 51));
-
         studentPassword_label.setForeground(new java.awt.Color(51, 51, 51));
         studentPassword_label.setText("Password:");
-
-        studentPassword_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentPassword_input.setForeground(new java.awt.Color(51, 51, 51));
 
         clearstudent_button.setText("Clear");
         clearstudent_button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -453,134 +441,222 @@ public class Admin extends javax.swing.JFrame {
         stellarnum_label.setForeground(new java.awt.Color(51, 51, 51));
         stellarnum_label.setText("Stellar Number:");
 
-        stellarnum_input.setBackground(new java.awt.Color(255, 255, 255));
-        stellarnum_input.setForeground(new java.awt.Color(51, 51, 51));
-        stellarnum_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stellarnum_inputActionPerformed(evt);
-            }
-        });
-
         studentEmail_label.setForeground(new java.awt.Color(51, 51, 51));
         studentEmail_label.setText("E-mail:");
-
-        studentEmail_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentEmail_input.setForeground(new java.awt.Color(51, 51, 51));
 
         studentGpa_label.setForeground(new java.awt.Color(51, 51, 51));
         studentGpa_label.setText("GPA:");
 
-        studentGpa_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentGpa_input.setForeground(new java.awt.Color(51, 51, 51));
-
         studentMajor_label.setForeground(new java.awt.Color(51, 51, 51));
         studentMajor_label.setText("Major:");
-
-        studentMajor_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentMajor_input.setForeground(new java.awt.Color(51, 51, 51));
 
         studentYear_label.setForeground(new java.awt.Color(51, 51, 51));
         studentYear_label.setText("School Year:");
 
-        studentYear_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentYear_input.setForeground(new java.awt.Color(51, 51, 51));
-
         studentBday_label.setForeground(new java.awt.Color(51, 51, 51));
         studentBday_label.setText("Birthday:");
-
-        studentBday_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentBday_input.setForeground(new java.awt.Color(51, 51, 51));
+        
+        studentLastName_input = new JTextField();
+        studentLastName_input.setForeground(new Color(51, 51, 51));
+        studentLastName_input.setBackground(Color.WHITE);
+        
+        studentId_input = new JTextField();
+        studentId_input.setForeground(new Color(51, 51, 51));
+        studentId_input.setBackground(Color.WHITE);
+        
+        studentPassword_input = new JTextField();
+        studentPassword_input.setForeground(new Color(51, 51, 51));
+        studentPassword_input.setBackground(Color.WHITE);
+        
+        stellarnum_input = new JTextField();
+        stellarnum_input.setForeground(new Color(51, 51, 51));
+        stellarnum_input.setBackground(Color.WHITE);
+        
+        studentEmail_input = new JTextField();
+        studentEmail_input.setForeground(new Color(51, 51, 51));
+        studentEmail_input.setBackground(Color.WHITE);
+        
+        studentGpa_input = new JTextField();
+        studentGpa_input.setForeground(new Color(51, 51, 51));
+        studentGpa_input.setBackground(Color.WHITE);
+        
+        studentMajor_input = new JTextField();
+        studentMajor_input.setForeground(new Color(51, 51, 51));
+        studentMajor_input.setBackground(Color.WHITE);
+        
+        studentYear_input = new JTextField();
+        studentYear_input.setForeground(new Color(51, 51, 51));
+        studentYear_input.setBackground(Color.WHITE);
+        
+        studentBday_input = new JTextField();
+        studentBday_input.setForeground(new Color(51, 51, 51));
+        studentBday_input.setBackground(Color.WHITE);
+        
+        JLabel lblPhone = new JLabel();
+        lblPhone.setText("Phone:");
+        lblPhone.setForeground(new Color(51, 51, 51));
+        
+        JLabel lblAddress = new JLabel();
+        lblAddress.setText("Address:");
+        lblAddress.setForeground(new Color(51, 51, 51));
+        
+        studentPhone_input = new JTextField();
+        studentPhone_input.setForeground(new Color(51, 51, 51));
+        studentPhone_input.setBackground(Color.WHITE);
+        
+        studentAddress_input = new JTextField();
+        studentAddress_input.setForeground(new Color(51, 51, 51));
+        studentAddress_input.setBackground(Color.WHITE);
+        
+        JLabel lblState = new JLabel();
+        lblState.setText("State:");
+        lblState.setForeground(new Color(51, 51, 51));
+        
+        JLabel lblCity = new JLabel();
+        lblCity.setText("City:");
+        lblCity.setForeground(new Color(51, 51, 51));
+        
+        studentState_input = new JTextField();
+        studentState_input.setForeground(new Color(51, 51, 51));
+        studentState_input.setBackground(Color.WHITE);
+        
+        studentCity_input = new JTextField();
+        studentCity_input.setForeground(new Color(51, 51, 51));
+        studentCity_input.setBackground(Color.WHITE);
+        
+        JLabel lblZipcode = new JLabel();
+        lblZipcode.setText("Zipcode:");
+        lblZipcode.setForeground(new Color(51, 51, 51));
+        
+        studentZip_input = new JTextField();
+        studentZip_input.setForeground(new Color(51, 51, 51));
+        studentZip_input.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout students_tabLayout = new javax.swing.GroupLayout(students_tab);
-        students_tab.setLayout(students_tabLayout);
         students_tabLayout.setHorizontalGroup(
-                students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(students_tabLayout.createSequentialGroup()
-                                .addComponent(student_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(students_tabLayout.createSequentialGroup()
-                                                .addGap(349, 349, 349)
-                                                .addComponent(clearstudent_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(addstudents_button))
-                                        .addGroup(students_tabLayout.createSequentialGroup()
-                                                .addGap(200, 200, 200)
-                                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(studentBday_label)
-                                                        .addComponent(studentYear_label)
-                                                        .addComponent(studentMajor_label)
-                                                        .addComponent(studentGpa_label)
-                                                        .addComponent(studentEmail_label)
-                                                        .addComponent(studentFirstName_label)
-                                                        .addComponent(studentLastName_label)
-                                                        .addComponent(studentId_label)
-                                                        .addComponent(studentPassword_label)
-                                                        .addComponent(studentFirstName_input)
-                                                        .addComponent(studentLastName_input)
-                                                        .addComponent(studentId_input)
-                                                        .addComponent(studentPassword_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                                                        .addComponent(addstudent_label)
-                                                        .addComponent(stellarnum_label)
-                                                        .addComponent(stellarnum_input)
-                                                        .addComponent(studentEmail_input)
-                                                        .addComponent(studentGpa_input)
-                                                        .addComponent(studentMajor_input)
-                                                        .addComponent(studentYear_input)
-                                                        .addComponent(studentBday_input))))
-                                .addContainerGap())
+        	students_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(students_tabLayout.createSequentialGroup()
+        			.addComponent(student_spanel, GroupLayout.PREFERRED_SIZE, 649, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(students_tabLayout.createSequentialGroup()
+        					.addGap(157)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(studentFirstName_label)
+        						.addComponent(studentFirstName_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentId_label)
+        						.addComponent(studentId_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(stellarnum_label)
+        						.addComponent(stellarnum_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentGpa_label)
+        						.addComponent(studentGpa_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentYear_label)
+        						.addComponent(addstudent_label)
+        						.addComponent(studentState_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblZipcode, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentZip_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentYear_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblPhone, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentPhone_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblState, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+        					.addGap(87)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(studentAddress_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentBday_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentCity_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCity, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentBday_label)
+        						.addComponent(studentMajor_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentMajor_label)
+        						.addComponent(studentEmail_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentEmail_label)
+        						.addComponent(studentPassword_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentPassword_label)
+        						.addComponent(studentLastName_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentLastName_label)))
+        				.addGroup(students_tabLayout.createSequentialGroup()
+        					.addGap(355)
+        					.addComponent(clearstudent_button)
+        					.addGap(18)
+        					.addComponent(addstudents_button)))
+        			.addGap(236))
         );
         students_tabLayout.setVerticalGroup(
-                students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(student_spanel)
-                        .addGroup(students_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(addstudent_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(studentFirstName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentFirstName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentLastName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentLastName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentId_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentId_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentPassword_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentPassword_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(stellarnum_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(stellarnum_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentEmail_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentEmail_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentGpa_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentGpa_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentMajor_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentMajor_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentYear_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentYear_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentBday_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentBday_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearstudent_button)
-                                        .addComponent(addstudents_button))
-                                .addGap(31, 31, 31))
+        	students_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(students_tabLayout.createSequentialGroup()
+        			.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(students_tabLayout.createSequentialGroup()
+        					.addGap(38)
+        					.addComponent(addstudent_label)
+        					.addGap(18)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentFirstName_label)
+        						.addComponent(studentLastName_label))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentFirstName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentLastName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentId_label)
+        						.addComponent(studentPassword_label))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentId_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentPassword_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(stellarnum_label)
+        						.addComponent(studentEmail_label))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(stellarnum_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentEmail_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentGpa_label)
+        						.addComponent(studentMajor_label))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentGpa_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentMajor_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentYear_label)
+        						.addComponent(studentBday_label))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentYear_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentBday_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblPhone)
+        						.addComponent(lblAddress))
+        					.addGap(1)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentPhone_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentAddress_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCity)
+        						.addComponent(lblState))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(studentState_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(studentCity_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addComponent(lblZipcode)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(studentZip_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addGap(29)
+        					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(clearstudent_button)
+        						.addComponent(addstudents_button)))
+        				.addComponent(student_spanel, GroupLayout.PREFERRED_SIZE, 756, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        students_tab.setLayout(students_tabLayout);
 
         admin_tab.addTab("Students", students_tab);
 
@@ -973,20 +1049,27 @@ public class Admin extends javax.swing.JFrame {
             statement = connection.createStatement();
 
             String firstName = studentFirstName_input.getText().trim().toUpperCase();
-            String lastName =  studentLastName_input.getText().trim().toUpperCase();
+            String lastName =  studentGpa_input.getText().trim().toUpperCase();
             String studentID = studentId_input.getText();
-            String password = studentPassword_input.getText().trim().toUpperCase();
+            String password = studentPassword_input.getText().trim();
             String email = studentEmail_input.getText().trim();
             int stellarNum = Integer.parseInt(stellarnum_input.getText());
             int gpa = Integer.parseInt(studentGpa_input.getText());
             String bday = studentBday_input.getText().trim().toUpperCase();
             String major = studentMajor_input.getText().trim().toUpperCase();
             String schoolYear = studentYear_input.getText().trim().toUpperCase();
+            
+            String phone = studentPhone_input.getText().trim().toUpperCase();
+            String address = studentAddress_input.getText().trim().toUpperCase();
+            String state = studentState_input.getText().trim().toUpperCase();
+            String city = studentCity_input.getText().trim().toUpperCase();
+            int zip = Integer.parseInt(studentZip_input.getText());
+            
 
             String sql = "INSERT INTO students "
-                    + "(panther_num, first_name, last_name, email, student_id, password, GPA, bday, major, school_year) "
+                    + "(panther_num, first_name, last_name, email, student_id, password, GPA, bday, major, school_year, phone, address, state, city, zipcode) "
                     + "VALUES('" + stellarNum + "','" + firstName + "','" + lastName + "','" + email + "','"
-                    + studentID + "','" + password + "','" + gpa + "','" + bday + "','" + major + "','" + schoolYear + "') ";
+                    + studentID + "','" + password + "','" + gpa + "','" + bday + "','" + major + "','" + schoolYear + "', '" + phone + "', '" + address + "', '" + state + "', '" + city + "', '" + zip + "') ";
 
             statement.execute(sql);
 
@@ -1054,11 +1137,6 @@ public class Admin extends javax.swing.JFrame {
          }
     }
 
-    private void stellarnum_inputActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        System.out.println("TEST STellar");
-    }
-
     private void clearclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         classtitle_input.setText("");
         classid_input.setText("");
@@ -1076,7 +1154,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void clearstudent_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         studentFirstName_input.setText("");
-        studentLastName_input.setText("");
+        studentGpa_input.setText("");
         studentId_input.setText("");
         stellarnum_input.setText("");
         studentEmail_input.setText("");
@@ -1190,7 +1268,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel addteacher_label;
     private javax.swing.JPanel admin_panel;
     private javax.swing.JTabbedPane admin_tab;
-    private javax.swing.JTextField studentBday_input;
     private javax.swing.JLabel studentBday_label;
     private javax.swing.JTextField clasid_input;
     private javax.swing.JLabel clasid_label;
@@ -1215,13 +1292,11 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel crn_label;
     private javax.swing.JTextField days_input;
     private javax.swing.JLabel days_label;
-    private javax.swing.JTextField studentEmail_input;
     private javax.swing.JLabel studentEmail_label;
     private javax.swing.JTextField studentFirstName_input;
     private javax.swing.JLabel studentFirstName_label;
     private javax.swing.JTextField teacherFirstName_input;
     private javax.swing.JLabel teacherFirstName_label;
-    private javax.swing.JTextField studentGpa_input;
     private javax.swing.JLabel studentGpa_label;
     private javax.swing.JButton classUpdateButton;
     private javax.swing.JButton classUpdateClear;
@@ -1233,24 +1308,19 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTextField updateClassID_input;
     private javax.swing.JTextField updateClassCredit_input;
     private javax.swing.JTextField updateClassSubject_input;
-    private javax.swing.JTextField studentLastName_input;
     private javax.swing.JLabel studentLastName_label;
     private javax.swing.JTextField teacherLastName_input;
     private javax.swing.JLabel teacherLastName_label;
     private javax.swing.JButton logout_button;
-    private javax.swing.JTextField studentMajor_input;
     private javax.swing.JLabel studentMajor_label;
-    private javax.swing.JTextField studentPassword_input;
     private javax.swing.JLabel studentPassword_label;
     private javax.swing.JTextField teacherPrefix_input;
     private javax.swing.JLabel teacherPrefix_label;
     private javax.swing.JTextField semester_input;
     private javax.swing.JLabel semester_label;
-    private javax.swing.JTextField stellarnum_input;
     private javax.swing.JLabel stellarnum_label;
     private javax.swing.JScrollPane student_spanel;
     private javax.swing.JTable student_table;
-    private javax.swing.JTextField studentId_input;
     private javax.swing.JLabel studentId_label;
     private javax.swing.JPanel students_tab;
     private javax.swing.JTextField subject_input;
@@ -1267,7 +1337,19 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel update_tab;
     private javax.swing.JLabel updateclass_label;
     private javax.swing.JTable updateclass_table;
-    private javax.swing.JTextField studentYear_input;
     private javax.swing.JLabel studentYear_label;
-   
+    private JTextField studentLastName_input;
+    private JTextField studentId_input;
+    private JTextField studentPassword_input;
+    private JTextField stellarnum_input;
+    private JTextField studentEmail_input;
+    private JTextField studentGpa_input;
+    private JTextField studentMajor_input;
+    private JTextField studentYear_input;
+    private JTextField studentBday_input;
+    private JTextField studentPhone_input;
+    private JTextField studentAddress_input;
+    private JTextField studentState_input;
+    private JTextField studentCity_input;
+    private JTextField studentZip_input;
 }

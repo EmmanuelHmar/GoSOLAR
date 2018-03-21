@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.awt.Font;
 
 
 public class StellarDashboard extends javax.swing.JFrame {
@@ -430,11 +431,11 @@ public class StellarDashboard extends javax.swing.JFrame {
         name_label.setForeground(new java.awt.Color(102, 102, 102));
         name_label.setText("Name:");
 
-        studentFirstname.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        studentFirstname.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
         studentFirstname.setForeground(new java.awt.Color(102, 102, 102));
         studentFirstname.setText("Fname");
 
-        studentLastname.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        studentLastname.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
         studentLastname.setForeground(new java.awt.Color(102, 102, 102));
         studentLastname.setText("Lname");
 
@@ -442,7 +443,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         studentYear_label.setForeground(new java.awt.Color(102, 102, 102));
         studentYear_label.setText("Year:");
 
-        studentYear.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        studentYear.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
         studentYear.setForeground(new java.awt.Color(102, 102, 102));
         studentYear.setText("SchoolYear");
 
@@ -458,7 +459,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         Schedule_label.setForeground(new java.awt.Color(102, 102, 102));
         Schedule_label.setText("Schedule:");
 
-        studentCon.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        studentCon.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
         studentCon.setForeground(new java.awt.Color(102, 102, 102));
         studentCon.setText("Con");
 
@@ -469,7 +470,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         });
         schedulelist_scroll.setViewportView(schedule_list);
 
-        totalcredits.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        totalcredits.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
         totalcredits.setForeground(new java.awt.Color(102, 102, 102));
         totalcredits.setText("4");
 
@@ -477,7 +478,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         totalcredits_label.setForeground(new java.awt.Color(102, 102, 102));
         totalcredits_label.setText("Total Credits:");
 
-        studentMajor.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        studentMajor.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
         studentMajor.setForeground(new java.awt.Color(102, 102, 102));
         studentMajor.setText("studentMajor");
 
