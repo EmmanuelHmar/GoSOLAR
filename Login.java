@@ -186,6 +186,8 @@ public class Login extends javax.swing.JFrame {
                             String GPA = "";
                             String Year = "";
                             String Standing= "";
+                           
+                           
                             
                              String passText = new String(pass_input.getPassword());
 					
@@ -213,6 +215,7 @@ public class Login extends javax.swing.JFrame {
                                                 GPA = rs.getString("GPA");
                                                 Year = rs.getString("school_year");
                                                
+                                               
                                               
 					}
 					if (count == 1)
@@ -236,6 +239,12 @@ public class Login extends javax.swing.JFrame {
                                                StellarDashboard.major.setText(Major);
                                                StellarDashboard.gpa.setText(GPA);
                                                StellarDashboard.year.setText(Year);
+                                               StellarDashboard.studentFirstname.setText(firstName);
+                                               StellarDashboard.studentLastname.setText(lastName);
+                                               StellarDashboard.studentYear.setText(Year);
+                                               StellarDashboard.studentMajor.setText(Major);
+                                               
+                                              // StellarDashboard.studentCon.setText(Concentration);
                                                dispose();
 					     //JOptionPane.showMessageDialog(null, "Username and password is correct");
                                                         

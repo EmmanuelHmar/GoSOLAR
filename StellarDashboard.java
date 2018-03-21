@@ -61,11 +61,11 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel sidemenu;
     private javax.swing.JLabel starimage;
     private javax.swing.JLabel studentCon;
-    private javax.swing.JLabel studentFirstname;
-    private javax.swing.JLabel studentLastname;
-    private javax.swing.JLabel studentMajor;
+    public static javax.swing.JLabel studentFirstname;
+    public static javax.swing.JLabel studentLastname;
+    public static javax.swing.JLabel studentMajor;
     private javax.swing.JLabel studentMajor_label;
-    private javax.swing.JLabel studentYear;
+    public static javax.swing.JLabel studentYear;
     private javax.swing.JLabel studentYear_label;
     public static javax.swing.JLabel studentid;
     private javax.swing.JLabel studentid_label;
@@ -444,7 +444,7 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         studentYear.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
         studentYear.setForeground(new java.awt.Color(102, 102, 102));
-        studentYear.setText("SchooYear");
+        studentYear.setText("SchoolYear");
 
         concentration_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
         concentration_label.setForeground(new java.awt.Color(102, 102, 102));
