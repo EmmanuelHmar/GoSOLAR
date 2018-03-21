@@ -27,12 +27,13 @@ public class Settings2 extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JPasswordField newp_input;
+    private javax.swing.JPasswordField new_password_input;
     private javax.swing.JLabel newpass_label;
-    private javax.swing.JPasswordField oldp_input;
+    private javax.swing.JPasswordField old_password_input;
     private javax.swing.JLabel oldpass_label;
-    private javax.swing.JPasswordField rep_input;
+    private javax.swing.JPasswordField repeat_password_input;
     private javax.swing.JLabel repeatnewpass_label;
+    private StellarDashboard dashboard;
     Connection connection = null;
 	
 	
@@ -40,7 +41,8 @@ public class Settings2 extends javax.swing.JFrame {
 	
 	
 
-    public Settings2() {
+    public Settings2(StellarDashboard dashboard) {
+    	this.dashboard = dashboard;
     	connection = DatabaseConnection.dbConnector();
         settings_form();
         setTitle("Change Password");
@@ -58,13 +60,13 @@ public class Settings2 extends javax.swing.JFrame {
         id_input = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         oldpass_label = new javax.swing.JLabel();
-        oldp_input = new javax.swing.JPasswordField();
+        old_password_input = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
         newpass_label = new javax.swing.JLabel();
-        newp_input = new javax.swing.JPasswordField();
+        new_password_input = new javax.swing.JPasswordField();
         jSeparator3 = new javax.swing.JSeparator();
         repeatnewpass_label = new javax.swing.JLabel();
-        rep_input = new javax.swing.JPasswordField();
+        repeat_password_input = new javax.swing.JPasswordField();
         jSeparator4 = new javax.swing.JSeparator();
         conf_button = new javax.swing.JButton();
         cancel_button = new javax.swing.JButton();
@@ -77,93 +79,87 @@ public class Settings2 extends javax.swing.JFrame {
         });
         conf_button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                	
-                    String npassText = new String(newp_input.getPassword());
-                    String repText = new String(rep_input.getPassword());
+            	try {
+
+                    String new_pw_text = new String(new_password_input.getPassword());
+                    String repeat_pw_Text = new String(repeat_password_input.getPassword());
                     String idText = new String(id_input.getText());
                     String firstName = "";
                     String lastName = "";
-                    
-                    if (oldp_input.getText().isEmpty() | npassText.isEmpty() | repText.isEmpty()) {
+
+                    if (old_password_input.getText().isEmpty() | new_pw_text.isEmpty() | repeat_pw_Text.isEmpty()) {
 
                         JOptionPane.showMessageDialog(null, "Please fill in all fields");
                     } else {
-
-
-                    	String query="select * from students where student_id=? and password=?";
-    					PreparedStatement pst= connection.prepareStatement(query);
-    					pst.setString(1,id_input.getText());
-    					pst.setString(2, oldp_input.getText());
-    					ResultSet rs= pst.executeQuery();
-    					int count=0;
+                        String query = "SELECT * FROM students WHERE student_id=? AND password=?";
+                        PreparedStatement pst = connection.prepareStatement(query);
+                        pst.setString(1, id_input.getText());
+                        pst.setString(2, old_password_input.getText());
+                        ResultSet rs = pst.executeQuery();
+                        int count = 0;
 
                         while (rs.next()) {
                             count = count + 1;
-
                         }
-                        if (count == 1 && npassText.equals(repText) && npassText.length()>=4)
 
-                        {
+                        if (new_pw_text.equals(old_password_input.getText())) {
+                            JOptionPane.showMessageDialog(null, "Cannot change to the same password.");
+                            new_password_input.setText("");
+                            repeat_password_input.setText("");
+                        } else if (count == 1 && new_pw_text.equals(repeat_pw_Text) && new_pw_text.length() >= 4
+                                && !new_pw_text.equals(old_password_input.getText())) {
 
-                        	String update = "update students set password = ? where student_id = ?";
+                            String update = "UPDATE students SET password = ? WHERE student_id = ?";
                             PreparedStatement preparedStmt = connection.prepareStatement(update);
-                            preparedStmt.setString   (1, npassText);
+                            preparedStmt.setString(1, new_pw_text);
                             preparedStmt.setString(2, idText);
 
                             preparedStmt.executeUpdate();
-                            
-                        	
-                        	//Calls the dashboard method and sets/displays the studentname as the input of the student id.
-                        	JOptionPane.showMessageDialog(null, "Please re-logg in with your new password.");
-                        	Login log = new Login();
+
+                            //Calls the dashboard method and sets/displays the studentname as the input of the student id.
+                            JOptionPane.showMessageDialog(null, "Please re-login with your new password.");
+
+                            dashboard.dispose();
+
+                            Login log = new Login();
                             log.setVisible(true);
                             log.pack();
                             log.setLocationRelativeTo(null);
-                            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-                            //dispose();
-                            System.exit(0);
+                            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                            dispose();
 
-                           
-                                
 
-                           
                             //JOptionPane.showMessageDialog(null, "Username and password is correct");
                         } else if (count > 1) {
-
                             JOptionPane.showMessageDialog(null, "Duplicate Username and password");
-                            oldp_input.setText("");
-                            newp_input.setText("");
-                            rep_input.setText("");
-                            
+                            old_password_input.setText("");
+                            new_password_input.setText("");
+                            repeat_password_input.setText("");
 
-                        } 
-                        else if (npassText.length()>=4 == false) {
+                        } else if (new_pw_text.length() < 4) {
                             JOptionPane.showMessageDialog(null, "The new password is too short.");
-                            newp_input.setText("");
-                            rep_input.setText("");
-                    
-                        
-                    }else if (npassText.equals(repText) == false) {
-                            JOptionPane.showMessageDialog(null, "The new password does not match.");
-                            newp_input.setText("");
-                            rep_input.setText("");
-                    }
-                        else {
-                            JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
-                            oldp_input.setText("");
-                            newp_input.setText("");
-                            rep_input.setText("");
+                            new_password_input.setText("");
+                            repeat_password_input.setText("");
 
+
+                        } else if (!new_pw_text.equals(repeat_pw_Text)) {
+                            JOptionPane.showMessageDialog(null, "The new password does not match.");
+                            new_password_input.setText("");
+                            repeat_password_input.setText("");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
+                            old_password_input.setText("");
+                            new_password_input.setText("");
+                            repeat_password_input.setText("");
                         }
-    					rs.close();
-    					pst.close();
+
+
+                        rs.close();
+                        pst.close();
                     }
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(null, e1);
                 }
-                
-                
                 
                 
               
@@ -195,28 +191,28 @@ public class Settings2 extends javax.swing.JFrame {
         oldpass_label.setForeground(new java.awt.Color(11, 2, 23));
         oldpass_label.setText("Old Password:");
 
-        oldp_input.setBackground(new java.awt.Color(255, 255, 255));
-        oldp_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
-        oldp_input.setBorder(null);
-        oldp_input.setSelectionColor(new java.awt.Color(153, 102, 255));
+        old_password_input.setBackground(new java.awt.Color(255, 255, 255));
+        old_password_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
+        old_password_input.setBorder(null);
+        old_password_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
         newpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14));
         newpass_label.setForeground(new java.awt.Color(11, 2, 23));
         newpass_label.setText("New Password:");
 
-        newp_input.setBackground(new java.awt.Color(255, 255, 255));
-        newp_input.setFont(new java.awt.Font("DialogInput", 0, 18));
-        newp_input.setBorder(null);
-        newp_input.setSelectionColor(new java.awt.Color(153, 102, 255));
+        new_password_input.setBackground(new java.awt.Color(255, 255, 255));
+        new_password_input.setFont(new java.awt.Font("DialogInput", 0, 18));
+        new_password_input.setBorder(null);
+        new_password_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
         repeatnewpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
         repeatnewpass_label.setForeground(new java.awt.Color(11, 2, 23));
         repeatnewpass_label.setText("Repeat New Password:");
 
-        rep_input.setBackground(new java.awt.Color(255, 255, 255));
-        rep_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
-        rep_input.setBorder(null);
-        rep_input.setSelectionColor(new java.awt.Color(153, 102, 255));
+        repeat_password_input.setBackground(new java.awt.Color(255, 255, 255));
+        repeat_password_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
+        repeat_password_input.setBorder(null);
+        repeat_password_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
         conf_button.setBackground(new java.awt.Color(14, 17, 45));
         conf_button.setFont(new java.awt.Font("Century Gothic", 1, 12));
@@ -252,11 +248,11 @@ public class Settings2 extends javax.swing.JFrame {
                             .addComponent(id_label)
                             .addComponent(id_input)
                             .addComponent(jSeparator1)
-                            .addComponent(oldp_input)
+                            .addComponent(old_password_input)
                             .addComponent(jSeparator2)
-                            .addComponent(newp_input)
+                            .addComponent(new_password_input)
                             .addComponent(jSeparator3)
-                            .addComponent(rep_input, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                            .addComponent(repeat_password_input, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                             .addComponent(jSeparator4)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
@@ -279,19 +275,19 @@ public class Settings2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(oldpass_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(oldp_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(old_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newpass_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newp_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(new_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(repeatnewpass_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rep_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(repeat_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -328,11 +324,6 @@ public class Settings2 extends javax.swing.JFrame {
     
     
     
-    
-    private class ChangePassword extends StellarDashboard{
-    	
-    	
-    	
-    }
+
               
 }

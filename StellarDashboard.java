@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class StellarDashboard extends javax.swing.JFrame {
@@ -47,7 +49,6 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel major_label;
     private javax.swing.JPanel menu_panel;
     private javax.swing.JMenuBar menubar;
-    private javax.swing.JMenuItem mntmChangePassword;
     private javax.swing.JCheckBox mon_check;
     private javax.swing.JLabel name_label;
     private javax.swing.JButton register_button;
@@ -175,7 +176,13 @@ public class StellarDashboard extends javax.swing.JFrame {
         home_menu = new javax.swing.JMenu();
         dash_menu = new javax.swing.JMenuItem();
         setting_menu = new javax.swing.JMenu();
-        mntmChangePassword = new javax.swing.JMenuItem();
+        
+        setting_menu.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mouseClicked(java.awt.event.MouseEvent evt) {
+        		settings_buttonMouseClicked(evt);
+
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -190,6 +197,7 @@ public class StellarDashboard extends javax.swing.JFrame {
                 logout_buttonMouseClicked(evt);
             }
         });
+        
 
         javax.swing.GroupLayout menu_panelLayout = new javax.swing.GroupLayout(menu_panel);
         menu_panel.setLayout(menu_panelLayout);
@@ -834,19 +842,6 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         setting_menu.setText("Settings");
 
-        mntmChangePassword.setText("Change Password");
-        mntmChangePassword.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseReleased(MouseEvent e) {
-        		Settings2 sett = new Settings2();
-                sett.setVisible(true);
-                sett.pack();
-                sett.setLocationRelativeTo(null);
-                sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        	}
-        });
-        setting_menu.add(mntmChangePassword);
-
         menubar.add(setting_menu);
 
         setJMenuBar(menubar);
@@ -917,7 +912,16 @@ public class StellarDashboard extends javax.swing.JFrame {
       mainpanel.add(dash_panel);
       mainpanel.repaint();
       mainpanel.revalidate();
-    }                                       
+    } 
+    
+    private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { //M1
+    	Settings2 sett = new Settings2(this);
+        sett.setVisible(true);
+        sett.pack();
+        sett.setLocationRelativeTo(null);
+      //Dispose just closes the pw window, not the entire program
+        sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
 
     private void tue_checkActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
