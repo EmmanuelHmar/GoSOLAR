@@ -86,6 +86,8 @@ public class Settings2 extends javax.swing.JFrame {
                     String idText = new String(id_input.getText());
                     String firstName = "";
                     String lastName = "";
+                    final String PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{4,}$";
+                    
 
                     if (old_password_input.getText().isEmpty() | new_pw_text.isEmpty() | repeat_pw_Text.isEmpty()) {
 
@@ -107,7 +109,7 @@ public class Settings2 extends javax.swing.JFrame {
                             new_password_input.setText("");
                             repeat_password_input.setText("");
                         } else if (count == 1 && new_pw_text.equals(repeat_pw_Text) && new_pw_text.length() >= 4
-                                && !new_pw_text.equals(old_password_input.getText())) {
+                                && !new_pw_text.equals(old_password_input.getText()) && new_pw_text.matches(PASSWORD_REGEX)) {
 
                             String update = "UPDATE students SET password = ? WHERE student_id = ?";
                             PreparedStatement preparedStmt = connection.prepareStatement(update);
@@ -146,6 +148,12 @@ public class Settings2 extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "The new password does not match.");
                             new_password_input.setText("");
                             repeat_password_input.setText("");
+                        } else if (!new_pw_text.matches(PASSWORD_REGEX)) {
+                            JOptionPane.showMessageDialog(null, "The password does not meet requirements." +
+                                    "\nRequirements: 1 upper case, 1 lower case, 1 number, >= 4 characters");
+                            new_password_input.setText("");
+                            repeat_password_input.setText("");
+ 
                         } else {
                             JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
                             old_password_input.setText("");

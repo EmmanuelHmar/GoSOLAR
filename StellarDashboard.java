@@ -840,7 +840,7 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         menubar.add(home_menu);
 
-        setting_menu.setText("Settings");
+        setting_menu.setText("Change Password");
 
         menubar.add(setting_menu);
 
