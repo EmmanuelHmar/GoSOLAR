@@ -6,16 +6,18 @@ import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import net.proteanit.sql.DbUtils;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 //TODO: Current update class not working
 
 public class Admin extends javax.swing.JFrame {
@@ -117,14 +119,20 @@ public class Admin extends javax.swing.JFrame {
     private JTextField studentZip_input;
 
     Connection connection = null;
+    Connection conn = null;
     ResultSet rs = null;  
     PreparedStatement pst = null;
+    PreparedStatement ps = null;
+
+    private JButton delete_button;
   
     
     public Admin() {
         administrator();
         //Connects to the database
         connection = DatabaseConnection.dbConnector();
+        conn = DatabaseConnection.dbConnector();
+
         staricon();
         setTitle("Stellar: Administrator");
         setLocationRelativeTo(null);
@@ -423,60 +431,72 @@ public class Admin extends javax.swing.JFrame {
             }
 
         });
+        
+        delete_button = new JButton("Delete");
+        delete_button.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(java.awt.event.MouseEvent evt) {
+        		delete_buttonMouseClicked(evt);
+
+            }
+        });
 
         javax.swing.GroupLayout teachers_tabLayout = new javax.swing.GroupLayout(teachers_tab);
-        teachers_tab.setLayout(teachers_tabLayout);
         teachers_tabLayout.setHorizontalGroup(
-                teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(teachers_tabLayout.createSequentialGroup()
-                                .addComponent(teacher_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(200, 200, 200)
-                                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(teacherFirstName_label)
-                                                .addComponent(teacherLastName_label)
-                                                .addComponent(teacherPrefix_label)
-                                                .addComponent(teacherid_label)
-                                                .addComponent(teacherFirstName_input)
-                                                .addComponent(teacherLastName_input)
-                                                .addComponent(teacherPrefix_input)
-                                                .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(addteacher_label)
-                                        .addGroup(teachers_tabLayout.createSequentialGroup()
-                                                .addGap(132, 132, 132)
-                                                .addComponent(clearteacher_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(teacher_button)))
-                                .addGap(200, 200, 200))
+        	teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(teachers_tabLayout.createSequentialGroup()
+        			.addComponent(teacher_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(200)
+        			.addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING, false)
+        					.addComponent(teacherFirstName_label)
+        					.addComponent(teacherLastName_label)
+        					.addComponent(teacherPrefix_label)
+        					.addComponent(teacherid_label)
+        					.addComponent(teacherFirstName_input)
+        					.addComponent(teacherLastName_input)
+        					.addComponent(teacherPrefix_input)
+        					.addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(addteacher_label)
+        				.addGroup(teachers_tabLayout.createSequentialGroup()
+        					.addGap(80)
+        					.addComponent(clearteacher_button)
+        					.addGap(18)
+        					.addComponent(teacher_button)
+        					.addGap(18)
+        					.addComponent(delete_button)))
+        			.addGap(200))
         );
         teachers_tabLayout.setVerticalGroup(
-                teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(teacher_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                        .addGroup(teachers_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(addteacher_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(teacherFirstName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teacherFirstName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherLastName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teacherLastName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherPrefix_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teacherPrefix_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearteacher_button)
-                                        .addComponent(teacher_button))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(teacher_spanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+        		.addGroup(teachers_tabLayout.createSequentialGroup()
+        			.addGap(45)
+        			.addComponent(addteacher_label)
+        			.addGap(31)
+        			.addComponent(teacherFirstName_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teacherFirstName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherLastName_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teacherLastName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherPrefix_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teacherPrefix_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherid_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(teachers_tabLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(clearteacher_button)
+        				.addComponent(teacher_button)
+        				.addComponent(delete_button))
+        			.addContainerGap(346, Short.MAX_VALUE))
         );
+        teachers_tab.setLayout(teachers_tabLayout);
 
         admin_tab.addTab("Teachers", teachers_tab);
 
@@ -1063,7 +1083,33 @@ public class Admin extends javax.swing.JFrame {
             log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         }
-    }//GEN-LAST:event_logout_buttonMouseClicked
+    }
+    
+    private void delete_buttonMouseClicked(java.awt.event.MouseEvent evt) {
+    
+    	 try {
+    	    	int row = teachers_table.getSelectedRow();
+    	        System.out.println(row); //the number will be the row selected - 1
+    	        String value = (teachers_table.getModel().getValueAt(row, 0).toString());
+    	        String query = "DELETE FROM teacher where teacher_id="+value;
+    			ps =  conn.prepareStatement(query);
+    			ps.executeUpdate();
+    			
+    			ps.close();
+    			
+    			DefaultTableModel model = (DefaultTableModel) teachers_table.getModel();
+    		     model.setRowCount(0);
+    			fetchTeachers();
+    			
+    		     JOptionPane.showMessageDialog(null, "Deleted");
+    	    } catch (Exception e) {
+    			JOptionPane.showMessageDialog(null, e);
+    			
+    		}
+    }
+    
+    
+    
 
     private void classtitle_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -1262,7 +1308,7 @@ public class Admin extends javax.swing.JFrame {
 
     }
 
-    private void clearinstructors_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearinstructors_buttonMouseClicked
+    private void clearinstructors_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         crn_input.setText("");
         teachid_input.setText("");
         clasid_input.setText("");
@@ -1294,6 +1340,9 @@ public class Admin extends javax.swing.JFrame {
             pst = connection.prepareStatement(stdTable);
             rs = pst.executeQuery();
             student_table.setModel(DbUtils.resultSetToTableModel(rs));
+           
+            rs.close();
+			pst.close();
             
         
         } catch(Exception e){
@@ -1311,6 +1360,9 @@ public class Admin extends javax.swing.JFrame {
             rs = pst.executeQuery();
             teachers_table.setModel(DbUtils.resultSetToTableModel(rs));
             
+            rs.close();
+			pst.close();
+            
         
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -1326,6 +1378,9 @@ public class Admin extends javax.swing.JFrame {
             pst = connection.prepareStatement(classTable);
             rs = pst.executeQuery();
            classes_table.setModel(DbUtils.resultSetToTableModel(rs));
+          
+           rs.close();
+		   pst.close();
             
         
         } catch(Exception e){
@@ -1340,10 +1395,16 @@ public class Admin extends javax.swing.JFrame {
 
         try{
         
-           String cinstructTable = "select * from classes, teacher, teacher_class where teacher.teacher_id =1 and teacher_class.semester='Spring 2020' and classes.class_id='CSC1100'";
+           String cinstructTable = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
+           		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
+           		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";
             pst = connection.prepareStatement(cinstructTable);
             rs = pst.executeQuery();
             classinstructor_table.setModel(DbUtils.resultSetToTableModel(rs));
+
+            rs.close();
+			pst.close();
+            
             
         
         } catch(Exception e){
