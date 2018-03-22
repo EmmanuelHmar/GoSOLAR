@@ -104,10 +104,11 @@ public class StudentRegistration extends javax.swing.JFrame {
         JComboBox Semester_select = new JComboBox();
         Semester_select.addItemListener(new ItemListener() {
         	public void itemStateChanged(ItemEvent e) {
-        	//	String query1 = Semester_select.getSelectedItem().toString();
-        	//	String query2 =   ClassID_txt.getText().toUpperCase();
-        	//	String query3 = (String) list_subject.getSelectedValue();
-        	//	idFilter(query1, query2, query3);
+        		String query1 = Semester_select.getSelectedItem().toString();
+        		String query2 = (String) list_subject.getSelectedValue();
+        		String query3 = (String) ClassID_txt.getText().toUpperCase();
+        		idFilter(query1,query2,query3);
+
         		
         	}
 
@@ -122,10 +123,11 @@ public class StudentRegistration extends javax.swing.JFrame {
         list_subject.addListSelectionListener(new ListSelectionListener() {
         	public void valueChanged(ListSelectionEvent e) {
         		
-        	//	String query1 = Semester_select.getSelectedItem().toString();
-        	//	String query2 =   ClassID_txt.getText().toUpperCase();
-        	//	String query3 = (String) list_subject.getSelectedValue();
-        	//	idFilter(query1, query2, query3);
+        		String query1 = Semester_select.getSelectedItem().toString();
+        		String query2 = (String) list_subject.getSelectedValue();
+        		String query3 = (String) ClassID_txt.getText().toUpperCase();
+        		idFilter(query1,query2, query3);
+
         	}
         });
         list_subject.setModel(new AbstractListModel() {
@@ -143,10 +145,11 @@ public class StudentRegistration extends javax.swing.JFrame {
         ClassID_txt = new JTextField();
         ClassID_txt.addKeyListener(new KeyAdapter() {
         	public void keyReleased(KeyEvent e) {
-        	//	String query1 = Semester_select.getSelectedItem().toString();
-        	//	String query2 =   ClassID_txt.getText().toUpperCase();
-        	//	String query3 = (String) list_subject.getSelectedValue();
-        	//	idFilter(query1, query2, query3);
+        		String query1 = Semester_select.getSelectedItem().toString();
+        		String query2 = (String) list_subject.getSelectedValue();
+        		String query3 = (String) ClassID_txt.getText().toUpperCase();
+        		idFilter(query1,query2, query3);
+
         	}
         });
         ClassID_txt.setColumns(10);
@@ -154,10 +157,10 @@ public class StudentRegistration extends javax.swing.JFrame {
         JButton btnSelect = new JButton("Select");
         btnSelect.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		String query1 = Semester_select.getSelectedItem().toString();
-        		String query2 = (String) list_subject.getSelectedValue();
-        		String query3 = (String) ClassID_txt.getText().toUpperCase();
-        		idFilter(query1,query2, query3);
+        	//	String query1 = Semester_select.getSelectedItem().toString();
+        	//	String query2 = (String) list_subject.getSelectedValue();
+        	//	String query3 = (String) ClassID_txt.getText().toUpperCase();
+        	//	idFilter(query1,query2, query3);
 
      		// idFilter();
 			
@@ -393,28 +396,24 @@ public class StudentRegistration extends javax.swing.JFrame {
 
     }
     
-    private void filter(String query) {
 
-		TableRowSorter<TableModel> tr = new TableRowSorter<TableModel>((DefaultTableModel)classes_table.getModel());
-		classes_table.setRowSorter(tr);
-		
-		if (query != "None")
-		{
-			tr.setRowFilter(RowFilter.regexFilter(query));
-		}else 
-		{
-			classes_table.setRowSorter(tr);
-		}
-	}
     
     private void idFilter(String query1  ,String query2, String query3)
     {
     	
     	ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
+    	if (query2 != null && !query2.isEmpty())
+    	{
     	filters.add(RowFilter.regexFilter(query1, 2));
     	filters.add(RowFilter.regexFilter(query2, 7));
     	filters.add(RowFilter.regexFilter(query3, 0 ));
-    	
+    	}
+    	else
+    	{
+        filters.add(RowFilter.regexFilter(query1, 2));
+        filters.add(RowFilter.regexFilter(query3, 0 ));
+
+    	}
     	TableRowSorter<TableModel>	sorter = new TableRowSorter<TableModel>(classes_table.getModel());
 
     	
@@ -423,6 +422,8 @@ public class StudentRegistration extends javax.swing.JFrame {
     	
 
     }
+    
+    
     
     javax.swing.JScrollPane addclass_spanel;
     private javax.swing.JPanel addclass_tab;
