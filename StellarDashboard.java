@@ -32,6 +32,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.AbstractListModel;
 import javax.swing.border.EtchedBorder;
+import javax.swing.JComboBox;
 
 
 public class StellarDashboard extends javax.swing.JFrame {
@@ -57,13 +58,11 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel exclaim_text;
     public static javax.swing.JLabel firstname;
-    private javax.swing.JCheckBox fri_check;
     public static javax.swing.JLabel gpa;
     private javax.swing.JLabel gpa_label;
     private javax.swing.JMenu home_menu;
     private javax.swing.JLabel instructor_label;
     private javax.swing.JList<String> instructor_list;
-    private javax.swing.JScrollPane instructor_scroll;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel lastname;
     private javax.swing.JButton logout_button;
@@ -72,11 +71,9 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel major_label;
     private javax.swing.JPanel menu_panel;
     private javax.swing.JMenuBar menubar;
-    private javax.swing.JCheckBox mon_check;
     private javax.swing.JLabel name_label;
     private javax.swing.JButton register_button;
     private javax.swing.JScrollPane registration_menu;
-    private javax.swing.JCheckBox sat_check;
     private javax.swing.JButton schedule_button;
     private javax.swing.JList<String> schedule_list;
     private javax.swing.JScrollPane schedulelist_scroll;
@@ -100,14 +97,10 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel subject_label;
     private javax.swing.JList<String> subject_list;
     private javax.swing.JScrollPane subjectlist_scroll;
-    private javax.swing.JCheckBox sun_check;
     private javax.swing.JLabel term_text;
-    private javax.swing.JCheckBox thur_check;
     private javax.swing.JLabel totalcredits;
     private javax.swing.JLabel totalcredits_label;
-    private javax.swing.JCheckBox tue_check;
     private javax.swing.JPanel viewSchedule_panel;
-    private javax.swing.JCheckBox wed_check;
     private javax.swing.JLabel welcome_text;
     public static javax.swing.JLabel year;
     private javax.swing.JLabel year_label;
@@ -211,16 +204,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         days_label = new javax.swing.JLabel();
         credits_combobox = new javax.swing.JComboBox<>();
         credits_label = new javax.swing.JLabel();
-        mon_check = new javax.swing.JCheckBox();
-        tue_check = new javax.swing.JCheckBox();
-        wed_check = new javax.swing.JCheckBox();
-        thur_check = new javax.swing.JCheckBox();
-        fri_check = new javax.swing.JCheckBox();
-        sat_check = new javax.swing.JCheckBox();
-        sun_check = new javax.swing.JCheckBox();
         instructor_label = new javax.swing.JLabel();
-        instructor_scroll = new javax.swing.JScrollPane();
-        instructor_list = new javax.swing.JList<>();
         addclasstitle_label = new javax.swing.JLabel();
         classestable_scroll = new javax.swing.JScrollPane();
         classes_table = new javax.swing.JTable();
@@ -240,7 +224,6 @@ public class StellarDashboard extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         menu_panel.setBackground(new java.awt.Color(194, 185, 198));
 
@@ -678,143 +661,76 @@ public class StellarDashboard extends javax.swing.JFrame {
         credits_label.setForeground(new java.awt.Color(14, 17, 45));
         credits_label.setText("Credits:");
 
-        mon_check.setForeground(new java.awt.Color(14, 17, 45));
-        mon_check.setText("Mon");
-
-        tue_check.setForeground(new java.awt.Color(14, 17, 45));
-        tue_check.setText("Tue");
-        tue_check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tue_checkActionPerformed(evt);
-            }
-        });
-
-        wed_check.setForeground(new java.awt.Color(14, 17, 45));
-        wed_check.setText("Wed");
-        wed_check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wed_checkActionPerformed(evt);
-            }
-        });
-
-        thur_check.setForeground(new java.awt.Color(14, 17, 45));
-        thur_check.setText("Thur");
-        thur_check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                thur_checkActionPerformed(evt);
-            }
-        });
-
-        fri_check.setForeground(new java.awt.Color(14, 17, 45));
-        fri_check.setText("Fri");
-        fri_check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fri_checkActionPerformed(evt);
-            }
-        });
-
-        sat_check.setForeground(new java.awt.Color(14, 17, 45));
-        sat_check.setText("Sat");
-        sat_check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sat_checkActionPerformed(evt);
-            }
-        });
-
-        sun_check.setForeground(new java.awt.Color(14, 17, 45));
-        sun_check.setText("Sun");
-        sun_check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sun_checkActionPerformed(evt);
-            }
-        });
-
         instructor_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
         instructor_label.setForeground(new java.awt.Color(14, 17, 45));
         instructor_label.setText("Instructor:");
-
-        instructor_list.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Instructors go here" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        instructor_scroll.setViewportView(instructor_list);
+        
+        JComboBox comboBox = new JComboBox();
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"}));
+        instructor_list = new javax.swing.JList<>();
+        
+                instructor_list.setModel(new javax.swing.AbstractListModel<String>() {
+                    String[] strings = { "Instructors go here" };
+                    public int getSize() { return strings.length; }
+                    public String getElementAt(int i) { return strings[i]; }
+                });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(semester_label)
-                        .addComponent(semester_combobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(subject_label)
-                        .addComponent(subjectlist_scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                        .addComponent(courseid_label)
-                        .addComponent(courseid_input))
-                    .addComponent(days_label)
-                    .addComponent(credits_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(credits_label)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(mon_check)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tue_check))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(wed_check)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(thur_check))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(fri_check)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sat_check))
-                    .addComponent(sun_check)
-                    .addComponent(instructor_label)
-                    .addComponent(instructor_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
+        					.addComponent(semester_label)
+        					.addComponent(semester_combobox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addComponent(subject_label)
+        					.addComponent(subjectlist_scroll, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+        					.addComponent(courseid_label)
+        					.addComponent(courseid_input))
+        				.addComponent(days_label)
+        				.addComponent(credits_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(credits_label)
+        				.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(jPanel1Layout.createSequentialGroup()
+        							.addComponent(instructor_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addGap(71))
+        						.addComponent(instructor_list))
+        					.addGap(124)))
+        			.addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(semester_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(semester_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(subject_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(subjectlist_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(courseid_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(courseid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(credits_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(credits_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(days_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mon_check)
-                    .addComponent(tue_check))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wed_check)
-                    .addComponent(thur_check))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fri_check)
-                    .addComponent(sat_check))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sun_check)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(instructor_label)
-                .addGap(18, 18, 18)
-                .addComponent(instructor_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(17)
+        			.addComponent(semester_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(semester_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(subject_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(subjectlist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(courseid_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(courseid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(24)
+        			.addComponent(credits_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(credits_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(days_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(instructor_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(instructor_list, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(135, Short.MAX_VALUE))
         );
+        jPanel1.setLayout(jPanel1Layout);
 
         registration_menu.setViewportView(jPanel1);
 
@@ -1028,33 +944,9 @@ public class StellarDashboard extends javax.swing.JFrame {
         sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    private void tue_checkActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
-
     private void courseid_inputActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
     }                                              
-
-    private void wed_checkActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
-
-    private void thur_checkActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-    private void fri_checkActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
-
-    private void sat_checkActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
-
-    private void sun_checkActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
 
     
     public void fetchClass(){
