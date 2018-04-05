@@ -19,6 +19,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -33,6 +34,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.AbstractListModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 
 
 public class StellarDashboard extends javax.swing.JFrame {
@@ -41,7 +43,6 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel addClass_panel;
     private javax.swing.JButton addclass_button;
     private javax.swing.JLabel addclasstitle_label;
-    private javax.swing.JList<String> classes_list;
     private javax.swing.JTable classes_table;
     private javax.swing.JScrollPane classeslist_scroll;
     private javax.swing.JScrollPane classestable_scroll;
@@ -55,14 +56,11 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel days_label;
     public static javax.swing.JLabel email;
     private javax.swing.JLabel email_label;
-    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel exclaim_text;
     public static javax.swing.JLabel firstname;
     public static javax.swing.JLabel gpa;
     private javax.swing.JLabel gpa_label;
     private javax.swing.JMenu home_menu;
-    private javax.swing.JLabel instructor_label;
-    private javax.swing.JList<String> instructor_list;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel lastname;
     private javax.swing.JButton logout_button;
@@ -78,6 +76,7 @@ public class StellarDashboard extends javax.swing.JFrame {
     private javax.swing.JList<String> schedule_list;
     private javax.swing.JScrollPane schedulelist_scroll;
     private javax.swing.JComboBox<String> semester_combobox;
+    private javax.swing.JComboBox<String> days_combobox;
     private javax.swing.JLabel semester_label;
     private javax.swing.JMenu setting_menu;
     private javax.swing.JPanel sidemenu;
@@ -108,6 +107,8 @@ public class StellarDashboard extends javax.swing.JFrame {
     ResultSet rs = null;  
     PreparedStatement pst = null;
     private JButton reset_button;
+    DefaultTableModel dtable;
+    private JTable registeredClass_table;
     
     
 	
@@ -173,21 +174,46 @@ public class StellarDashboard extends javax.swing.JFrame {
         semester_combobox.addItemListener(new ItemListener() {
         	public void itemStateChanged(ItemEvent arg0) {
         		
+        		String query = semester_combobox.getSelectedItem().toString();
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
-        		idFilter(query1,query2,query3);
+        		String query4 = days_combobox.getSelectedItem().toString();
+        		String query5 = credits_combobox.getSelectedItem().toString();
+        		idFilter(query1,query2,query3,query4,query5);
+        		filterData(query);
         	}
         });
+        
+        days_combobox = new javax.swing.JComboBox<>();
+        days_combobox.addItemListener(new ItemListener() {
+        	public void itemStateChanged(ItemEvent e) {
+        		String query = days_combobox.getSelectedItem().toString();
+        		String query1 = semester_combobox.getSelectedItem().toString();
+        		String query2 = (String) subject_list.getSelectedValue();
+        		String query3 = (String) courseid_input.getText().toUpperCase();
+        		String query4 = days_combobox.getSelectedItem().toString();
+        		String query5 = credits_combobox.getSelectedItem().toString();
+        		idFilter(query1,query2,query3,query4,query5);   
+        		filterData(query);
+        	
+        	
+        	}
+        });
+        days_combobox.setModel(new DefaultComboBoxModel(new String[] {"MW", "TR", "F", "M", "T", "W", "R"}));
         subject_label = new javax.swing.JLabel();
         subjectlist_scroll = new javax.swing.JScrollPane();
         subject_list = new javax.swing.JList<>();
         subject_list.addListSelectionListener(new ListSelectionListener() {
         	public void valueChanged(ListSelectionEvent arg0) {
+        		String query = subject_list.getSelectedValue().toString();
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
-        		idFilter(query1,query2,query3);
+        		String query4 = days_combobox.getSelectedItem().toString();
+        		String query5 = credits_combobox.getSelectedItem().toString();
+        		idFilter(query1,query2,query3,query4,query5);
+        		filterData(query);
         	}
         });
         courseid_label = new javax.swing.JLabel();
@@ -198,19 +224,56 @@ public class StellarDashboard extends javax.swing.JFrame {
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
-        		idFilter(query1,query2,query3);
+        		String query4 = days_combobox.getSelectedItem().toString();
+        		String query5 = credits_combobox.getSelectedItem().toString();
+        		idFilter(query1,query2,query3,query4,query5);
         	}
         });
         days_label = new javax.swing.JLabel();
         credits_combobox = new javax.swing.JComboBox<>();
+        credits_combobox.addItemListener(new ItemListener() {
+        	public void itemStateChanged(ItemEvent e) {
+        		String query = credits_combobox.getSelectedItem().toString();
+        		String query1 = semester_combobox.getSelectedItem().toString();
+        		String query2 = (String) subject_list.getSelectedValue();
+        		String query3 = (String) courseid_input.getText().toUpperCase();
+        		String query4 = days_combobox.getSelectedItem().toString();
+        		String query5 = credits_combobox.getSelectedItem().toString();
+        		idFilter(query1,query2,query3,query4,query5);
+        		filterData(query);
+        		
+        	}
+        });
         credits_label = new javax.swing.JLabel();
-        instructor_label = new javax.swing.JLabel();
         addclasstitle_label = new javax.swing.JLabel();
         classestable_scroll = new javax.swing.JScrollPane();
         classes_table = new javax.swing.JTable();
         register_button = new javax.swing.JButton();
+        register_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+            	try {
+           	    	int row = classes_table.getSelectedRow();
+           	        String value1 = (classes_table.getModel().getValueAt(row, 0).toString());
+           	        String value2 = studentidnum.getText() ;
+           	        String value3 = (classes_table.getModel().getValueAt(row, 1).toString());
+           	        String value4 = (classes_table.getModel().getValueAt(row, 2).toString());
+           	        String query = "insert into classesTaken values('" + value2 + "','"  +  value1  + "','"  +  value4  + "','"  +  value3  + "') ";
+           	     pst =  connection.prepareStatement(query);
+           	     pst.executeUpdate();
+           			
+           	     pst.close();
+           	
+           		//	DefaultTableModel model = (DefaultTableModel) student_table.getModel();
+           		 //    model.setRowCount(0);
+           			
+           		  //   JOptionPane.showMessageDialog(null, "Student deleted!");
+           	    } catch (Exception E) {
+           			JOptionPane.showMessageDialog(null, E);
+           			
+           		}
+        	}
+        });
         classeslist_scroll = new javax.swing.JScrollPane();
-        errorMessage = new javax.swing.JLabel();
         menubar = new javax.swing.JMenuBar();
         home_menu = new javax.swing.JMenu();
         dash_menu = new javax.swing.JMenuItem();
@@ -238,25 +301,25 @@ public class StellarDashboard extends javax.swing.JFrame {
         
 
         javax.swing.GroupLayout menu_panelLayout = new javax.swing.GroupLayout(menu_panel);
+        menu_panel.setLayout(menu_panelLayout);
         menu_panelLayout.setHorizontalGroup(
-        	menu_panelLayout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(menu_panelLayout.createSequentialGroup()
-        			.addContainerGap(1173, Short.MAX_VALUE)
-        			.addComponent(logout_button)
-        			.addGap(190))
+            menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu_panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logout_button)
+                .addGap(22, 22, 22))
         );
         menu_panelLayout.setVerticalGroup(
-        	menu_panelLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(menu_panelLayout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(logout_button)
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menu_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(logout_button)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
-        menu_panel.setLayout(menu_panelLayout);
 
         sidemenu.setBackground(new java.awt.Color(14, 17, 45));
 
-        schedule_button.setBackground(new Color(153, 102, 204));
+        schedule_button.setBackground(new java.awt.Color(14, 17, 45));
         schedule_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
         schedule_button.setForeground(new java.awt.Color(255, 255, 255));
         schedule_button.setText("View Schedule");
@@ -266,7 +329,7 @@ public class StellarDashboard extends javax.swing.JFrame {
             }
         });
 
-        addclass_button.setBackground(new Color(153, 102, 204));
+        addclass_button.setBackground(new java.awt.Color(14, 17, 45));
         addclass_button.setFont(new java.awt.Font("Century Gothic", 1, 14));
         addclass_button.setForeground(new java.awt.Color(255, 255, 255));
         addclass_button.setText("Add/Drop Classes");
@@ -290,7 +353,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         home_button.setText("Home");
         home_button.setForeground(Color.WHITE);
         home_button.setFont(new Font("Century Gothic", Font.BOLD, 14));
-        home_button.setBackground(new Color(153, 102, 204));
+        home_button.setBackground(new Color(14, 17, 45));
 
         javax.swing.GroupLayout sidemenuLayout = new javax.swing.GroupLayout(sidemenu);
         sidemenuLayout.setHorizontalGroup(
@@ -624,14 +687,14 @@ public class StellarDashboard extends javax.swing.JFrame {
         semester_label.setForeground(new java.awt.Color(14, 17, 45));
         semester_label.setText("Semester:");
 
-        semester_combobox.setModel(new DefaultComboBoxModel(new String[] {"All", "Spring 2020", "Summer 2020", "Fall 2020"}));
+        semester_combobox.setModel(new DefaultComboBoxModel(new String[] {"Spring 2020", "Summer 2020", "Fall 2020"}));
 
         subject_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
         subject_label.setForeground(new java.awt.Color(14, 17, 45));
         subject_label.setText("Subject:");
 
         subject_list.setModel(new AbstractListModel() {
-        	String[] values = new String[] {"ALL SUBJECTS", "CSC", "HIST"};
+        	String[] values = new String[] {"ART", "BIOL", "CSC", "HIST", "MUA"};
         	public int getSize() {
         		return values.length;
         	}
@@ -655,25 +718,11 @@ public class StellarDashboard extends javax.swing.JFrame {
         days_label.setForeground(new java.awt.Color(14, 17, 45));
         days_label.setText("Days:");
 
-        credits_combobox.setModel(new DefaultComboBoxModel(new String[] {"All", "1", "2", "3", "4"}));
+        credits_combobox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
 
         credits_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
         credits_label.setForeground(new java.awt.Color(14, 17, 45));
         credits_label.setText("Credits:");
-
-        instructor_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
-        instructor_label.setForeground(new java.awt.Color(14, 17, 45));
-        instructor_label.setText("Instructor:");
-        
-        JComboBox dayComboBox = new JComboBox();
-        dayComboBox.setModel(new DefaultComboBoxModel(new String[] {"Mon", "Tue", "Wed", "Thurs", "Fri"}));
-        instructor_list = new javax.swing.JList<>();
-        
-                instructor_list.setModel(new javax.swing.AbstractListModel<String>() {
-                    String[] strings = { "Instructors go here" };
-                    public int getSize() { return strings.length; }
-                    public String getElementAt(int i) { return strings[i]; }
-                });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
@@ -691,14 +740,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         				.addComponent(days_label)
         				.addComponent(credits_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(credits_label)
-        				.addComponent(dayComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(instructor_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addGap(71))
-        						.addComponent(instructor_list))
-        					.addGap(124)))
+        				.addComponent(days_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -723,12 +765,8 @@ public class StellarDashboard extends javax.swing.JFrame {
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(days_label)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(dayComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(instructor_label)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(instructor_list, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(135, Short.MAX_VALUE))
+        			.addComponent(days_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(254, Short.MAX_VALUE))
         );
         jPanel1.setLayout(jPanel1Layout);
 
@@ -756,30 +794,28 @@ public class StellarDashboard extends javax.swing.JFrame {
         register_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
         register_button.setForeground(new java.awt.Color(255, 255, 255));
         register_button.setText("Register");
-
-        errorMessage.setForeground(new java.awt.Color(255, 255, 255));
-        errorMessage.setText("ERROR");
-        classes_list = new javax.swing.JList<>();
-        classes_list.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-        
-                classes_list.setModel(new javax.swing.AbstractListModel<String>() {
-                    String[] strings = { "Registered Classes go here" };
-                    public int getSize() { return strings.length; }
-                    public String getElementAt(int i) { return strings[i]; }
-                });
         
         reset_button = new JButton("Reset");
         reset_button.addMouseListener(new MouseAdapter() {
         	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        		
+        	public void mouseClicked(MouseEvent e) {
         		fetchClass();
-        		
         	}
         });
-        reset_button.setBackground(new java.awt.Color(14, 17, 45));
+        reset_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
+            	classes_table.setRowSorter(t);
+        		 
+        	}
+        });
         reset_button.setForeground(Color.WHITE);
         reset_button.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        reset_button.setBackground(new java.awt.Color(14, 17, 45));
+        reset_button.setForeground(Color.WHITE);
+        
+        registeredClass_table = new JTable();
 
         javax.swing.GroupLayout addClass_panelLayout = new javax.swing.GroupLayout(addClass_panel);
         addClass_panelLayout.setHorizontalGroup(
@@ -787,29 +823,25 @@ public class StellarDashboard extends javax.swing.JFrame {
         		.addGroup(addClass_panelLayout.createSequentialGroup()
         			.addContainerGap()
         			.addComponent(addclasstitle_label)
-        			.addContainerGap(1065, Short.MAX_VALUE))
+        			.addContainerGap(1101, Short.MAX_VALUE))
         		.addGroup(addClass_panelLayout.createSequentialGroup()
         			.addComponent(registration_menu, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
         			.addGroup(addClass_panelLayout.createParallelGroup(Alignment.LEADING)
         				.addGroup(addClass_panelLayout.createSequentialGroup()
-        					.addGap(18)
         					.addGroup(addClass_panelLayout.createParallelGroup(Alignment.LEADING)
         						.addGroup(addClass_panelLayout.createSequentialGroup()
-        							.addComponent(classeslist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addGap(274))
-        						.addGroup(addClass_panelLayout.createSequentialGroup()
-        							.addComponent(errorMessage)
-        							.addContainerGap(862, Short.MAX_VALUE))
-        						.addGroup(addClass_panelLayout.createSequentialGroup()
         							.addGap(18)
-        							.addGroup(addClass_panelLayout.createParallelGroup(Alignment.LEADING)
-        								.addComponent(classes_list, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
-        								.addComponent(classestable_scroll, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
-        							.addContainerGap())))
+        							.addComponent(classeslist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(registeredClass_table, GroupLayout.PREFERRED_SIZE, 923, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(addClass_panelLayout.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(classestable_scroll, GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)))
+        					.addContainerGap())
         				.addGroup(Alignment.TRAILING, addClass_panelLayout.createSequentialGroup()
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(register_button, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
+        					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(reset_button)
         					.addGap(310))))
         );
@@ -825,14 +857,13 @@ public class StellarDashboard extends javax.swing.JFrame {
         					.addComponent(classestable_scroll, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
         					.addGroup(addClass_panelLayout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(register_button)
-        						.addComponent(reset_button))
+        						.addComponent(reset_button)
+        						.addComponent(register_button))
         					.addGap(18)
-        					.addComponent(classeslist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        					.addGap(27)
-        					.addComponent(classes_list, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(errorMessage))))
+        					.addGroup(addClass_panelLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(registeredClass_table, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(classeslist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        			.addGap(2))
         );
         addClass_panel.setLayout(addClass_panelLayout);
 
@@ -945,13 +976,7 @@ public class StellarDashboard extends javax.swing.JFrame {
 
     private void courseid_inputActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
-    }             
-    
-    
-  private void reset_buttonMouseClicked(java.awt.event.MouseEvent evt) {
-       fetchClass();
-    }
-
+    }                                              
 
     
     public void fetchClass(){
@@ -964,6 +989,9 @@ public class StellarDashboard extends javax.swing.JFrame {
             rs = pst.executeQuery();
             classes_table.setModel(DbUtils.resultSetToTableModel(rs));
             
+            DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
+            String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
+    		model.setColumnIdentifiers(col);
 
 
         } catch(Exception e){
@@ -974,7 +1002,7 @@ public class StellarDashboard extends javax.swing.JFrame {
     }
 
     
-    private void idFilter(String query1  ,String query2, String query3)
+    private void idFilter(String query1  ,String query2, String query3, String query4, String query5)
     {
     	
     	ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
@@ -983,11 +1011,18 @@ public class StellarDashboard extends javax.swing.JFrame {
     	filters.add(RowFilter.regexFilter(query1, 2));
     	filters.add(RowFilter.regexFilter(query2, 7));
     	filters.add(RowFilter.regexFilter(query3, 0 ));
+    	filters.add(RowFilter.regexFilter(query4, 3 ));
+    	filters.add(RowFilter.regexFilter(query5, 6 ));
+
+
     	}
     	else
     	{
         filters.add(RowFilter.regexFilter(query1, 2));
         filters.add(RowFilter.regexFilter(query3, 0 ));
+    	filters.add(RowFilter.regexFilter(query4, 3 ));
+    	filters.add(RowFilter.regexFilter(query5, 6 ));
+
 
     	}
     	TableRowSorter<TableModel>	sorter = new TableRowSorter<TableModel>(classes_table.getModel());
@@ -998,6 +1033,25 @@ public class StellarDashboard extends javax.swing.JFrame {
     	
 
     }
+ private void filterData(String query) {
+    	
+    	dtable = (DefaultTableModel) classes_table.getModel();
+    	
+    	TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
+    	classes_table.setRowSorter(t);
+    	
+    	
+    	if (query != "All") {
+    		
+    		t.setRowFilter(RowFilter.regexFilter(query));
+    	} else {
+    		classes_table.setRowSorter(t);
+    		
+    	}
+    	
+    	
+    }
+    
     
     
     
@@ -1006,10 +1060,4 @@ public class StellarDashboard extends javax.swing.JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
     
     }
-	public Color getReset_buttonBackground() {
-		return reset_button.getBackground();
-	}
-	public void setReset_buttonBackground(Color background) {
-		reset_button.setBackground(background);
-	}
 }
