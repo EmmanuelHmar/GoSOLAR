@@ -6,29 +6,134 @@ import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import net.proteanit.sql.DbUtils;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 //TODO: Current update class not working
-/**
- * @author aturn
- */
+
 public class Admin extends javax.swing.JFrame {
+	
+	//Variables
+	private javax.swing.JButton addClass_button;
+    private javax.swing.JLabel addClass_label;
+    private javax.swing.JScrollPane addclass_spanel;
+    private javax.swing.JPanel addclass_tab;
+    private javax.swing.JButton addinstructor_button;
+    private javax.swing.JLabel addstudent_label;
+    private javax.swing.JButton addstudents_button;
+    private javax.swing.JLabel addteacher_label;
+    private javax.swing.JPanel admin_panel;
+    private javax.swing.JTabbedPane admin_tab;
+    private javax.swing.JLabel studentBday_label;
+    private javax.swing.JTextField clasid_input;
+    private javax.swing.JLabel clasid_label;
+    private javax.swing.JTable classes_table;
+    private javax.swing.JTextField classid_input;
+    private javax.swing.JLabel classid_label;
+    private javax.swing.JLabel classinstructor_label;
+    private javax.swing.JScrollPane classinstructor_spanel;
+    private javax.swing.JPanel classinstructor_tab;
+    private javax.swing.JTable classinstructor_table;
+    private javax.swing.JTextField classtime_input;
+    private javax.swing.JLabel classtime_label;
+    private javax.swing.JTextField classtitle_input;
+    private javax.swing.JLabel classtitle_label;
+    private javax.swing.JButton clearclass_button;
+    private javax.swing.JButton clearinstructors_button;
+    private javax.swing.JButton clearstudent_button;
+    private javax.swing.JButton clearteacher_button;
+    private javax.swing.JTextField credit_input;
+    private javax.swing.JLabel credit_label;
+    private javax.swing.JTextField crn_input;
+    private javax.swing.JLabel crn_label;
+    private javax.swing.JTextField days_input;
+    private javax.swing.JLabel days_label;
+    private javax.swing.JLabel studentEmail_label;
+    private javax.swing.JTextField studentFirstName_input;
+    private javax.swing.JLabel studentFirstName_label;
+    private javax.swing.JTextField teacherFirstName_input;
+    private javax.swing.JLabel teacherFirstName_label;
+    private javax.swing.JLabel studentGpa_label;
+    private javax.swing.JButton classUpdateButton;
+    private javax.swing.JButton classUpdateClear;
+    private javax.swing.JLabel updateClassTitle_label;
+    private javax.swing.JLabel updateClassID_label;
+    private javax.swing.JLabel updateClassCredit_label;
+    private javax.swing.JLabel updateClassSubject_label;
+    private javax.swing.JTextField updateClassTitle_input;
+    private javax.swing.JTextField updateClassID_input;
+    private javax.swing.JTextField updateClassCredit_input;
+    private javax.swing.JTextField updateClassSubject_input;
+    private javax.swing.JLabel studentLastName_label;
+    private javax.swing.JTextField teacherLastName_input;
+    private javax.swing.JLabel teacherLastName_label;
+    private javax.swing.JButton logout_button;
+    private javax.swing.JLabel studentMajor_label;
+    private javax.swing.JLabel studentPassword_label;
+    private javax.swing.JTextField teacherPrefix_input;
+    private javax.swing.JLabel teacherPrefix_label;
+    private javax.swing.JTextField semester_input;
+    private javax.swing.JLabel semester_label;
+    private javax.swing.JLabel stellarnum_label;
+    private javax.swing.JScrollPane student_spanel;
+    private javax.swing.JTable student_table;
+    private javax.swing.JLabel studentId_label;
+    private javax.swing.JPanel students_tab;
+    private javax.swing.JTextField subject_input;
+    private javax.swing.JLabel subject_label;
+    private javax.swing.JButton teacher_button;
+    private javax.swing.JScrollPane teacher_spanel;
+    private javax.swing.JTextField teacherid_input;
+    private javax.swing.JLabel teacherid_label;
+    private javax.swing.JPanel teachers_tab;
+    private javax.swing.JTable teachers_table;
+    private javax.swing.JTextField teachid_input;
+    private javax.swing.JLabel teachid_label;
+    private javax.swing.JScrollPane update_spanel;
+    private javax.swing.JPanel update_tab;
+    private javax.swing.JLabel updateclass_label;
+    private javax.swing.JTable updateclass_table;
+    private javax.swing.JLabel studentYear_label;
+    private JTextField studentLastName_input;
+    private JTextField studentId_input;
+    private JTextField studentPassword_input;
+    private JTextField stellarnum_input;
+    private JTextField studentEmail_input;
+    private JTextField studentGpa_input;
+    private JTextField studentMajor_input;
+    private JTextField studentYear_input;
+    private JTextField studentBday_input;
+    private JTextField studentPhone_input;
+    private JTextField studentAddress_input;
+    private JTextField studentState_input;
+    private JTextField studentCity_input;
+    private JTextField studentZip_input;
 
     Connection connection = null;
+    Connection conn = null;
     ResultSet rs = null;  
     PreparedStatement pst = null;
+    PreparedStatement ps = null;
+
+    private JButton teachersDelete_button;
+    private JButton instructorsDelete_button;
+  
     
-
-    /**
-     * Creates new form Admin
-     */
     public Admin() {
-        initComponents();
-
+        administrator();
         //Connects to the database
         connection = DatabaseConnection.dbConnector();
+        conn = DatabaseConnection.dbConnector();
+
         staricon();
         setTitle("Stellar: Administrator");
         setLocationRelativeTo(null);
@@ -38,31 +143,12 @@ public class Admin extends javax.swing.JFrame {
         fetchClassInstructor();    
         }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    
+    private void administrator() {
 
         admin_panel = new javax.swing.JPanel();
         admin_tab = new javax.swing.JTabbedPane();
-        addclass_tab = new javax.swing.JPanel();
-        addclass_spanel = new javax.swing.JScrollPane();
-        classes_table = new javax.swing.JTable();
-        classtitle_label = new javax.swing.JLabel();
-        classtitle_input = new javax.swing.JTextField();
-        classid_label = new javax.swing.JLabel();
-        classid_input = new javax.swing.JTextField();
-        credit_label = new javax.swing.JLabel();
-        credit_input = new javax.swing.JTextField();
-        subject_label = new javax.swing.JLabel();
-        subject_input = new javax.swing.JTextField();
-        addClass_label = new javax.swing.JLabel();
-        clearclass_button = new javax.swing.JButton();
-        addClass_button = new javax.swing.JButton();
         teachers_tab = new javax.swing.JPanel();
         teacher_spanel = new javax.swing.JScrollPane();
         teachers_table = new javax.swing.JTable();
@@ -77,32 +163,6 @@ public class Admin extends javax.swing.JFrame {
         teacherid_input = new javax.swing.JTextField();
         clearteacher_button = new javax.swing.JButton();
         teacher_button = new javax.swing.JButton();
-        students_tab = new javax.swing.JPanel();
-        student_spanel = new javax.swing.JScrollPane();
-        student_table = new javax.swing.JTable();
-        addstudent_label = new javax.swing.JLabel();
-        studentFirstName_label = new javax.swing.JLabel();
-        studentFirstName_input = new javax.swing.JTextField();
-        studentLastName_label = new javax.swing.JLabel();
-        studentLastName_input = new javax.swing.JTextField();
-        studentId_label = new javax.swing.JLabel();
-        studentId_input = new javax.swing.JTextField();
-        studentPassword_label = new javax.swing.JLabel();
-        studentPassword_input = new javax.swing.JTextField();
-        clearstudent_button = new javax.swing.JButton();
-        addstudents_button = new javax.swing.JButton();
-        stellarnum_label = new javax.swing.JLabel();
-        stellarnum_input = new javax.swing.JTextField();
-        studentEmail_label = new javax.swing.JLabel();
-        studentEmail_input = new javax.swing.JTextField();
-        studentGpa_label = new javax.swing.JLabel();
-        studentGpa_input = new javax.swing.JTextField();
-        studentMajor_label = new javax.swing.JLabel();
-        studentMajor_input = new javax.swing.JTextField();
-        studentYear_label = new javax.swing.JLabel();
-        studentYear_input = new javax.swing.JTextField();
-        studentBday_label = new javax.swing.JLabel();
-        studentBday_input = new javax.swing.JTextField();
         update_tab = new javax.swing.JPanel();
         update_spanel = new javax.swing.JScrollPane();
         updateclass_table = new javax.swing.JTable();
@@ -148,135 +208,11 @@ public class Admin extends javax.swing.JFrame {
 
         admin_tab.setBackground(new java.awt.Color(255, 215, 73));
         admin_tab.setForeground(new java.awt.Color(51, 51, 51));
-
-        addclass_tab.setBackground(new java.awt.Color(255, 255, 255));
-        addclass_tab.setForeground(new java.awt.Color(51, 51, 51));
-
-        classes_table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
-                },
-                new String[]{
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }
-        ));
-        addclass_spanel.setViewportView(classes_table);
-
-        classtitle_label.setForeground(new java.awt.Color(51, 51, 51));
-        classtitle_label.setText("Class Title:");
-
-        classtitle_input.setBackground(new java.awt.Color(255, 255, 255));
-        classtitle_input.setForeground(new java.awt.Color(51, 51, 51));
-        classtitle_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                classtitle_inputActionPerformed(evt);
-            }
-        });
-
-        classid_label.setForeground(new java.awt.Color(51, 51, 51));
-        classid_label.setText("Class ID:");
-
-        classid_input.setBackground(new java.awt.Color(255, 255, 255));
-        classid_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        credit_label.setForeground(new java.awt.Color(51, 51, 51));
-        credit_label.setText("Credit:");
-
-        credit_input.setBackground(new java.awt.Color(255, 255, 255));
-        credit_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        subject_label.setForeground(new java.awt.Color(51, 51, 51));
-        subject_label.setText("Subject:");
-
-        subject_input.setBackground(new java.awt.Color(255, 255, 255));
-        subject_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        addClass_label.setBackground(new java.awt.Color(102, 102, 102));
-        addClass_label.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        addClass_label.setForeground(new java.awt.Color(51, 51, 51));
-        addClass_label.setText("Add Class:");
-
-        clearclass_button.setText("Clear");
-        clearclass_button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearclass_buttonMouseClicked(evt);
-            }
-        });
-
-        addClass_button.setText("Add");
-        addClass_button.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                addClasses_buttonActionPerformed(evt);
-            }
-
-        });
         teacherFirstName_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fname_inputActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout addclass_tabLayout = new javax.swing.GroupLayout(addclass_tab);
-        addclass_tab.setLayout(addclass_tabLayout);
-        addclass_tabLayout.setHorizontalGroup(
-                addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                .addComponent(addclass_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                                .addGap(200, 200, 200)
-                                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(classtitle_label)
-                                                                .addComponent(classid_label)
-                                                                .addComponent(credit_label)
-                                                                .addComponent(subject_label)
-                                                                .addComponent(classtitle_input)
-                                                                .addComponent(classid_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                                                                .addComponent(credit_input)
-                                                                .addComponent(subject_input))
-                                                        .addComponent(addClass_label)))
-                                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                                .addGap(332, 332, 332)
-                                                .addComponent(clearclass_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(addClass_button)))
-                                .addGap(0, 243, Short.MAX_VALUE))
-        );
-        addclass_tabLayout.setVerticalGroup(
-                addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(addclass_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(addClass_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(classtitle_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(classtitle_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(classid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(classid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(credit_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(credit_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(subject_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(subject_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearclass_button)
-                                        .addComponent(addClass_button))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        admin_tab.addTab("Add Class", addclass_tab);
 
         teachers_tab.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -293,7 +229,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         teacher_spanel.setViewportView(teachers_table);
 
-        addteacher_label.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        addteacher_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
         addteacher_label.setForeground(new java.awt.Color(51, 51, 51));
         addteacher_label.setText("Add Teacher:");
 
@@ -341,259 +277,74 @@ public class Admin extends javax.swing.JFrame {
             }
 
         });
+        
+        teachersDelete_button = new JButton("Delete");
+        teachersDelete_button.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(java.awt.event.MouseEvent evt) {
+        		teachersDelete_buttonMouseClicked(evt);
+
+            }
+        });
 
         javax.swing.GroupLayout teachers_tabLayout = new javax.swing.GroupLayout(teachers_tab);
-        teachers_tab.setLayout(teachers_tabLayout);
         teachers_tabLayout.setHorizontalGroup(
-                teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(teachers_tabLayout.createSequentialGroup()
-                                .addComponent(teacher_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(200, 200, 200)
-                                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(teacherFirstName_label)
-                                                .addComponent(teacherLastName_label)
-                                                .addComponent(teacherPrefix_label)
-                                                .addComponent(teacherid_label)
-                                                .addComponent(teacherFirstName_input)
-                                                .addComponent(teacherLastName_input)
-                                                .addComponent(teacherPrefix_input)
-                                                .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(addteacher_label)
-                                        .addGroup(teachers_tabLayout.createSequentialGroup()
-                                                .addGap(132, 132, 132)
-                                                .addComponent(clearteacher_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(teacher_button)))
-                                .addGap(200, 200, 200))
+        	teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(teachers_tabLayout.createSequentialGroup()
+        			.addComponent(teacher_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(200)
+        			.addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING, false)
+        					.addComponent(teacherFirstName_label)
+        					.addComponent(teacherLastName_label)
+        					.addComponent(teacherPrefix_label)
+        					.addComponent(teacherid_label)
+        					.addComponent(teacherFirstName_input)
+        					.addComponent(teacherLastName_input)
+        					.addComponent(teacherPrefix_input)
+        					.addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(addteacher_label)
+        				.addGroup(teachers_tabLayout.createSequentialGroup()
+        					.addGap(80)
+        					.addComponent(clearteacher_button)
+        					.addGap(18)
+        					.addComponent(teacher_button)
+        					.addGap(18)
+        					.addComponent(teachersDelete_button)))
+        			.addGap(200))
         );
         teachers_tabLayout.setVerticalGroup(
-                teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(teacher_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                        .addGroup(teachers_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(addteacher_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(teacherFirstName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teacherFirstName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherLastName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teacherLastName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherPrefix_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teacherPrefix_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teacherid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(teachers_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearteacher_button)
-                                        .addComponent(teacher_button))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(teacher_spanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+        		.addGroup(teachers_tabLayout.createSequentialGroup()
+        			.addGap(45)
+        			.addComponent(addteacher_label)
+        			.addGap(31)
+        			.addComponent(teacherFirstName_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teacherFirstName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherLastName_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teacherLastName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherPrefix_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teacherPrefix_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherid_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(teachers_tabLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(clearteacher_button)
+        				.addComponent(teacher_button)
+        				.addComponent(teachersDelete_button))
+        			.addContainerGap(346, Short.MAX_VALUE))
         );
+        teachers_tab.setLayout(teachers_tabLayout);
 
         admin_tab.addTab("Teachers", teachers_tab);
-
-        students_tab.setBackground(new java.awt.Color(255, 255, 255));
-
-        student_table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
-                },
-                new String[]{
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }
-        ));
-        student_spanel.setViewportView(student_table);
-
-        addstudent_label.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        addstudent_label.setForeground(new java.awt.Color(51, 51, 51));
-        addstudent_label.setText("Add Student:");
-
-        studentFirstName_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentFirstName_label.setText("First Name:");
-
-        studentFirstName_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentFirstName_input.setForeground(new java.awt.Color(51, 51, 51));
-        studentFirstName_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstname_inputActionPerformed(evt);
-            }
-        });
-
-        studentLastName_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentLastName_label.setText("Last Name:");
-
-        studentLastName_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentLastName_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        studentId_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentId_label.setText("Student ID:");
-
-        studentId_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentId_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        studentPassword_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentPassword_label.setText("Password:");
-
-        studentPassword_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentPassword_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        clearstudent_button.setText("Clear");
-        clearstudent_button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearstudent_buttonMouseClicked(evt);
-            }
-        });
-
-
-        addstudents_button.setText("Add");
-        addstudents_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStudents_buttonActionPerformed(evt);
-            }
-        });
-
-        stellarnum_label.setForeground(new java.awt.Color(51, 51, 51));
-        stellarnum_label.setText("Stellar Number:");
-
-        stellarnum_input.setBackground(new java.awt.Color(255, 255, 255));
-        stellarnum_input.setForeground(new java.awt.Color(51, 51, 51));
-        stellarnum_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stellarnum_inputActionPerformed(evt);
-            }
-        });
-
-        studentEmail_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentEmail_label.setText("E-mail:");
-
-        studentEmail_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentEmail_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        studentGpa_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentGpa_label.setText("GPA:");
-
-        studentGpa_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentGpa_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        studentMajor_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentMajor_label.setText("Major:");
-
-        studentMajor_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentMajor_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        studentYear_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentYear_label.setText("School Year:");
-
-        studentYear_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentYear_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        studentBday_label.setForeground(new java.awt.Color(51, 51, 51));
-        studentBday_label.setText("Birthday:");
-
-        studentBday_input.setBackground(new java.awt.Color(255, 255, 255));
-        studentBday_input.setForeground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout students_tabLayout = new javax.swing.GroupLayout(students_tab);
-        students_tab.setLayout(students_tabLayout);
-        students_tabLayout.setHorizontalGroup(
-                students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(students_tabLayout.createSequentialGroup()
-                                .addComponent(student_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(students_tabLayout.createSequentialGroup()
-                                                .addGap(349, 349, 349)
-                                                .addComponent(clearstudent_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(addstudents_button))
-                                        .addGroup(students_tabLayout.createSequentialGroup()
-                                                .addGap(200, 200, 200)
-                                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(studentBday_label)
-                                                        .addComponent(studentYear_label)
-                                                        .addComponent(studentMajor_label)
-                                                        .addComponent(studentGpa_label)
-                                                        .addComponent(studentEmail_label)
-                                                        .addComponent(studentFirstName_label)
-                                                        .addComponent(studentLastName_label)
-                                                        .addComponent(studentId_label)
-                                                        .addComponent(studentPassword_label)
-                                                        .addComponent(studentFirstName_input)
-                                                        .addComponent(studentLastName_input)
-                                                        .addComponent(studentId_input)
-                                                        .addComponent(studentPassword_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                                                        .addComponent(addstudent_label)
-                                                        .addComponent(stellarnum_label)
-                                                        .addComponent(stellarnum_input)
-                                                        .addComponent(studentEmail_input)
-                                                        .addComponent(studentGpa_input)
-                                                        .addComponent(studentMajor_input)
-                                                        .addComponent(studentYear_input)
-                                                        .addComponent(studentBday_input))))
-                                .addContainerGap())
-        );
-        students_tabLayout.setVerticalGroup(
-                students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(student_spanel)
-                        .addGroup(students_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(addstudent_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(studentFirstName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentFirstName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentLastName_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentLastName_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentId_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentId_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentPassword_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentPassword_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(stellarnum_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(stellarnum_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentEmail_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentEmail_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentGpa_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentGpa_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentMajor_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentMajor_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentYear_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentYear_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(studentBday_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(studentBday_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(students_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearstudent_button)
-                                        .addComponent(addstudents_button))
-                                .addGap(31, 31, 31))
-        );
-
-        admin_tab.addTab("Students", students_tab);
 
         update_tab.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -610,7 +361,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         update_spanel.setViewportView(updateclass_table);
 
-        updateclass_label.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        updateclass_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
         updateclass_label.setForeground(new java.awt.Color(51, 51, 51));
         updateclass_label.setText("Update Class:");
 
@@ -653,6 +404,482 @@ public class Admin extends javax.swing.JFrame {
             }
 
         });
+        students_tab = new javax.swing.JPanel();
+        student_spanel = new javax.swing.JScrollPane();
+        student_table = new javax.swing.JTable();
+        addstudent_label = new javax.swing.JLabel();
+        studentFirstName_label = new javax.swing.JLabel();
+        studentFirstName_input = new javax.swing.JTextField();
+        studentLastName_label = new javax.swing.JLabel();
+        studentId_label = new javax.swing.JLabel();
+        studentPassword_label = new javax.swing.JLabel();
+        clearstudent_button = new javax.swing.JButton();
+        addstudents_button = new javax.swing.JButton();
+        stellarnum_label = new javax.swing.JLabel();
+        studentEmail_label = new javax.swing.JLabel();
+        studentGpa_label = new javax.swing.JLabel();
+        studentMajor_label = new javax.swing.JLabel();
+        studentYear_label = new javax.swing.JLabel();
+        studentBday_label = new javax.swing.JLabel();
+        
+                students_tab.setBackground(new java.awt.Color(255, 255, 255));
+                
+                        student_table.setModel(new javax.swing.table.DefaultTableModel(
+                                new Object[][]{
+                                        {null, null, null, null},
+                                        {null, null, null, null},
+                                        {null, null, null, null},
+                                        {null, null, null, null}
+                                },
+                                new String[]{
+                                        "Title 1", "Title 2", "Title 3", "Title 4"
+                                }
+                        ));
+                        student_spanel.setViewportView(student_table);
+                        
+                                addstudent_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
+                                addstudent_label.setForeground(new java.awt.Color(51, 51, 51));
+                                addstudent_label.setText("Add Student:");
+                                
+                                        studentFirstName_label.setForeground(new java.awt.Color(51, 51, 51));
+                                        studentFirstName_label.setText("First Name:");
+                                        
+                                                studentFirstName_input.setBackground(new java.awt.Color(255, 255, 255));
+                                                studentFirstName_input.setForeground(new java.awt.Color(51, 51, 51));
+                                                studentFirstName_input.addActionListener(new java.awt.event.ActionListener() {
+                                                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                                        firstname_inputActionPerformed(evt);
+                                                    }
+                                                });
+                                                
+                                                        studentLastName_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                        studentLastName_label.setText("Last Name:");
+                                                        
+                                                                studentId_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                studentId_label.setText("Student ID:");
+                                                                
+                                                                        studentPassword_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                        studentPassword_label.setText("Password:");
+                                                                        
+                                                                                clearstudent_button.setText("Clear");
+                                                                                clearstudent_button.addMouseListener(new java.awt.event.MouseAdapter() {
+                                                                                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                                                                        clearstudent_buttonMouseClicked(evt);
+                                                                                    }
+                                                                                });
+                                                                                
+                                                                                
+                                                                                        addstudents_button.setText("Add");
+                                                                                        addstudents_button.addActionListener(new java.awt.event.ActionListener() {
+                                                                                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                                                                                addStudents_buttonActionPerformed(evt);
+                                                                                            }
+                                                                                        });
+                                                                                        
+                                                                                                stellarnum_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                                stellarnum_label.setText("Stellar Number:");
+                                                                                                
+                                                                                                        studentEmail_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                                        studentEmail_label.setText("E-mail:");
+                                                                                                        
+                                                                                                                studentGpa_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                                                studentGpa_label.setText("GPA:");
+                                                                                                                
+                                                                                                                        studentMajor_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                                                        studentMajor_label.setText("Major:");
+                                                                                                                        
+                                                                                                                                studentYear_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                                                                studentYear_label.setText("School Year:");
+                                                                                                                                
+                                                                                                                                        studentBday_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                                                                        studentBday_label.setText("Birthday:");
+                                                                                                                                        
+                                                                                                                                        studentLastName_input = new JTextField();
+                                                                                                                                        studentLastName_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentLastName_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentId_input = new JTextField();
+                                                                                                                                        studentId_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentId_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentPassword_input = new JTextField();
+                                                                                                                                        studentPassword_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentPassword_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        stellarnum_input = new JTextField();
+                                                                                                                                        stellarnum_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        stellarnum_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentEmail_input = new JTextField();
+                                                                                                                                        studentEmail_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentEmail_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentGpa_input = new JTextField();
+                                                                                                                                        studentGpa_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentGpa_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentMajor_input = new JTextField();
+                                                                                                                                        studentMajor_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentMajor_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentYear_input = new JTextField();
+                                                                                                                                        studentYear_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentYear_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentBday_input = new JTextField();
+                                                                                                                                        studentBday_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentBday_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        JLabel lblPhone = new JLabel();
+                                                                                                                                        lblPhone.setText("Phone:");
+                                                                                                                                        lblPhone.setForeground(new Color(51, 51, 51));
+                                                                                                                                        
+                                                                                                                                        JLabel lblAddress = new JLabel();
+                                                                                                                                        lblAddress.setText("Address:");
+                                                                                                                                        lblAddress.setForeground(new Color(51, 51, 51));
+                                                                                                                                        
+                                                                                                                                        studentPhone_input = new JTextField();
+                                                                                                                                        studentPhone_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentPhone_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentAddress_input = new JTextField();
+                                                                                                                                        studentAddress_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentAddress_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        JLabel lblState = new JLabel();
+                                                                                                                                        lblState.setText("State:");
+                                                                                                                                        lblState.setForeground(new Color(51, 51, 51));
+                                                                                                                                        
+                                                                                                                                        JLabel lblCity = new JLabel();
+                                                                                                                                        lblCity.setText("City:");
+                                                                                                                                        lblCity.setForeground(new Color(51, 51, 51));
+                                                                                                                                        
+                                                                                                                                        studentState_input = new JTextField();
+                                                                                                                                        studentState_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentState_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        studentCity_input = new JTextField();
+                                                                                                                                        studentCity_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentCity_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        JLabel lblZipcode = new JLabel();
+                                                                                                                                        lblZipcode.setText("Zipcode:");
+                                                                                                                                        lblZipcode.setForeground(new Color(51, 51, 51));
+                                                                                                                                        
+                                                                                                                                        studentZip_input = new JTextField();
+                                                                                                                                        studentZip_input.setForeground(new Color(51, 51, 51));
+                                                                                                                                        studentZip_input.setBackground(Color.WHITE);
+                                                                                                                                        
+                                                                                                                                        JButton studentsDelete_button = new JButton("Delete");
+                                                                                                                                        studentsDelete_button.addMouseListener(new MouseAdapter() {
+                                                                                                                                        	@Override
+                                                                                                                                        	public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                                                                                                                        		studentsDelete_buttonMouseClicked(evt);
+
+                                                                                                                                            }
+                                                                                                                                        });
+                                                                                                                                        
+                                                                                                                                                javax.swing.GroupLayout students_tabLayout = new javax.swing.GroupLayout(students_tab);
+                                                                                                                                                students_tabLayout.setHorizontalGroup(
+                                                                                                                                                	students_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                		.addGroup(students_tabLayout.createSequentialGroup()
+                                                                                                                                                			.addComponent(student_spanel, GroupLayout.PREFERRED_SIZE, 649, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                			.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                				.addGroup(students_tabLayout.createSequentialGroup()
+                                                                                                                                                					.addGap(157)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                						.addComponent(studentFirstName_label)
+                                                                                                                                                						.addComponent(studentFirstName_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentId_label)
+                                                                                                                                                						.addComponent(studentId_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(stellarnum_label)
+                                                                                                                                                						.addComponent(stellarnum_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentGpa_label)
+                                                                                                                                                						.addComponent(studentGpa_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentYear_label)
+                                                                                                                                                						.addComponent(addstudent_label)
+                                                                                                                                                						.addComponent(studentState_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(lblZipcode, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentZip_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentYear_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(lblPhone, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentPhone_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(lblState, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addGap(87)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                						.addComponent(studentAddress_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentBday_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentCity_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(lblCity, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentBday_label)
+                                                                                                                                                						.addComponent(studentMajor_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentMajor_label)
+                                                                                                                                                						.addComponent(studentEmail_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentEmail_label)
+                                                                                                                                                						.addComponent(studentPassword_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentPassword_label)
+                                                                                                                                                						.addComponent(studentLastName_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentLastName_label)))
+                                                                                                                                                				.addGroup(students_tabLayout.createSequentialGroup()
+                                                                                                                                                					.addGap(325)
+                                                                                                                                                					.addComponent(clearstudent_button)
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                					.addComponent(addstudents_button)
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                					.addComponent(studentsDelete_button)))
+                                                                                                                                                			.addGap(236))
+                                                                                                                                                );
+                                                                                                                                                students_tabLayout.setVerticalGroup(
+                                                                                                                                                	students_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                		.addGroup(students_tabLayout.createSequentialGroup()
+                                                                                                                                                			.addGroup(students_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                				.addGroup(students_tabLayout.createSequentialGroup()
+                                                                                                                                                					.addGap(38)
+                                                                                                                                                					.addComponent(addstudent_label)
+                                                                                                                                                					.addGap(18)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentFirstName_label)
+                                                                                                                                                						.addComponent(studentLastName_label))
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentFirstName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentLastName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addGap(18)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentId_label)
+                                                                                                                                                						.addComponent(studentPassword_label))
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentId_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentPassword_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addGap(18)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(stellarnum_label)
+                                                                                                                                                						.addComponent(studentEmail_label))
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(stellarnum_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentEmail_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentGpa_label)
+                                                                                                                                                						.addComponent(studentMajor_label))
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentGpa_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentMajor_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addGap(18)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentYear_label)
+                                                                                                                                                						.addComponent(studentBday_label))
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentYear_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentBday_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addGap(18)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(lblPhone)
+                                                                                                                                                						.addComponent(lblAddress))
+                                                                                                                                                					.addGap(1)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentPhone_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentAddress_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addGap(18)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(lblCity)
+                                                                                                                                                						.addComponent(lblState))
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(studentState_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                						.addComponent(studentCity_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                					.addGap(18)
+                                                                                                                                                					.addComponent(lblZipcode)
+                                                                                                                                                					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                					.addComponent(studentZip_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                					.addGap(29)
+                                                                                                                                                					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                						.addComponent(clearstudent_button)
+                                                                                                                                                						.addComponent(addstudents_button)
+                                                                                                                                                						.addComponent(studentsDelete_button)))
+                                                                                                                                                				.addComponent(student_spanel, GroupLayout.PREFERRED_SIZE, 756, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                                                                                                );
+                                                                                                                                                students_tab.setLayout(students_tabLayout);
+                                                                                                                                                
+                                                                                                                                                        admin_tab.addTab("Students", students_tab);
+        addclass_tab = new javax.swing.JPanel();
+        addclass_spanel = new javax.swing.JScrollPane();
+        classes_table = new javax.swing.JTable();
+        classtitle_label = new javax.swing.JLabel();
+        classtitle_input = new javax.swing.JTextField();
+        classid_label = new javax.swing.JLabel();
+        classid_input = new javax.swing.JTextField();
+        credit_label = new javax.swing.JLabel();
+        credit_input = new javax.swing.JTextField();
+        subject_label = new javax.swing.JLabel();
+        subject_input = new javax.swing.JTextField();
+        addClass_label = new javax.swing.JLabel();
+        clearclass_button = new javax.swing.JButton();
+        addClass_button = new javax.swing.JButton();
+        
+                addclass_tab.setBackground(new java.awt.Color(255, 255, 255));
+                addclass_tab.setForeground(new java.awt.Color(51, 51, 51));
+                
+                        classes_table.setModel(new javax.swing.table.DefaultTableModel(
+                                new Object[][]{
+                                        {null, null, null, null},
+                                        {null, null, null, null},
+                                        {null, null, null, null},
+                                        {null, null, null, null}
+                                },
+                                new String[]{
+                                        "Title 1", "Title 2", "Title 3", "Title 4"
+                                }
+                        ));
+                        addclass_spanel.setViewportView(classes_table);
+                        
+                                classtitle_label.setForeground(new java.awt.Color(51, 51, 51));
+                                classtitle_label.setText("Class Title:");
+                                
+                                        classtitle_input.setBackground(new java.awt.Color(255, 255, 255));
+                                        classtitle_input.setForeground(new java.awt.Color(51, 51, 51));
+                                        classtitle_input.addActionListener(new java.awt.event.ActionListener() {
+                                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                                classtitle_inputActionPerformed(evt);
+                                            }
+                                        });
+                                        
+                                                classid_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                classid_label.setText("Class ID:");
+                                                
+                                                        classid_input.setBackground(new java.awt.Color(255, 255, 255));
+                                                        classid_input.setForeground(new java.awt.Color(51, 51, 51));
+                                                        
+                                                                credit_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                credit_label.setText("Credit:");
+                                                                
+                                                                        credit_input.setBackground(new java.awt.Color(255, 255, 255));
+                                                                        credit_input.setForeground(new java.awt.Color(51, 51, 51));
+                                                                        
+                                                                                subject_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                subject_label.setText("Subject:");
+                                                                                
+                                                                                        subject_input.setBackground(new java.awt.Color(255, 255, 255));
+                                                                                        subject_input.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                        
+                                                                                                addClass_label.setBackground(new java.awt.Color(102, 102, 102));
+                                                                                                addClass_label.setFont(new java.awt.Font("Dialog", 1, 14));
+                                                                                                addClass_label.setForeground(new java.awt.Color(51, 51, 51));
+                                                                                                addClass_label.setText("Add Class:");
+                                                                                                
+                                                                                                        clearclass_button.setText("Clear");
+                                                                                                        clearclass_button.addMouseListener(new java.awt.event.MouseAdapter() {
+                                                                                                            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                                                                                                clearclass_buttonMouseClicked(evt);
+                                                                                                            }
+                                                                                                        });
+                                                                                                        
+                                                                                                                addClass_button.setText("Add");
+                                                                                                                addClass_button.addActionListener(new java.awt.event.ActionListener() {
+                                                                                                                    @Override
+                                                                                                                    public void actionPerformed(ActionEvent evt) {
+                                                                                                                        addClasses_buttonActionPerformed(evt);
+                                                                                                                    }
+
+                                                                                                                });
+                                                                                                                
+                                                                                                                JButton classDelete_button = new JButton("Delete");
+                                                                                                                classDelete_button.addMouseListener(new MouseAdapter() {
+                                                                                                                	@Override
+                                                                                                                	public void mouseClicked(MouseEvent arg0) {
+                                                                                                                		
+                                                                                                                		 try {
+                                                                                                                 	    	int row = classes_table.getSelectedRow();
+                                                                                                                 	        System.out.println(row); //the number will be the row selected - 1
+                                                                                                                 	        String value = (classes_table.getModel().getValueAt(row, 0).toString());
+                                                                                                                 	        String query = "DELETE FROM classes where class_id="+value;
+                                                                                                                 			ps =  conn.prepareStatement(query);
+                                                                                                                 			ps.executeUpdate();
+                                                                                                                 			
+                                                                                                                 			ps.close();
+                                                                                                                 			
+                                                                                                                 			DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
+                                                                                                                 		     model.setRowCount(0);
+                                                                                                                 			fetchClasses();
+                                                                                                                 			
+                                                                                                                 		     JOptionPane.showMessageDialog(null, "Class deleted!");
+                                                                                                                 	    } catch (Exception e) {
+                                                                                                                 			JOptionPane.showMessageDialog(null, e);
+                                                                                                                 			
+                                                                                                                 		}
+                                                                                                                		
+                                                                                                                		
+                                                                                                                		
+                                                                                                                	}
+                                                                                                                });
+                                                                                                                
+                                                                                                                        javax.swing.GroupLayout addclass_tabLayout = new javax.swing.GroupLayout(addclass_tab);
+                                                                                                                        addclass_tabLayout.setHorizontalGroup(
+                                                                                                                        	addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                        		.addGroup(addclass_tabLayout.createSequentialGroup()
+                                                                                                                        			.addComponent(addclass_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                        			.addGroup(addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                        				.addGroup(addclass_tabLayout.createSequentialGroup()
+                                                                                                                        					.addGap(200)
+                                                                                                                        					.addGroup(addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                        						.addGroup(addclass_tabLayout.createParallelGroup(Alignment.LEADING, false)
+                                                                                                                        							.addComponent(classtitle_label)
+                                                                                                                        							.addComponent(classid_label)
+                                                                                                                        							.addComponent(credit_label)
+                                                                                                                        							.addComponent(subject_label)
+                                                                                                                        							.addComponent(classtitle_input)
+                                                                                                                        							.addComponent(classid_input, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                                                                                                                        							.addComponent(credit_input)
+                                                                                                                        							.addComponent(subject_input))
+                                                                                                                        						.addComponent(addClass_label)))
+                                                                                                                        				.addGroup(addclass_tabLayout.createSequentialGroup()
+                                                                                                                        					.addGap(323)
+                                                                                                                        					.addComponent(clearclass_button)
+                                                                                                                        					.addGap(18)
+                                                                                                                        					.addComponent(addClass_button)
+                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                        					.addComponent(classDelete_button)))
+                                                                                                                        			.addGap(0, 440, Short.MAX_VALUE))
+                                                                                                                        );
+                                                                                                                        addclass_tabLayout.setVerticalGroup(
+                                                                                                                        	addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+                                                                                                                        		.addComponent(addclass_spanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                                                                                                                        		.addGroup(addclass_tabLayout.createSequentialGroup()
+                                                                                                                        			.addGap(45)
+                                                                                                                        			.addComponent(addClass_label)
+                                                                                                                        			.addGap(31)
+                                                                                                                        			.addComponent(classtitle_label)
+                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                        			.addComponent(classtitle_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                        			.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                        			.addComponent(classid_label)
+                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                        			.addComponent(classid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                        			.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                        			.addComponent(credit_label)
+                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                        			.addComponent(credit_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                        			.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                        			.addComponent(subject_label)
+                                                                                                                        			.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                        			.addComponent(subject_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                        			.addGap(18)
+                                                                                                                        			.addGroup(addclass_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                        				.addComponent(classDelete_button)
+                                                                                                                        				.addComponent(addClass_button)
+                                                                                                                        				.addComponent(clearclass_button))
+                                                                                                                        			.addContainerGap(346, Short.MAX_VALUE))
+                                                                                                                        );
+                                                                                                                        addclass_tab.setLayout(addclass_tabLayout);
+                                                                                                                        
+                                                                                                                                admin_tab.addTab("Add Class", addclass_tab);
 
 
         javax.swing.GroupLayout update_tabLayout = new javax.swing.GroupLayout(update_tab);
@@ -726,7 +953,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         classinstructor_spanel.setViewportView(classinstructor_table);
 
-        classinstructor_label.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        classinstructor_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
         classinstructor_label.setForeground(new java.awt.Color(51, 51, 51));
         classinstructor_label.setText("Class Instructors:");
 
@@ -779,73 +1006,77 @@ public class Admin extends javax.swing.JFrame {
 
         classtime_input.setBackground(new java.awt.Color(255, 255, 255));
         classtime_input.setForeground(new java.awt.Color(51, 51, 51));
+        
+        instructorsDelete_button = new JButton("Delete");
 
         javax.swing.GroupLayout classinstructor_tabLayout = new javax.swing.GroupLayout(classinstructor_tab);
-        classinstructor_tab.setLayout(classinstructor_tabLayout);
         classinstructor_tabLayout.setHorizontalGroup(
-                classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                .addComponent(classinstructor_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                                .addGap(336, 336, 336)
-                                                .addComponent(clearinstructors_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(addinstructor_button))
-                                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                                .addGap(200, 200, 200)
-                                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(classtime_label)
-                                                        .addComponent(crn_label)
-                                                        .addComponent(teachid_label)
-                                                        .addComponent(clasid_label)
-                                                        .addComponent(semester_label)
-                                                        .addComponent(crn_input)
-                                                        .addComponent(teachid_input)
-                                                        .addComponent(clasid_input)
-                                                        .addComponent(semester_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                                                        .addComponent(classinstructor_label)
-                                                        .addComponent(days_label)
-                                                        .addComponent(days_input)
-                                                        .addComponent(classtime_input))))
-                                .addContainerGap())
+        	classinstructor_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        			.addComponent(classinstructor_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(classinstructor_tabLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        					.addGap(306)
+        					.addComponent(clearinstructors_button)
+        					.addGap(18)
+        					.addComponent(addinstructor_button)
+        					.addGap(18)
+        					.addComponent(instructorsDelete_button))
+        				.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        					.addGap(200)
+        					.addGroup(classinstructor_tabLayout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(classtime_label)
+        						.addComponent(crn_label)
+        						.addComponent(teachid_label)
+        						.addComponent(clasid_label)
+        						.addComponent(semester_label)
+        						.addComponent(crn_input)
+        						.addComponent(teachid_input)
+        						.addComponent(clasid_input)
+        						.addComponent(semester_input, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+        						.addComponent(classinstructor_label)
+        						.addComponent(days_label)
+        						.addComponent(days_input)
+        						.addComponent(classtime_input))))
+        			.addContainerGap())
         );
         classinstructor_tabLayout.setVerticalGroup(
-                classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(classinstructor_spanel)
-                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(classinstructor_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(crn_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(crn_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teachid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teachid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clasid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clasid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(semester_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(semester_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(days_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(days_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(classtime_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(classtime_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearinstructors_button)
-                                        .addComponent(addinstructor_button))
-                                .addContainerGap(284, Short.MAX_VALUE))
+        	classinstructor_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(classinstructor_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        		.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        			.addGap(45)
+        			.addComponent(classinstructor_label)
+        			.addGap(31)
+        			.addComponent(crn_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(crn_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teachid_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teachid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(clasid_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(clasid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(semester_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(semester_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(days_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(days_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(classtime_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(classtime_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(classinstructor_tabLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(clearinstructors_button)
+        				.addComponent(addinstructor_button)
+        				.addComponent(instructorsDelete_button)))
         );
+        classinstructor_tab.setLayout(classinstructor_tabLayout);
 
         admin_tab.addTab("Class Instructors", classinstructor_tab);
 
@@ -858,24 +1089,23 @@ public class Admin extends javax.swing.JFrame {
         });
 
         javax.swing.GroupLayout admin_panelLayout = new javax.swing.GroupLayout(admin_panel);
-        admin_panel.setLayout(admin_panelLayout);
         admin_panelLayout.setHorizontalGroup(
-                admin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(admin_tab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, admin_panelLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(logout_button)
-                                .addGap(17, 17, 17))
+        	admin_panelLayout.createParallelGroup(Alignment.TRAILING)
+        		.addComponent(admin_tab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        		.addGroup(admin_panelLayout.createSequentialGroup()
+        			.addComponent(logout_button)
+        			.addGap(229))
         );
         admin_panelLayout.setVerticalGroup(
-                admin_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, admin_panelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(logout_button)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(admin_tab, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+        	admin_panelLayout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(admin_panelLayout.createSequentialGroup()
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addComponent(logout_button)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(admin_tab, GroupLayout.PREFERRED_SIZE, 797, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
         );
+        admin_panel.setLayout(admin_panelLayout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -889,42 +1119,157 @@ public class Admin extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void logout_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_buttonMouseClicked
+    private void logout_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         int logout_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
 
         if (logout_con == 0) {
-            Login log = new Login();
+            AdminLogin log = new AdminLogin();
             log.setVisible(true);
             log.pack();
             log.setLocationRelativeTo(null);
             log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         }
-    }//GEN-LAST:event_logout_buttonMouseClicked
+    }
+    
+    private void teachersDelete_buttonMouseClicked(java.awt.event.MouseEvent evt) {
+    
+    	 int delete_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
 
-    private void classtitle_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classtitle_inputActionPerformed
+         if (delete_con == 0) {
+    	 try {
+    	    	int row = teachers_table.getSelectedRow();
+    	        System.out.println(row); //the number will be the row selected - 1
+    	        String value = (teachers_table.getModel().getValueAt(row, 0).toString());
+    	        String query = "DELETE FROM teacher where teacher_id="+value;
+    			ps =  conn.prepareStatement(query);
+    			ps.executeUpdate();
+    			
+    			ps.close();
+    			
+    			DefaultTableModel model = (DefaultTableModel) teachers_table.getModel();
+    		     model.setRowCount(0);
+    			fetchTeachers();
+    			
+    		     JOptionPane.showMessageDialog(null, "Teacher deleted!");
+    	    } catch (Exception e) {
+    			JOptionPane.showMessageDialog(null, e);
+    			
+    		}
+         }
+    }
+    
+    private void studentsDelete_buttonMouseClicked(java.awt.event.MouseEvent evt) {
+        
+       int delete_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+       if (delete_con == 0) {
+    	try {
+   	    	int row = student_table.getSelectedRow();
+   	        System.out.println(row); //the number will be the row selected - 1
+   	        String value = (student_table.getModel().getValueAt(row, 0).toString());
+   	        String query = "DELETE FROM students where panther_num="+value;
+   			ps =  conn.prepareStatement(query);
+   			ps.executeUpdate();
+   			
+   			ps.close();
+   			
+   			DefaultTableModel model = (DefaultTableModel) student_table.getModel();
+   		     model.setRowCount(0);
+   			fetchStudents();
+   			
+   		     JOptionPane.showMessageDialog(null, "Student deleted!");
+   	    } catch (Exception e) {
+   			JOptionPane.showMessageDialog(null, e);
+   			
+   		}
+    }
+   }
+    private void classDelete_buttonMouseClicked(java.awt.event.MouseEvent evt) {
+        
+        int delete_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+        if (delete_con == 0) {
+     	try {
+    	    	int row = classes_table.getSelectedRow();
+    	        System.out.println(row); //the number will be the row selected - 1
+    	        String value = (classes_table.getModel().getValueAt(row, 0).toString());
+    	        String query = "DELETE FROM classes where class_id="+value;
+    			ps =  conn.prepareStatement(query);
+    			ps.executeUpdate();
+    			
+    			ps.close();
+    			
+    			DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
+    		     model.setRowCount(0);
+    			fetchClasses();
+    			
+    		     JOptionPane.showMessageDialog(null, "Class deleted!");
+    	    } catch (Exception e) {
+    			JOptionPane.showMessageDialog(null, e);
+    			
+    		}
+     }
+    }
+    
+private void instructorDelete_buttonMouseClicked(java.awt.event.MouseEvent evt) {
+        
+        int delete_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+        if (delete_con == 0) {
+     	try {
+    	    	int row = classinstructor_table.getSelectedRow();
+    	        System.out.println(row); //the number will be the row selected - 1
+    	        String value = (classinstructor_table.getModel().getValueAt(row, 0).toString());
+    	        String query = "DELETE FROM teacher_class where CRN="+value;
+    			ps =  conn.prepareStatement(query);
+    			ps.executeUpdate();
+    			
+    			ps.close();
+    			
+    			DefaultTableModel model = (DefaultTableModel) classinstructor_table.getModel();
+    		     model.setRowCount(0);
+    			fetchClasses();
+    			
+    		     JOptionPane.showMessageDialog(null, "Class deleted!");
+    	    } catch (Exception e) {
+    			JOptionPane.showMessageDialog(null, e);
+    			
+    		}
+     }
+    }
+    
+    
+   
+    
+    
+    
+    
+    
+    
+
+    private void classtitle_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_classtitle_inputActionPerformed
-
-    private void fname_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fname_inputActionPerformed
+    }
+    private void fname_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_fname_inputActionPerformed
+    }
 
-    private void firstname_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstname_inputActionPerformed
+    private void firstname_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstname_inputActionPerformed
+    }
 
-    private void crn_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crn_inputActionPerformed
+    private void crn_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_crn_inputActionPerformed
+    }
 
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
+    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
+    }
 
-    private void addClasses_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudents_buttonActionPerformed
+    private void addClasses_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         Statement statement = null;
 
@@ -937,7 +1282,7 @@ public class Admin extends javax.swing.JFrame {
             String subject = subject_input.getText().trim().toUpperCase();
 
             String sql = "INSERT INTO classes " + "(class_id,class_name,class_credit,class_subj) "
-                    + "VALUES('" + title + "','" + id + "','" + credit + "','" + subject + "') ";
+                    + "VALUES('" + id + "','" + title + "','" + credit + "','" + subject + "') ";
 
             statement.execute(sql);
 
@@ -947,9 +1292,10 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
         }
+        fetchClasses();
     }
 
-    private void addTeacher_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudents_buttonActionPerformed
+    private void addTeacher_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         Statement statement = null;
 
         try {
@@ -971,32 +1317,40 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
         }
+		fetchTeachers();
     }
 
 
 
-    private void addStudents_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudents_buttonActionPerformed
-        //GEN-FIRST:event_addstudents_buttonActionPerformed
+    private void addStudents_buttonActionPerformed(java.awt.event.ActionEvent evt) {
+      
         Statement statement = null;
 
         try {
             statement = connection.createStatement();
 
             String firstName = studentFirstName_input.getText().trim().toUpperCase();
-            String lastName =  studentLastName_input.getText().trim().toUpperCase();
+            String lastName =  studentGpa_input.getText().trim().toUpperCase();
             String studentID = studentId_input.getText();
-            String password = studentPassword_input.getText().trim().toUpperCase();
+            String password = studentPassword_input.getText().trim();
             String email = studentEmail_input.getText().trim();
             int stellarNum = Integer.parseInt(stellarnum_input.getText());
             int gpa = Integer.parseInt(studentGpa_input.getText());
             String bday = studentBday_input.getText().trim().toUpperCase();
             String major = studentMajor_input.getText().trim().toUpperCase();
             String schoolYear = studentYear_input.getText().trim().toUpperCase();
+            
+            String phone = studentPhone_input.getText().trim().toUpperCase();
+            String address = studentAddress_input.getText().trim().toUpperCase();
+            String state = studentState_input.getText().trim().toUpperCase();
+            String city = studentCity_input.getText().trim().toUpperCase();
+            int zip = Integer.parseInt(studentZip_input.getText());
+            
 
             String sql = "INSERT INTO students "
-                    + "(panther_num, first_name, last_name, email, student_id, password, GPA, bday, major, school_year) "
+                    + "(panther_num, first_name, last_name, email, student_id, password, GPA, bday, major, school_year, phone, address, state, city, zipcode) "
                     + "VALUES('" + stellarNum + "','" + firstName + "','" + lastName + "','" + email + "','"
-                    + studentID + "','" + password + "','" + gpa + "','" + bday + "','" + major + "','" + schoolYear + "') ";
+                    + studentID + "','" + password + "','" + gpa + "','" + bday + "','" + major + "','" + schoolYear + "', '" + phone + "', '" + address + "', '" + state + "', '" + city + "', '" + zip + "') ";
 
             statement.execute(sql);
 
@@ -1006,11 +1360,12 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
         }
+        
+        fetchStudents();
 
-    }//GEN-LAST:event_addstudents_buttonActionPerformed
+    }
 
-    private void updateClasses_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudents_buttonActionPerformed
-        // TODO add your handling code here:
+    private void updateClasses_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         Statement statement = null;
 
         try {
@@ -1062,29 +1417,24 @@ public class Admin extends javax.swing.JFrame {
          }
     }
 
-    private void stellarnum_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stellarnum_inputActionPerformed
-        // TODO add your handling code here:
-        System.out.println("TEST STellar");
-    }//GEN-LAST:event_stellarnum_inputActionPerformed
-
-    private void clearclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearclass_buttonMouseClicked
+    private void clearclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         classtitle_input.setText("");
         classid_input.setText("");
         credit_input.setText("");
         subject_input.setText("");
-    }//GEN-LAST:event_clearclass_buttonMouseClicked
+    }
 
-    private void clearteacher_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearteacher_buttonMouseClicked
+    private void clearteacher_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         teacherFirstName_input.setText("");
         teacherLastName_input.setText("");
         teacherid_input.setText("");
         teacherPrefix_input.setText("");
 
-    }//GEN-LAST:event_clearteacher_buttonMouseClicked
+    }
 
-    private void clearstudent_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearstudent_buttonMouseClicked
+    private void clearstudent_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         studentFirstName_input.setText("");
-        studentLastName_input.setText("");
+        studentGpa_input.setText("");
         studentId_input.setText("");
         stellarnum_input.setText("");
         studentEmail_input.setText("");
@@ -1094,9 +1444,9 @@ public class Admin extends javax.swing.JFrame {
         studentBday_input.setText("");
         studentPassword_input.setText("");
 
-    }//GEN-LAST:event_clearstudent_buttonMouseClicked
+    }
 
-    private void clearinstructors_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearinstructors_buttonMouseClicked
+    private void clearinstructors_buttonMouseClicked(java.awt.event.MouseEvent evt) {
         crn_input.setText("");
         teachid_input.setText("");
         clasid_input.setText("");
@@ -1104,35 +1454,9 @@ public class Admin extends javax.swing.JFrame {
         days_input.setText("");
         classtime_input.setText("");
 
-    }//GEN-LAST:event_clearinstructors_buttonMouseClicked
+   
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+   
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1142,7 +1466,7 @@ public class Admin extends javax.swing.JFrame {
     }
 
     public void staricon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("star-icon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
 
     }
     
@@ -1154,6 +1478,9 @@ public class Admin extends javax.swing.JFrame {
             pst = connection.prepareStatement(stdTable);
             rs = pst.executeQuery();
             student_table.setModel(DbUtils.resultSetToTableModel(rs));
+           
+            rs.close();
+			pst.close();
             
         
         } catch(Exception e){
@@ -1171,6 +1498,9 @@ public class Admin extends javax.swing.JFrame {
             rs = pst.executeQuery();
             teachers_table.setModel(DbUtils.resultSetToTableModel(rs));
             
+            rs.close();
+			pst.close();
+            
         
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -1186,6 +1516,9 @@ public class Admin extends javax.swing.JFrame {
             pst = connection.prepareStatement(classTable);
             rs = pst.executeQuery();
            classes_table.setModel(DbUtils.resultSetToTableModel(rs));
+          
+           rs.close();
+		   pst.close();
             
         
         } catch(Exception e){
@@ -1200,10 +1533,16 @@ public class Admin extends javax.swing.JFrame {
 
         try{
         
-           String cinstructTable = "select * from classes, teacher, teacher_class where teacher.teacher_id =1 and teacher_class.semester='Spring 2020' and classes.class_id='CSC1100'";
+           String cinstructTable = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
+           		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
+           		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";
             pst = connection.prepareStatement(cinstructTable);
             rs = pst.executeQuery();
             classinstructor_table.setModel(DbUtils.resultSetToTableModel(rs));
+
+            rs.close();
+			pst.close();
+            
             
         
         } catch(Exception e){
@@ -1212,96 +1551,4 @@ public class Admin extends javax.swing.JFrame {
         }
     
      }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addClass_button;
-    private javax.swing.JLabel addClass_label;
-    private javax.swing.JScrollPane addclass_spanel;
-    private javax.swing.JPanel addclass_tab;
-    private javax.swing.JButton addinstructor_button;
-    private javax.swing.JLabel addstudent_label;
-    private javax.swing.JButton addstudents_button;
-    private javax.swing.JLabel addteacher_label;
-    private javax.swing.JPanel admin_panel;
-    private javax.swing.JTabbedPane admin_tab;
-    private javax.swing.JTextField studentBday_input;
-    private javax.swing.JLabel studentBday_label;
-    private javax.swing.JTextField clasid_input;
-    private javax.swing.JLabel clasid_label;
-    private javax.swing.JTable classes_table;
-    private javax.swing.JTextField classid_input;
-    private javax.swing.JLabel classid_label;
-    private javax.swing.JLabel classinstructor_label;
-    private javax.swing.JScrollPane classinstructor_spanel;
-    private javax.swing.JPanel classinstructor_tab;
-    private javax.swing.JTable classinstructor_table;
-    private javax.swing.JTextField classtime_input;
-    private javax.swing.JLabel classtime_label;
-    private javax.swing.JTextField classtitle_input;
-    private javax.swing.JLabel classtitle_label;
-    private javax.swing.JButton clearclass_button;
-    private javax.swing.JButton clearinstructors_button;
-    private javax.swing.JButton clearstudent_button;
-    private javax.swing.JButton clearteacher_button;
-    private javax.swing.JTextField credit_input;
-    private javax.swing.JLabel credit_label;
-    private javax.swing.JTextField crn_input;
-    private javax.swing.JLabel crn_label;
-    private javax.swing.JTextField days_input;
-    private javax.swing.JLabel days_label;
-    private javax.swing.JTextField studentEmail_input;
-    private javax.swing.JLabel studentEmail_label;
-    private javax.swing.JTextField studentFirstName_input;
-    private javax.swing.JLabel studentFirstName_label;
-    private javax.swing.JTextField teacherFirstName_input;
-    private javax.swing.JLabel teacherFirstName_label;
-    private javax.swing.JTextField studentGpa_input;
-    private javax.swing.JLabel studentGpa_label;
-    private javax.swing.JButton classUpdateButton;
-    private javax.swing.JButton classUpdateClear;
-    private javax.swing.JLabel updateClassTitle_label;
-    private javax.swing.JLabel updateClassID_label;
-    private javax.swing.JLabel updateClassCredit_label;
-    private javax.swing.JLabel updateClassSubject_label;
-    private javax.swing.JTextField updateClassTitle_input;
-    private javax.swing.JTextField updateClassID_input;
-    private javax.swing.JTextField updateClassCredit_input;
-    private javax.swing.JTextField updateClassSubject_input;
-    private javax.swing.JTextField studentLastName_input;
-    private javax.swing.JLabel studentLastName_label;
-    private javax.swing.JTextField teacherLastName_input;
-    private javax.swing.JLabel teacherLastName_label;
-    private javax.swing.JButton logout_button;
-    private javax.swing.JTextField studentMajor_input;
-    private javax.swing.JLabel studentMajor_label;
-    private javax.swing.JTextField studentPassword_input;
-    private javax.swing.JLabel studentPassword_label;
-    private javax.swing.JTextField teacherPrefix_input;
-    private javax.swing.JLabel teacherPrefix_label;
-    private javax.swing.JTextField semester_input;
-    private javax.swing.JLabel semester_label;
-    private javax.swing.JTextField stellarnum_input;
-    private javax.swing.JLabel stellarnum_label;
-    private javax.swing.JScrollPane student_spanel;
-    private javax.swing.JTable student_table;
-    private javax.swing.JTextField studentId_input;
-    private javax.swing.JLabel studentId_label;
-    private javax.swing.JPanel students_tab;
-    private javax.swing.JTextField subject_input;
-    private javax.swing.JLabel subject_label;
-    private javax.swing.JButton teacher_button;
-    private javax.swing.JScrollPane teacher_spanel;
-    private javax.swing.JTextField teacherid_input;
-    private javax.swing.JLabel teacherid_label;
-    private javax.swing.JPanel teachers_tab;
-    private javax.swing.JTable teachers_table;
-    private javax.swing.JTextField teachid_input;
-    private javax.swing.JLabel teachid_label;
-    private javax.swing.JScrollPane update_spanel;
-    private javax.swing.JPanel update_tab;
-    private javax.swing.JLabel updateclass_label;
-    private javax.swing.JTable updateclass_table;
-    private javax.swing.JTextField studentYear_input;
-    private javax.swing.JLabel studentYear_label;
-    // End of variables declaration//GEN-END:variables
 }
