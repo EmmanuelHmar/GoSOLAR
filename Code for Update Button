@@ -1,0 +1,20 @@
+btnUpdate = new JButton("Update");
+    btnUpdate.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent arg0) {
+                 
+				 try{
+				 String val1 = classtitle_input.getText();
+				 String val2 = classid_input.getText();
+				 String val3 = credit_input.getText();
+				 String val4 = subject_input.getText();
+				 
+				 String sql = "update classes set class_name =  '"+val1+"', class_id = '"+val2+"',class_credit = '"+val3+"',class_subj = '"+val4+"' ";
+                    
+					pst = connection.prepareStatement(sql);
+					pst.execute();
+                    JOptionPane.showMessageDialog(null,"Record Updated!");					
+				 
+				 
+				}catch(Exception e){
+				JOptionPane.showMessageDialog(null,e");
+				}
