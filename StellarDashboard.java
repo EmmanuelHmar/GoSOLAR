@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -34,103 +35,117 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.AbstractListModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 public class StellarDashboard extends javax.swing.JFrame {
 
-	private javax.swing.JLabel Schedule_label;
-    private javax.swing.JPanel addClass_panel;
-    private javax.swing.JButton addclass_button;
-    private javax.swing.JLabel addclasstitle_label;
-    private javax.swing.JList<String> classes_list;
-    private javax.swing.JTable classes_table;
-    private javax.swing.JScrollPane classeslist_scroll;
-    private javax.swing.JScrollPane classestable_scroll;
-    private javax.swing.JLabel concentration_label;
-    private javax.swing.JTextField courseid_input;
-    private javax.swing.JLabel courseid_label;
-    private javax.swing.JComboBox<String> credits_combobox;
-    private javax.swing.JLabel credits_label;
-    private javax.swing.JMenuItem dash_menu;
-    private javax.swing.JPanel dash_panel;
-    private javax.swing.JLabel days_label;
-    public static javax.swing.JLabel email;
-    private javax.swing.JLabel email_label;
-    private javax.swing.JLabel errorMessage;
-    private javax.swing.JLabel exclaim_text;
-    public static javax.swing.JLabel firstname;
-    public static javax.swing.JLabel gpa;
-    private javax.swing.JLabel gpa_label;
-    private javax.swing.JMenu home_menu;
-    private javax.swing.JLabel instructor_label;
-    private javax.swing.JList<String> instructor_list;
-    private javax.swing.JPanel jPanel1;
-    public static javax.swing.JLabel lastname;
-    private javax.swing.JButton logout_button;
-    private javax.swing.JPanel mainpanel;
-    public static javax.swing.JLabel major;
-    private javax.swing.JLabel major_label;
-    private javax.swing.JPanel menu_panel;
-    private javax.swing.JMenuBar menubar;
-    private javax.swing.JLabel name_label;
-    private javax.swing.JButton register_button;
-    private javax.swing.JScrollPane registration_menu;
-    private javax.swing.JButton schedule_button;
-    private javax.swing.JList<String> schedule_list;
-    private javax.swing.JScrollPane schedulelist_scroll;
-    private javax.swing.JComboBox<String> semester_combobox;
-    private javax.swing.JComboBox<String> days_combobox;
-    private javax.swing.JLabel semester_label;
-    private javax.swing.JMenu setting_menu;
-    private javax.swing.JPanel sidemenu;
-    private javax.swing.JLabel starimage;
-    private javax.swing.JLabel studentCon;
-    public static javax.swing.JLabel studentFirstname;
-    public static javax.swing.JLabel studentLastname;
-    public static javax.swing.JLabel studentMajor;
-    private javax.swing.JLabel studentMajor_label;
-    public static javax.swing.JLabel studentYear;
-    private javax.swing.JLabel studentYear_label;
-    public static javax.swing.JLabel studentid;
-    private javax.swing.JLabel studentid_label;
-    public static javax.swing.JLabel studentidnum;
-    private javax.swing.JLabel studentidnum_label;
-    private javax.swing.JLabel studentinfo_label;
-    private javax.swing.JLabel subject_label;
-    private javax.swing.JList<String> subject_list;
-    private javax.swing.JScrollPane subjectlist_scroll;
-    private javax.swing.JLabel term_text;
-    private javax.swing.JLabel totalcredits;
-    private javax.swing.JLabel totalcredits_label;
-    private javax.swing.JPanel viewSchedule_panel;
-    private javax.swing.JLabel welcome_text;
-    public static javax.swing.JLabel year;
-    private javax.swing.JLabel year_label;
-    Connection connection = null;
-    ResultSet rs = null;  
-    PreparedStatement pst = null;
-    private JButton reset_button;
-    
-    
+	 private javax.swing.JLabel Schedule_label;
+	    private javax.swing.JPanel addClass_panel;
+	    private javax.swing.JButton addclass_button1;
+	    private javax.swing.JLabel addclasstitle_label;
+	    private javax.swing.JTable addedClass_table;
+	    private javax.swing.JTable classes_table;
+	    private javax.swing.JScrollPane classestable_scroll;
+	    private javax.swing.JLabel concentration_label;
+	    private javax.swing.JTextField courseid_input;
+	    private javax.swing.JLabel courseid_label;
+	    private javax.swing.JComboBox<String> credits_combobox;
+	    private javax.swing.JLabel credits_label;
+	    private javax.swing.JMenuItem dash_menu;
+	    private javax.swing.JPanel dash_panel;
+	    private javax.swing.JComboBox<String> days_combobox;
+	    private javax.swing.JLabel days_label;
+	    public static javax.swing.JLabel email;
+	    private javax.swing.JLabel email_label;
+	    private javax.swing.JLabel errorMessage;
+	    private javax.swing.JLabel exclaim_text;
+	    public static javax.swing.JLabel firstname;
+	    public static javax.swing.JLabel firstnameHeader;
+	    public static javax.swing.JLabel gpa;
+	    private javax.swing.JLabel gpa_label;
+	    private javax.swing.JButton home_button;
+	    private javax.swing.JMenu home_menu;
+	    private javax.swing.JPanel jPanel1;
+	    private javax.swing.JScrollPane jScrollPane1;
+	    private javax.swing.JScrollPane jScrollPane2;
+	    public static javax.swing.JLabel lastname;
+	    public static javax.swing.JLabel lastnameHeader;
+	    private javax.swing.JLabel lblWelcome;
+	    private javax.swing.JButton logout_button;
+	    private javax.swing.JPanel mainpanel;
+	    public static javax.swing.JLabel major;
+	    private javax.swing.JLabel major_label;
+	    private javax.swing.JPanel menu_panel;
+	    private javax.swing.JMenuBar menubar;
+	    private javax.swing.JLabel name_label;
+	    private javax.swing.JButton register_button;
+	    private javax.swing.JScrollPane registration_menu;
+	    private javax.swing.JButton remove_button;
+	    private javax.swing.JButton removeclass_button;
+	    private javax.swing.JButton reset_button1;
+	    private javax.swing.JButton schedule_button;
+	    private javax.swing.JTable schedule_table;
+	    private javax.swing.JComboBox<String> semester_combobox;
+	    private javax.swing.JLabel semester_label;
+	    private javax.swing.JMenu setting_menu;
+	    private javax.swing.JPanel sidemenu;
+	    private javax.swing.JLabel starimage;
+	    public static javax.swing.JLabel studentCon;
+	    public static javax.swing.JLabel studentFirstname;
+	    public static javax.swing.JLabel studentLastname;
+	    public static javax.swing.JLabel studentMajor;
+	    private javax.swing.JLabel studentMajor_label;
+	    public static javax.swing.JLabel studentYear;
+	    private javax.swing.JLabel studentYear_label;
+	    public static javax.swing.JLabel studentid;
+	    private javax.swing.JLabel studentid_label;
+	    public static javax.swing.JLabel studentidnum;
+	    private javax.swing.JLabel studentidnum_label;
+	    private javax.swing.JLabel studentinfo_label;
+	    private javax.swing.JLabel subject_label;
+	    private javax.swing.JList<String> subject_list;
+	    private javax.swing.JScrollPane subjectlist_scroll;
+	    private javax.swing.JLabel term_text;
+	    private javax.swing.JLabel totalcredits;
+	    private javax.swing.JLabel totalcredits_label;
+	    private javax.swing.JPanel viewSchedule_panel;
+	    private javax.swing.JLabel welcome_text;
+	    public static javax.swing.JLabel year;
+	    private javax.swing.JLabel year_label;
+	    Connection connection = null;
+	    ResultSet rs = null;  
+	    PreparedStatement pst = null;
+	    DefaultTableModel dtable;
+	
+	
 	
     public StellarDashboard() {
-        connection = DatabaseConnection.dbConnector();
+    	 connection = DatabaseConnection.dbConnector();
 
-        initComponents();
-         setTitle("Stellar");
-        setLocationRelativeTo(null);
-        staricon();
-        fetchClass();
+         initComponents();
+          setTitle("Stellar");
+         setLocationRelativeTo(null);
+         staricon();
+         fetchClass();
+         fetchRegClasses();
     }
 
+    
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
         menu_panel = new javax.swing.JPanel();
         logout_button = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
+        firstnameHeader = new javax.swing.JLabel();
+        lastnameHeader = new javax.swing.JLabel();
         sidemenu = new javax.swing.JPanel();
+        home_button = new javax.swing.JButton();
         schedule_button = new javax.swing.JButton();
-        addclass_button = new javax.swing.JButton();
+        addclass_button1 = new javax.swing.JButton();
         mainpanel = new javax.swing.JPanel();
         dash_panel = new javax.swing.JPanel();
         starimage = new javax.swing.JLabel();
@@ -162,11 +177,12 @@ public class StellarDashboard extends javax.swing.JFrame {
         studentMajor_label = new javax.swing.JLabel();
         Schedule_label = new javax.swing.JLabel();
         studentCon = new javax.swing.JLabel();
-        schedulelist_scroll = new javax.swing.JScrollPane();
-        schedule_list = new javax.swing.JList<>();
         totalcredits = new javax.swing.JLabel();
         totalcredits_label = new javax.swing.JLabel();
         studentMajor = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        schedule_table = new javax.swing.JTable();
+        removeclass_button = new javax.swing.JButton();
         addClass_panel = new javax.swing.JPanel();
         registration_menu = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -174,37 +190,31 @@ public class StellarDashboard extends javax.swing.JFrame {
         semester_combobox = new javax.swing.JComboBox<>();
         semester_combobox.addItemListener(new ItemListener() {
         	public void itemStateChanged(ItemEvent arg0) {
+        		
+        		//String query = semester_combobox.getSelectedItem().toString();
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
         		idFilter(query1,query2,query3,query4,query5);
+        		//filterData(query);
         	}
         });
-        
-        days_combobox = new javax.swing.JComboBox<>();
-        days_combobox.addItemListener(new ItemListener() {
-        	public void itemStateChanged(ItemEvent e) {
-        		String query1 = semester_combobox.getSelectedItem().toString();
-        		String query2 = (String) subject_list.getSelectedValue();
-        		String query3 = (String) courseid_input.getText().toUpperCase();
-        		String query4 = days_combobox.getSelectedItem().toString();
-        		String query5 = credits_combobox.getSelectedItem().toString();
-        		idFilter(query1,query2,query3,query4,query5);     	}
-        });
-        days_combobox.setModel(new DefaultComboBoxModel(new String[] {"MW", "TR", "F", "M", "T", "W", "R"}));
         subject_label = new javax.swing.JLabel();
         subjectlist_scroll = new javax.swing.JScrollPane();
         subject_list = new javax.swing.JList<>();
         subject_list.addListSelectionListener(new ListSelectionListener() {
         	public void valueChanged(ListSelectionEvent arg0) {
+        		
+        		//String query = subject_list.getSelectedValue().toString();
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
         		idFilter(query1,query2,query3,query4,query5);
+        		//filterData(query);
         	}
         });
         courseid_label = new javax.swing.JLabel();
@@ -212,6 +222,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         courseid_input.addKeyListener(new KeyAdapter() {
         	@Override
         	public void keyReleased(KeyEvent arg0) {
+        		
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
@@ -224,62 +235,163 @@ public class StellarDashboard extends javax.swing.JFrame {
         credits_combobox = new javax.swing.JComboBox<>();
         credits_combobox.addItemListener(new ItemListener() {
         	public void itemStateChanged(ItemEvent e) {
+        		
+//        		String query = credits_combobox.getSelectedItem().toString();
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
         		idFilter(query1,query2,query3,query4,query5);
-        		
+        	//	filterData(query);
         	}
         });
         credits_label = new javax.swing.JLabel();
-        instructor_label = new javax.swing.JLabel();
+        days_combobox = new javax.swing.JComboBox<>();
+        days_combobox.addItemListener(new ItemListener() {
+        	public void itemStateChanged(ItemEvent e) {
+        		
+//        		String query = days_combobox.getSelectedItem().toString();
+        		String query1 = semester_combobox.getSelectedItem().toString();
+        		String query2 = (String) subject_list.getSelectedValue();
+        		String query3 = (String) courseid_input.getText().toUpperCase();
+        		String query4 = days_combobox.getSelectedItem().toString();
+        		String query5 = credits_combobox.getSelectedItem().toString();
+        		idFilter(query1,query2,query3,query4,query5);   
+        	//	filterData(query);
+        	}
+        });
         addclasstitle_label = new javax.swing.JLabel();
         classestable_scroll = new javax.swing.JScrollPane();
         classes_table = new javax.swing.JTable();
         register_button = new javax.swing.JButton();
         register_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-            	try {
-           	    	int row = classes_table.getSelectedRow();
-           	        String value1 = (classes_table.getValueAt(row, 0).toString());
-           	        String value2 = studentidnum.getText() ;
-           	        String value3 = (classes_table.getValueAt(row, 1).toString());
-           	        String value4 = (classes_table.getValueAt(row, 2).toString());
-           	        String query = "insert into classesTaken values('" + value2 + "','"  +  value1  + "','"  +  value4  + "','"  +  value3  + "') ";
-           	     pst =  connection.prepareStatement(query);
-           	     pst.executeUpdate();
-           			
-           	     pst.close();
-           	
-           		
-           	    } catch (Exception E) {
-           			JOptionPane.showMessageDialog(null, E);
-           			
-           		}
+        		
+        		 try {
+                     int row = classes_table.getSelectedRow();
+
+                     String classID = (classes_table.getValueAt(row, 0).toString());
+                     String student_id = studentidnum.getText();
+                     String class_day = (classes_table.getValueAt(row, 3).toString());
+                     String CRN = (classes_table.getValueAt(row, 1).toString());
+                     String semester_taken = (classes_table.getValueAt(row, 2).toString());
+                     String classTimes = (classes_table.getValueAt(row, 4).toString());
+                     String[] class_time = classTimes.split(" - ", 2);
+                     String start_time = class_time[0];
+                     String end_time = class_time[1];
+
+ // Change the class hours to 24 hour format
+
+                     SimpleDateFormat date12Format = new SimpleDateFormat("hh:mm a");
+                     SimpleDateFormat date24Format = new SimpleDateFormat("HH:mm");
+                     start_time = date24Format.format(date12Format.parse(start_time));
+                     end_time = date24Format.format(date12Format.parse(end_time));
+
+
+ // String query = "insert into classesTaken values('" + student_id + "','" + classID + "','" + semester_taken + "','" + CRN + "') ";
+
+                     String queryNew = "select * FROM classesTaken where panther_num = ? AND day = ? " +
+                             "AND start_time between ? AND ? OR end_time BETWEEN ? AND ?";
+
+                     PreparedStatement preparedStatement = connection.prepareStatement(queryNew);
+
+                     preparedStatement.setString(1, student_id);
+                     preparedStatement.setString(2, class_day);
+                     preparedStatement.setString(3, start_time);
+                     preparedStatement.setString(4, end_time);
+                     preparedStatement.setString(5, start_time);
+                     preparedStatement.setString(6, end_time);
+
+                     ResultSet resultSet = preparedStatement.executeQuery();
+
+                     if (resultSet.next()) {
+ // JOptionPane.showMessageDialog(null, resultSet.getString(5)
+
+ // + "\n"+ resultSet.getString(6));
+                         JOptionPane.showMessageDialog(null, "Classes conflict error.");
+                     }
+
+                     else if (!resultSet.next()) {
+
+                         String query = "insert into classesTaken values('" + student_id + "','" + classID + "','" + semester_taken + "','"
+                                 + CRN + "','" + class_day + "','" + start_time + "','" + end_time + "') ";
+
+                         pst = connection.prepareStatement(query);
+
+                         pst.executeUpdate();
+ // pst.executeQuery();
+                         JOptionPane.showMessageDialog(null, "Class added for registration.");
+
+                         pst.close();
+                         fetchRegClasses();
+                     }
+
+                 } catch (Exception E) {
+                     JOptionPane.showMessageDialog(null, E);
+
+                 }
+        		
         	}
         });
-        classeslist_scroll = new javax.swing.JScrollPane();
+        
+        
+        
+        
         errorMessage = new javax.swing.JLabel();
+        remove_button = new javax.swing.JButton();
+        remove_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+
+       		 try {
+        	    	int row = addedClass_table.getSelectedRow();
+        	        System.out.println(row); //the number will be the row selected - 1
+                    String CRN = (addedClass_table.getValueAt(row, 1).toString());
+        	        String query = "DELETE FROM classesTaken where CRN="+CRN;
+        			pst =  connection.prepareStatement(query);
+        			pst.executeUpdate();
+        			
+        			pst.close();
+        			
+        			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
+        		    // model.setRowCount(0);
+        		     fetchRegClasses();        			
+        		     JOptionPane.showMessageDialog(null, "Class Dropped!");
+        	    } catch (Exception E) {
+        			JOptionPane.showMessageDialog(null, E);
+        			
+        		}
+        	}
+        });
+        jScrollPane1 = new javax.swing.JScrollPane();
+        addedClass_table = new javax.swing.JTable();
+        reset_button1 = new javax.swing.JButton();
+        reset_button1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
+            	classes_table.setRowSorter(t);
+        		fetchClass();
+        	}
+        });
         menubar = new javax.swing.JMenuBar();
         home_menu = new javax.swing.JMenu();
         dash_menu = new javax.swing.JMenuItem();
         setting_menu = new javax.swing.JMenu();
-        
-        setting_menu.addMouseListener(new java.awt.event.MouseAdapter() {
-        	public void mouseClicked(java.awt.event.MouseEvent evt) {
+        setting_menu.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent evt) {
         		settings_buttonMouseClicked(evt);
-
-            }
+        	}
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         menu_panel.setBackground(new java.awt.Color(194, 185, 198));
 
-        logout_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
-        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("door12.png"))); 
+        logout_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("door12.png"))); // NOI18N
         logout_button.setText("Logout");
         logout_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -287,28 +399,68 @@ public class StellarDashboard extends javax.swing.JFrame {
             }
         });
         
+        
+        
+        
+
+        lblWelcome.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblWelcome.setForeground(new java.awt.Color(51, 51, 51));
+        lblWelcome.setText("Welcome,");
+
+        firstnameHeader.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        firstnameHeader.setForeground(new java.awt.Color(51, 51, 51));
+        firstnameHeader.setText("firstname");
+
+        lastnameHeader.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lastnameHeader.setForeground(new java.awt.Color(51, 51, 51));
+        lastnameHeader.setText("lastname");
 
         javax.swing.GroupLayout menu_panelLayout = new javax.swing.GroupLayout(menu_panel);
-        menu_panel.setLayout(menu_panelLayout);
         menu_panelLayout.setHorizontalGroup(
-            menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu_panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logout_button)
-                .addGap(22, 22, 22))
+        	menu_panelLayout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(menu_panelLayout.createSequentialGroup()
+        			.addContainerGap(1061, Short.MAX_VALUE)
+        			.addComponent(lblWelcome)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(firstnameHeader)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(lastnameHeader)
+        			.addGap(30)
+        			.addComponent(logout_button)
+        			.addGap(22))
         );
         menu_panelLayout.setVerticalGroup(
-            menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menu_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logout_button)
-                .addContainerGap(12, Short.MAX_VALUE))
+        	menu_panelLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(menu_panelLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(menu_panelLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(logout_button)
+        				.addComponent(lastnameHeader)
+        				.addComponent(firstnameHeader)
+        				.addComponent(lblWelcome))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        menu_panel.setLayout(menu_panelLayout);
 
         sidemenu.setBackground(new java.awt.Color(14, 17, 45));
 
+        home_button.setBackground(new java.awt.Color(14, 17, 45));
+        home_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        home_button.setForeground(new java.awt.Color(255, 255, 255));
+        home_button.setText("Home");
+        home_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                home_buttonMouseClicked(evt);
+            }
+        });
+        home_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                home_buttonActionPerformed(evt);
+            }
+        });
+
         schedule_button.setBackground(new java.awt.Color(14, 17, 45));
-        schedule_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
+        schedule_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         schedule_button.setForeground(new java.awt.Color(255, 255, 255));
         schedule_button.setText("View Schedule");
         schedule_button.addActionListener(new java.awt.event.ActionListener() {
@@ -317,131 +469,115 @@ public class StellarDashboard extends javax.swing.JFrame {
             }
         });
 
-        addclass_button.setBackground(new java.awt.Color(14, 17, 45));
-        addclass_button.setFont(new java.awt.Font("Century Gothic", 1, 14));
-        addclass_button.setForeground(new java.awt.Color(255, 255, 255));
-        addclass_button.setText("Add/Drop Classes");
-        addclass_button.addActionListener(new java.awt.event.ActionListener() {
+        addclass_button1.setBackground(new java.awt.Color(14, 17, 45));
+        addclass_button1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        addclass_button1.setForeground(new java.awt.Color(255, 255, 255));
+        addclass_button1.setText("Add/Drop Classes");
+        addclass_button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addclass_buttonActionPerformed(evt);
+                addclass_button1ActionPerformed(evt);
             }
         });
-        
-        JButton home_button = new JButton();
-        home_button.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		  mainpanel.removeAll();
-        	      mainpanel.add(dash_panel);
-        	      mainpanel.repaint();
-        	      mainpanel.revalidate();
-        		
-        	}
-        });
-        home_button.setText("Home");
-        home_button.setForeground(Color.WHITE);
-        home_button.setFont(new Font("Century Gothic", Font.BOLD, 14));
-        home_button.setBackground(new Color(14, 17, 45));
 
         javax.swing.GroupLayout sidemenuLayout = new javax.swing.GroupLayout(sidemenu);
+        sidemenu.setLayout(sidemenuLayout);
         sidemenuLayout.setHorizontalGroup(
-        	sidemenuLayout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(sidemenuLayout.createSequentialGroup()
-        			.addContainerGap(34, Short.MAX_VALUE)
-        			.addGroup(sidemenuLayout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(schedule_button, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(home_button, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(addclass_button, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
-        			.addGap(25))
+            sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidemenuLayout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addclass_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(schedule_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(home_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
         sidemenuLayout.setVerticalGroup(
-        	sidemenuLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(sidemenuLayout.createSequentialGroup()
-        			.addGap(71)
-        			.addComponent(home_button, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(addclass_button, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(schedule_button, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(436, Short.MAX_VALUE))
+            sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidemenuLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(home_button, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addclass_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(schedule_button, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        sidemenu.setLayout(sidemenuLayout);
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
         dash_panel.setBackground(new java.awt.Color(255, 255, 255));
 
-        starimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("StellarAccents.png"))); 
+        starimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("StellarAccents.png"))); // NOI18N
 
-        welcome_text.setFont(new java.awt.Font("Century Gothic", 1, 24)); 
+        welcome_text.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         welcome_text.setForeground(new java.awt.Color(102, 102, 102));
         welcome_text.setText("Welcome,");
 
-        firstname.setFont(new java.awt.Font("Century Gothic", 1, 36)); 
+        firstname.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         firstname.setForeground(new java.awt.Color(102, 102, 102));
         firstname.setText("FirstName");
 
-        lastname.setFont(new java.awt.Font("Century Gothic", 1, 36)); 
+        lastname.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         lastname.setForeground(new java.awt.Color(102, 102, 102));
         lastname.setText("LastName");
 
-        term_text.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        term_text.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         term_text.setForeground(new java.awt.Color(102, 102, 102));
         term_text.setText("Spring 2018");
 
-        studentinfo_label.setFont(new java.awt.Font("Century Gothic", 1, 18));
+        studentinfo_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         studentinfo_label.setForeground(new java.awt.Color(102, 102, 102));
         studentinfo_label.setText("Student Information:");
 
-        studentidnum_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); 
+        studentidnum_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         studentidnum_label.setForeground(new java.awt.Color(102, 102, 102));
         studentidnum_label.setText("Student ID#:");
 
-        studentidnum.setFont(new java.awt.Font("Century Gothic", 0, 20)); 
+        studentidnum.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         studentidnum.setForeground(new java.awt.Color(102, 102, 102));
         studentidnum.setText("Student ID#");
 
-        studentid_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); 
+        studentid_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         studentid_label.setForeground(new java.awt.Color(102, 102, 102));
         studentid_label.setText("Student ID:");
 
-        studentid.setFont(new java.awt.Font("Century Gothic", 0, 20)); 
+        studentid.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         studentid.setForeground(new java.awt.Color(102, 102, 102));
         studentid.setText("StudentID");
 
-        email_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); 
+        email_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         email_label.setForeground(new java.awt.Color(102, 102, 102));
         email_label.setText("Email:");
 
-        email.setFont(new java.awt.Font("Century Gothic", 0, 20)); 
+        email.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         email.setForeground(new java.awt.Color(102, 102, 102));
         email.setText("StudentEmail");
 
-        major_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); 
+        major_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         major_label.setForeground(new java.awt.Color(102, 102, 102));
         major_label.setText("Major:");
 
-        major.setFont(new java.awt.Font("Century Gothic", 0, 20)); 
+        major.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         major.setForeground(new java.awt.Color(102, 102, 102));
         major.setText("Major");
 
-        gpa_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); 
+        gpa_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         gpa_label.setForeground(new java.awt.Color(102, 102, 102));
         gpa_label.setText("GPA:");
 
-        gpa.setFont(new java.awt.Font("Century Gothic", 0, 20)); 
+        gpa.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         gpa.setForeground(new java.awt.Color(102, 102, 102));
         gpa.setText("GPA");
 
-        year_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); 
+        year_label.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         year_label.setForeground(new java.awt.Color(102, 102, 102));
         year_label.setText("Current Year:");
 
-        year.setFont(new java.awt.Font("Century Gothic", 0, 20)); 
+        year.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         year.setForeground(new java.awt.Color(102, 102, 102));
         year.setText("Year");
 
-        exclaim_text.setFont(new java.awt.Font("Century Gothic", 1, 36)); 
+        exclaim_text.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         exclaim_text.setForeground(new java.awt.Color(102, 102, 102));
         exclaim_text.setText("!");
 
@@ -543,60 +679,71 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         viewSchedule_panel.setBackground(new java.awt.Color(255, 255, 255));
 
-        name_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        name_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         name_label.setForeground(new java.awt.Color(102, 102, 102));
         name_label.setText("Name:");
 
-        studentFirstname.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
+        studentFirstname.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         studentFirstname.setForeground(new java.awt.Color(102, 102, 102));
         studentFirstname.setText("Fname");
 
-        studentLastname.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
+        studentLastname.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         studentLastname.setForeground(new java.awt.Color(102, 102, 102));
         studentLastname.setText("Lname");
 
-        studentYear_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        studentYear_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         studentYear_label.setForeground(new java.awt.Color(102, 102, 102));
         studentYear_label.setText("Year:");
 
-        studentYear.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
+        studentYear.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         studentYear.setForeground(new java.awt.Color(102, 102, 102));
-        studentYear.setText("SchoolYear");
+        studentYear.setText("SchooYear");
 
-        concentration_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        concentration_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         concentration_label.setForeground(new java.awt.Color(102, 102, 102));
         concentration_label.setText("Concentration:");
 
-        studentMajor_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        studentMajor_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         studentMajor_label.setForeground(new java.awt.Color(102, 102, 102));
         studentMajor_label.setText("Major:");
 
-        Schedule_label.setFont(new java.awt.Font("Century Gothic", 1, 21)); 
+        Schedule_label.setFont(new java.awt.Font("Century Gothic", 1, 21)); // NOI18N
         Schedule_label.setForeground(new java.awt.Color(102, 102, 102));
         Schedule_label.setText("Schedule:");
 
-        studentCon.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
+        studentCon.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         studentCon.setForeground(new java.awt.Color(102, 102, 102));
         studentCon.setText("Con");
 
-        schedule_list.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Add List Items Here" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        schedulelist_scroll.setViewportView(schedule_list);
-
-        totalcredits.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
+        totalcredits.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         totalcredits.setForeground(new java.awt.Color(102, 102, 102));
         totalcredits.setText("4");
 
-        totalcredits_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        totalcredits_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         totalcredits_label.setForeground(new java.awt.Color(102, 102, 102));
         totalcredits_label.setText("Total Credits:");
 
-        studentMajor.setFont(new Font("Century Gothic", Font.PLAIN, 18)); 
+        studentMajor.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         studentMajor.setForeground(new java.awt.Color(102, 102, 102));
         studentMajor.setText("studentMajor");
+
+        schedule_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(schedule_table);
+
+        removeclass_button.setBackground(new java.awt.Color(14, 17, 45));
+        removeclass_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        removeclass_button.setForeground(new java.awt.Color(255, 255, 255));
+        removeclass_button.setText("Remove");
 
         javax.swing.GroupLayout viewSchedule_panelLayout = new javax.swing.GroupLayout(viewSchedule_panel);
         viewSchedule_panel.setLayout(viewSchedule_panelLayout);
@@ -605,15 +752,7 @@ public class StellarDashboard extends javax.swing.JFrame {
             .addGroup(viewSchedule_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(viewSchedule_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewSchedule_panelLayout.createSequentialGroup()
-                        .addComponent(totalcredits_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalcredits))
-                    .addComponent(Schedule_label)
-                    .addGroup(viewSchedule_panelLayout.createSequentialGroup()
-                        .addComponent(concentration_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(studentCon))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(viewSchedule_panelLayout.createSequentialGroup()
                         .addComponent(studentMajor_label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -628,8 +767,20 @@ public class StellarDashboard extends javax.swing.JFrame {
                         .addComponent(studentFirstname)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(studentLastname))
-                    .addComponent(schedulelist_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addGroup(viewSchedule_panelLayout.createSequentialGroup()
+                        .addComponent(totalcredits_label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalcredits))
+                    .addComponent(Schedule_label)
+                    .addGroup(viewSchedule_panelLayout.createSequentialGroup()
+                        .addComponent(concentration_label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(studentCon)))
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSchedule_panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(removeclass_button)
+                .addGap(545, 545, 545))
         );
         viewSchedule_panelLayout.setVerticalGroup(
             viewSchedule_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,13 +804,15 @@ public class StellarDashboard extends javax.swing.JFrame {
                     .addComponent(studentCon))
                 .addGap(47, 47, 47)
                 .addComponent(Schedule_label)
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(schedulelist_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addComponent(removeclass_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(viewSchedule_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalcredits_label)
                     .addComponent(totalcredits))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addGap(111, 111, 111))
         );
 
         mainpanel.add(viewSchedule_panel, "card4");
@@ -671,28 +824,24 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        semester_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
+        semester_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         semester_label.setForeground(new java.awt.Color(14, 17, 45));
         semester_label.setText("Semester:");
 
-        semester_combobox.setModel(new DefaultComboBoxModel(new String[] {"Spring 2020", "Summer 2020", "Fall 2020"}));
+        semester_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Spring 2020", "Summer 2020", "Fall 2020" }));
 
-        subject_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
+        subject_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         subject_label.setForeground(new java.awt.Color(14, 17, 45));
         subject_label.setText("Subject:");
 
-        subject_list.setModel(new AbstractListModel() {
-        	String[] values = new String[] {"CSC", "HIST"};
-        	public int getSize() {
-        		return values.length;
-        	}
-        	public Object getElementAt(int index) {
-        		return values[index];
-        	}
+        subject_list.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "ART", "BIO", "CSC", "HIST", "MUA" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         subjectlist_scroll.setViewportView(subject_list);
 
-        courseid_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
+        courseid_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         courseid_label.setForeground(new java.awt.Color(14, 17, 45));
         courseid_label.setText("Course ID:");
 
@@ -702,90 +851,73 @@ public class StellarDashboard extends javax.swing.JFrame {
             }
         });
 
-        days_label.setFont(new java.awt.Font("Century Gothic", 1, 12));
+        days_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         days_label.setForeground(new java.awt.Color(14, 17, 45));
         days_label.setText("Days:");
 
         credits_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        credits_combobox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                credits_comboboxActionPerformed(evt);
+            }
+        });
 
-        credits_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
+        credits_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         credits_label.setForeground(new java.awt.Color(14, 17, 45));
         credits_label.setText("Credits:");
 
-        instructor_label.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
-        instructor_label.setForeground(new java.awt.Color(14, 17, 45));
-        instructor_label.setText("Instructor:");
-        
-       
-        instructor_list = new javax.swing.JList<>();
-        
-                instructor_list.setModel(new javax.swing.AbstractListModel<String>() {
-                    String[] strings = { "Instructors go here" };
-                    public int getSize() { return strings.length; }
-                    public String getElementAt(int i) { return strings[i]; }
-                });
+        days_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MW", "TR", "F", "M", "T", "W", "R" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
-        					.addComponent(semester_label)
-        					.addComponent(semester_combobox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(subject_label)
-        					.addComponent(subjectlist_scroll, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-        					.addComponent(courseid_label)
-        					.addComponent(courseid_input))
-        				.addComponent(days_label)
-        				.addComponent(credits_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(credits_label)
-        				.addComponent(days_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(instructor_label, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addGap(71))
-        						.addComponent(instructor_list))
-        					.addGap(124)))
-        			.addContainerGap())
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(semester_label)
+                        .addComponent(semester_combobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(subject_label)
+                        .addComponent(subjectlist_scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                        .addComponent(courseid_label)
+                        .addComponent(courseid_input))
+                    .addComponent(days_label)
+                    .addComponent(credits_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(credits_label)
+                    .addComponent(days_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(17)
-        			.addComponent(semester_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(semester_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(subject_label)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(subjectlist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(courseid_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(courseid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(24)
-        			.addComponent(credits_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(credits_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(days_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(days_combobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(instructor_label)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(instructor_list, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(135, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(semester_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(semester_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(subject_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(subjectlist_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(courseid_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(courseid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(credits_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(credits_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(days_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(days_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(253, Short.MAX_VALUE))
         );
-        jPanel1.setLayout(jPanel1Layout);
 
         registration_menu.setViewportView(jPanel1);
 
         addclasstitle_label.setBackground(new java.awt.Color(14, 17, 45));
-        addclasstitle_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); 
+        addclasstitle_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         addclasstitle_label.setForeground(new java.awt.Color(14, 17, 45));
         addclasstitle_label.setText("Class Selection:");
 
@@ -803,89 +935,90 @@ public class StellarDashboard extends javax.swing.JFrame {
         classestable_scroll.setViewportView(classes_table);
 
         register_button.setBackground(new java.awt.Color(14, 17, 45));
-        register_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
+        register_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         register_button.setForeground(new java.awt.Color(255, 255, 255));
         register_button.setText("Register");
 
         errorMessage.setForeground(new java.awt.Color(255, 255, 255));
         errorMessage.setText("ERROR");
-        
-        reset_button = new JButton("Reset");
-        reset_button.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		fetchClass();
-        	}
-        });
-        reset_button.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		 //reset_buttonActionPerformed(evt);
-        	}
-        });
-        reset_button.setForeground(Color.WHITE);
-        reset_button.setFont(new Font("Century Gothic", Font.BOLD, 14));
-        reset_button.setBackground(new java.awt.Color(14, 17, 45));
-        reset_button.setForeground(Color.WHITE);
-        classes_list = new javax.swing.JList<>();
-        classes_list.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-        
-                classes_list.setModel(new javax.swing.AbstractListModel<String>() {
-                    String[] strings = { "Registered Classes go here" };
-                    public int getSize() { return strings.length; }
-                    public String getElementAt(int i) { return strings[i]; }
-                });
+
+        remove_button.setBackground(new java.awt.Color(14, 17, 45));
+        remove_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        remove_button.setForeground(new java.awt.Color(255, 255, 255));
+        remove_button.setText("Remove");
+
+        addedClass_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(addedClass_table);
+
+        reset_button1.setBackground(new java.awt.Color(14, 17, 45));
+        reset_button1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        reset_button1.setForeground(new java.awt.Color(255, 255, 255));
+        reset_button1.setText("Reset");
 
         javax.swing.GroupLayout addClass_panelLayout = new javax.swing.GroupLayout(addClass_panel);
+        addClass_panel.setLayout(addClass_panelLayout);
         addClass_panelLayout.setHorizontalGroup(
-        	addClass_panelLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(addClass_panelLayout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(addclasstitle_label)
-        			.addContainerGap(1029, Short.MAX_VALUE))
-        		.addGroup(addClass_panelLayout.createSequentialGroup()
-        			.addComponent(registration_menu, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addGroup(addClass_panelLayout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(addClass_panelLayout.createSequentialGroup()
-        					.addComponent(register_button, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(reset_button)
-        					.addGap(324))
-        				.addGroup(addClass_panelLayout.createSequentialGroup()
-        					.addComponent(classeslist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        					.addGap(274))
-        				.addGroup(addClass_panelLayout.createSequentialGroup()
-        					.addComponent(errorMessage)
-        					.addContainerGap(826, Short.MAX_VALUE))
-        				.addGroup(Alignment.LEADING, addClass_panelLayout.createSequentialGroup()
-        					.addGap(18)
-        					.addGroup(addClass_panelLayout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(classes_list, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
-        						.addComponent(classestable_scroll, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
-        					.addContainerGap())))
+            addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addClass_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addclasstitle_label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(addClass_panelLayout.createSequentialGroup()
+                .addComponent(registration_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addClass_panelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addClass_panelLayout.createSequentialGroup()
+                                .addGap(0, 278, Short.MAX_VALUE)
+                                .addComponent(register_button, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(reset_button1)
+                                .addGap(343, 343, 343))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addClass_panelLayout.createSequentialGroup()
+                                .addGroup(addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(classestable_scroll))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(errorMessage)
+                                .addContainerGap())))
+                    .addGroup(addClass_panelLayout.createSequentialGroup()
+                        .addGap(403, 403, 403)
+                        .addComponent(remove_button)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         addClass_panelLayout.setVerticalGroup(
-        	addClass_panelLayout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(addClass_panelLayout.createSequentialGroup()
-        			.addGap(0, 16, Short.MAX_VALUE)
-        			.addComponent(addclasstitle_label)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addGroup(addClass_panelLayout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(registration_menu, GroupLayout.PREFERRED_SIZE, 689, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(addClass_panelLayout.createSequentialGroup()
-        					.addComponent(classestable_scroll, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addGroup(addClass_panelLayout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(reset_button)
-        						.addComponent(register_button))
-        					.addGap(18)
-        					.addComponent(classeslist_scroll, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        					.addGap(27)
-        					.addComponent(classes_list, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(errorMessage))))
+            addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addClass_panelLayout.createSequentialGroup()
+                .addGap(0, 10, Short.MAX_VALUE)
+                .addComponent(addclasstitle_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(registration_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(addClass_panelLayout.createSequentialGroup()
+                        .addComponent(classestable_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(register_button)
+                            .addComponent(reset_button1))
+                        .addGap(18, 18, 18)
+                        .addGroup(addClass_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(errorMessage)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(remove_button)))
+                .addContainerGap())
         );
-        addClass_panel.setLayout(addClass_panelLayout);
 
         mainpanel.add(addClass_panel, "card3");
 
@@ -912,7 +1045,6 @@ public class StellarDashboard extends javax.swing.JFrame {
         menubar.add(home_menu);
 
         setting_menu.setText("Change Password");
-
         menubar.add(setting_menu);
 
         setJMenuBar(menubar);
@@ -934,13 +1066,18 @@ public class StellarDashboard extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sidemenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))))
+                    .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
-    }              
+    }// </editor-fold>                        
+
+    private void home_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+      mainpanel.removeAll();
+      mainpanel.add(dash_panel);
+      mainpanel.repaint();
+      mainpanel.revalidate();
+    }                                           
 
     private void schedule_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                                
       mainpanel.removeAll();
@@ -949,25 +1086,18 @@ public class StellarDashboard extends javax.swing.JFrame {
       mainpanel.revalidate();
     }                                               
 
-    private void addclass_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-      mainpanel.removeAll();
-      mainpanel.add(addClass_panel);
-      mainpanel.repaint();
-      mainpanel.revalidate();
-    }                                               
-
     private void logout_buttonMouseClicked(java.awt.event.MouseEvent evt) {                                           
-        int logout_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+    	 int logout_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
 
-        if (logout_con == 0){
-            Login log = new Login();
-            log.setVisible(true);
-            log.pack();
-            log.setLocationRelativeTo(null);
-            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            dispose();
+         if (logout_con == 0){
+             Login log = new Login();
+             log.setVisible(true);
+             log.pack();
+             log.setLocationRelativeTo(null);
+             log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+             dispose();
 
-        }
+         }
     }                                          
 
     private void home_menuActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -983,25 +1113,34 @@ public class StellarDashboard extends javax.swing.JFrame {
       mainpanel.add(dash_panel);
       mainpanel.repaint();
       mainpanel.revalidate();
-    } 
-    
-    private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { 
-    	Settings2 sett = new Settings2(this);
-        sett.setVisible(true);
-        sett.pack();
-        sett.setLocationRelativeTo(null);
-      //Dispose just closes the pw window, not the entire program
-        sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }
+    }                                       
 
     private void courseid_inputActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
     }                                              
 
-    
+    private void addclass_button1ActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+      mainpanel.removeAll();
+      mainpanel.add(addClass_panel);
+      mainpanel.repaint();
+      mainpanel.revalidate();
+    }                                                
+
+    private void home_buttonMouseClicked(java.awt.event.MouseEvent evt) {                                         
+      mainpanel.removeAll();
+      mainpanel.add(dash_panel);
+      mainpanel.repaint();
+      mainpanel.revalidate();
+    }                                        
+
+    private void credits_comboboxActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
     public void fetchClass(){
 
         try{
+        	
             String classTable = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
             		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
             		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";
@@ -1009,6 +1148,9 @@ public class StellarDashboard extends javax.swing.JFrame {
             rs = pst.executeQuery();
             classes_table.setModel(DbUtils.resultSetToTableModel(rs));
             
+            DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
+            String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
+    		model.setColumnIdentifiers(col);
 
 
         } catch(Exception e){
@@ -1017,6 +1159,31 @@ public class StellarDashboard extends javax.swing.JFrame {
         }
 
     }
+    
+    public void fetchRegClasses(){
+
+        try{
+        	
+        	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id";
+         /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
+            		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
+            		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
+            pst = connection.prepareStatement(RegTab);
+            rs = pst.executeQuery();
+            addedClass_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+            DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
+           // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
+    	  // model.setColumnIdentifiers(col);
+
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
+    
 
     
     private void idFilter(String query1  ,String query2, String query3, String query4, String query5)
@@ -1050,12 +1217,39 @@ public class StellarDashboard extends javax.swing.JFrame {
     	
 
     }
-    
+ private void filterData(String query) {
+    	
+    	dtable = (DefaultTableModel) classes_table.getModel();
+    	
+    	TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
+    	classes_table.setRowSorter(t);
+    	
+    	
+    	if (query != "All") {
+    		
+    		t.setRowFilter(RowFilter.regexFilter(query));
+    	} else {
+    		classes_table.setRowSorter(t);
+    		
+    	}
+    	
+    	
+    }
+ 
+ private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { 
+ 	Settings2 sett = new Settings2(this);
+     sett.setVisible(true);
+     sett.pack();
+     sett.setLocationRelativeTo(null);
+   //Dispose just closes the pw window, not the entire program
+     sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ }
     
     
     
       public void staricon(){
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
     
-    }
+    }                   
+   
 }
