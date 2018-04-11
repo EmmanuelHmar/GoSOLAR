@@ -290,8 +290,8 @@ public class StellarDashboard extends javax.swing.JFrame {
 
  // String query = "insert into classesTaken values('" + student_id + "','" + classID + "','" + semester_taken + "','" + CRN + "') ";
 
-                     String queryNew = "select * FROM classesTaken where panther_num = ? AND day = ? " +
-                             "AND start_time between ? AND ? OR end_time BETWEEN ? AND ?";
+                    String queryNew = "select * FROM classesTaken where panther_num = ? AND day = ? " +
+                            "AND start_time between ? AND ? OR day = ? AND end_time BETWEEN ? AND ?";
 
                      PreparedStatement preparedStatement = connection.prepareStatement(queryNew);
 
