@@ -131,6 +131,7 @@ public class StellarDashboard extends javax.swing.JFrame {
          staricon();
          fetchClass();
          fetchRegClasses();
+         fetchSchudleClasses();
     }
 
     
@@ -183,6 +184,29 @@ public class StellarDashboard extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         schedule_table = new javax.swing.JTable();
         removeclass_button = new javax.swing.JButton();
+        removeclass_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		 try {
+         	    	int row = schedule_table.getSelectedRow();
+         	        System.out.println(row); //the number will be the row selected - 1
+                     String CRN = (schedule_table.getValueAt(row, 1).toString());
+         	        String query = "DELETE FROM classesTaken where CRN="+CRN;
+         			pst =  connection.prepareStatement(query);
+         			pst.executeUpdate();
+         			
+         			pst.close();
+         			
+         			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
+         		    // model.setRowCount(0);
+         		     fetchRegClasses();  
+         		    fetchSchudleClasses();
+         		     JOptionPane.showMessageDialog(null, "Class Dropped!");
+         	    } catch (Exception E) {
+         			JOptionPane.showMessageDialog(null, E);
+         			
+         		}
+        	}
+        });
         addClass_panel = new javax.swing.JPanel();
         registration_menu = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -324,6 +348,7 @@ public class StellarDashboard extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(null, "Class added for registration.");
 
                          pst.close();
+                         fetchSchudleClasses();
                          fetchRegClasses();
                      }
 
@@ -355,6 +380,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         			
         			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
         		    // model.setRowCount(0);
+        			fetchSchudleClasses();
         		     fetchRegClasses();        			
         		     JOptionPane.showMessageDialog(null, "Class Dropped!");
         	    } catch (Exception E) {
@@ -1184,6 +1210,29 @@ public class StellarDashboard extends javax.swing.JFrame {
 
     }
     
+    public void fetchSchudleClasses(){
+
+        try{
+        	
+        	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id";
+         /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
+            		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
+            		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
+            pst = connection.prepareStatement(RegTab);
+            rs = pst.executeQuery();
+            schedule_table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+            DefaultTableModel model = (DefaultTableModel) schedule_table.getModel();
+           // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
+    	  // model.setColumnIdentifiers(col);
+
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
 
     
     private void idFilter(String query1  ,String query2, String query3, String query4, String query5)
