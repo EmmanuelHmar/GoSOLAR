@@ -69,8 +69,7 @@ public class Login extends javax.swing.JFrame {
         	public void keyPressed(KeyEvent e) {
         		if(e.getKeyCode() == KeyEvent.VK_ENTER ) {
         			
-        			try{
-                        
+        			try {
                         String firstName = "";
                         String lastName = "";
                         String studentIDnum = "";
@@ -79,97 +78,108 @@ public class Login extends javax.swing.JFrame {
                         String Major = "";
                         String GPA = "";
                         String Year = "";
-                        String Standing= "";
-                        
-                         String passText = new String(pass_input.getPassword());
-				
-                         if (attempts == 0) {
-                             JOptionPane.showMessageDialog(null, "You ran out of login attempts." +
-                             "\nGoodbye.");
-                             System.exit(0);
-                         } 
-                         
-                     
-                         if (id_input.getText().isEmpty() | pass_input.getText().isEmpty()){
-                           
-                               JOptionPane.showMessageDialog(null, "Please fill in all fields");
-                           } else {
-                        
-                        
-                                    String query="select * from students where student_id=? and password=?";
-				PreparedStatement pst= connection.prepareStatement(query);
-				pst.setString(1,id_input.getText());
-				pst.setString(2, passText);
-				ResultSet rs= pst.executeQuery();
-				int count=0;
-                                    
-                                    while(rs.next()){
-					count= count+1;
-                                            firstName = rs.getString("first_name");
-                                            lastName = rs.getString("last_name");
-                                            studentIDnum = rs.getString("panther_num");
-                                            studentID = rs.getString("student_id");
-                                            studentEmail = rs.getString("email");
-                                            Major = rs.getString("major");
-                                            GPA = rs.getString("GPA");
-                                            Year = rs.getString("school_year");
-                                          
-				}
-				if (count == 1)
-                                        
-				{
-                                        
-                                        
-                               
-                                        //Calls the dashboard method and sets/displays the studentname as the input of the student id.
-                                         StellarDashboard stellardash= new StellarDashboard() ;
-                                         stellardash.setVisible(true);
-                                         stellardash.pack();
-                                         stellardash.setLocationRelativeTo(null);
-                                         stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                         StellarDashboard.firstname.setText(firstName);
-                                         StellarDashboard.lastname.setText(lastName);
-                                         StellarDashboard.studentidnum.setText(studentIDnum);
-                                         StellarDashboard.studentid.setText(studentID);
-                                         StellarDashboard.email.setText(studentEmail);
-                                           StellarDashboard.major.setText(Major);
-                                           StellarDashboard.gpa.setText(GPA);
-                                           StellarDashboard.year.setText(Year);
-                                           dispose();
-				     //JOptionPane.showMessageDialog(null, "Username and password is correct");
-                                                    
-						
-				}
-				else if (count >1)
-				{
-					 JOptionPane.showMessageDialog(null, "Duplicate Username and password " +
-                             "\nLogin attempts left: " + attempts);
-                     id_input.setText("");
-                     pass_input.setText("");
-                     attempts--;;
+                        String Concentration = "";
+                        String balance = "";
 
+                        String passText = new String(pass_input.getPassword());
 
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Username or password is not correct. " +
-                            "\nLogin attempts left: " + attempts);
-                    id_input.setText("");
-                    pass_input.setText("");
-                    attempts--;
+//                        while (attempts != 0) {
 
-				}
-                   
-                                    
-				rs.close();
-				pst.close();
-				}
-                           }
-                    
+                        if (attempts == 0) {
+                            JOptionPane.showMessageDialog(null, "You ran out of login attempts." +
+                            "\nGoodbye.");
+                            System.exit(0);
+                        }
 
-			catch(Exception e1)
-			{
-				JOptionPane.showMessageDialog(null, e1);
-			}
+                        if (id_input.getText().isEmpty() | pass_input.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                        } else {
+                            String query = "select * from students where student_id=? and password=?";
+                            PreparedStatement pst = connection.prepareStatement(query);
+                            pst.setString(1, id_input.getText());
+                            pst.setString(2, passText);
+                            ResultSet rs = pst.executeQuery();
+                            int count = 0;
+
+                            while (rs.next()) {
+                                count = count + 1;
+                                firstName = rs.getString("first_name");
+                                lastName = rs.getString("last_name");
+                                studentIDnum = rs.getString("panther_num");
+                                studentID = rs.getString("student_id");
+                                studentEmail = rs.getString("email");
+                                Major = rs.getString("major");
+                                GPA = rs.getString("GPA");
+                                Year = rs.getString("school_year");
+                                Concentration = rs.getString("concentration");
+                                balance = rs.getString("balance");
+
+                            }
+
+                            if (count == 1) {
+                            	//Calls the dashboard method and sets/displays the studentname as the input of the student id.
+                                StellarDashboard stellardash= new StellarDashboard() ;
+                                stellardash.setVisible(true);
+                                stellardash.pack();
+                                stellardash.setLocationRelativeTo(null);
+                                stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                //stellardash.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                                StellarDashboard.firstname.setText(firstName);
+                                StellarDashboard.lastname.setText(lastName);
+                                StellarDashboard.studentidnum.setText(studentIDnum);
+                                StellarDashboard.studentid.setText(studentID);
+                                StellarDashboard.email.setText(studentEmail);
+                                  StellarDashboard.major.setText(Major);
+                                  StellarDashboard.gpa.setText(GPA);
+                                  StellarDashboard.year.setText(Year);
+                                  StellarDashboard.studentFirstname.setText(firstName);
+                                  StellarDashboard.studentLastname.setText(lastName);
+                                  StellarDashboard.studentYear.setText(Year);
+                                  StellarDashboard.studentMajor.setText(Major);
+                                  StellarDashboard.studentFirstname.setText(firstName);
+                                  StellarDashboard.firstnameHeader.setText(firstName);
+                                  StellarDashboard.lastnameHeader.setText(lastName);
+                                  StellarDashboard.balance.setText(balance);
+                                  
+                                  
+                                  
+                                  if (Concentration == null) {
+                                  StellarDashboard.studentCon.setText("None"); 
+                                  } else {
+                                	  
+                                   StellarDashboard.studentCon.setText(Concentration);
+                                	  
+                                  }
+                                  
+                                  
+                                  
+                                  
+                                dispose();
+                                //JOptionPane.showMessageDialog(null, "Username and password is correct");
+
+                            } else if (count > 1) {
+                                JOptionPane.showMessageDialog(null, "Duplicate Username and password " +
+                                        "\nLogin attempts left: " + attempts);
+                                id_input.setText("");
+                                pass_input.setText("");
+                                attempts--;
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Username or password is not correct. " +
+                                        "\nLogin attempts left: " + attempts);
+                                id_input.setText("");
+                                pass_input.setText("");
+                                attempts--;
+                            }
+
+                            rs.close();
+                            pst.close();
+//                            }
+                        }
+
+                    } catch (Exception e1) {
+                        JOptionPane.showMessageDialog(null, e1);
+                    }
         			
         			
         		}
@@ -196,7 +206,8 @@ public class Login extends javax.swing.JFrame {
                     String Major = "";
                     String GPA = "";
                     String Year = "";
-                    String Standing = "";
+                    String Concentration = "";
+                    String balance = "";
 
                     String passText = new String(pass_input.getPassword());
 
@@ -228,7 +239,8 @@ public class Login extends javax.swing.JFrame {
                             Major = rs.getString("major");
                             GPA = rs.getString("GPA");
                             Year = rs.getString("school_year");
-                            //Standing = rs.getString("");
+                            Concentration = rs.getString("concentration");
+                            balance = rs.getString("balance");
 
                         }
 
@@ -252,6 +264,23 @@ public class Login extends javax.swing.JFrame {
                               StellarDashboard.studentLastname.setText(lastName);
                               StellarDashboard.studentYear.setText(Year);
                               StellarDashboard.studentMajor.setText(Major);
+                              StellarDashboard.studentFirstname.setText(firstName);
+                              StellarDashboard.firstnameHeader.setText(firstName);
+                              StellarDashboard.lastnameHeader.setText(lastName);
+                              StellarDashboard.balance.setText(balance);
+                              
+                              
+                              
+                              if (Concentration == null) {
+                              StellarDashboard.studentCon.setText("None"); 
+                              } else {
+                            	  
+                               StellarDashboard.studentCon.setText(Concentration);
+                            	  
+                              }
+                              
+                              
+                              
                               
                             dispose();
                             //JOptionPane.showMessageDialog(null, "Username and password is correct");
@@ -491,24 +520,7 @@ public class Login extends javax.swing.JFrame {
             dispose();
     }                                           
 
-   
-    
-   private static void delay() {
-	   try {
-		   Thread.sleep(2000);
-		   
-	   } catch (java.lang.InterruptedException e) {
-		   //System.out.println(e);
-		   
-		   
-	   }
-	   
-	   
-	   
-   } 
-    
-    
-    
+  
     
     
      public void staricon(){
