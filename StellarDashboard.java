@@ -417,11 +417,15 @@ public class StellarDashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         addedClass_table = new javax.swing.JTable();
         reset_button1 = new javax.swing.JButton();
+        reset_button1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		resetData(e);
+        	}
+        });
         reset_button1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
-            	classes_table.setRowSorter(t);
-        		fetchClass();
+        		
         	}
         });
         finances_panel = new javax.swing.JPanel();
@@ -445,8 +449,8 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         menu_panel.setBackground(new java.awt.Color(194, 185, 198));
 
-        logout_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("door12.png"))); // NOI18N
+        logout_button.setFont(new java.awt.Font("Century Gothic", 1, 12)); 
+        logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("door12.png"))); 
         logout_button.setText("Logout");
         logout_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1352,6 +1356,16 @@ public class StellarDashboard extends javax.swing.JFrame {
     	
     	
     }
+ private void resetData(java.awt.event.MouseEvent evt) {
+ 	
+ 	dtable = (DefaultTableModel) classes_table.getModel();
+ 	
+ 	TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
+ 	classes_table.setRowSorter(t);
+ 	
+ 		
+ 	
+ }
  
  private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { 
  	Settings2 sett = new Settings2(this);
