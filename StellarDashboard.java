@@ -134,15 +134,16 @@ public class StellarDashboard extends javax.swing.JFrame {
 
     
     public StellarDashboard() {
-    	 connection = DatabaseConnection.dbConnector();
+    	
+    	connection = DatabaseConnection.dbConnector();
 
-    	  initComponents();
-          setTitle("Stellar");
+    	 initComponents();
+         setTitle("Stellar");
          setLocationRelativeTo(null);
          staricon();
-         fetchClass();
          fetchRegClasses();
          fetchSchudleClasses();
+         fetchClass();
          CalculateCredit();
     }
 
@@ -309,6 +310,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         	//	filterData(query);
         	}
         });
+        
         addclasstitle_label = new javax.swing.JLabel();
         classestable_scroll = new javax.swing.JScrollPane();
         classes_table = new javax.swing.JTable();
@@ -316,10 +318,14 @@ public class StellarDashboard extends javax.swing.JFrame {
         register_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		String s = balance.getText();
+                String t = totalcredits.getText();
         		
             	int b = Integer.parseInt(s);
+            	int total = Integer.parseInt(t);
             	
-            	if (b <= 0){	
+            	if (b <= 0){
+            		if (total <= 14)
+            		{
         		 try {
                      int row = classes_table.getSelectedRow();
 
@@ -385,7 +391,15 @@ public class StellarDashboard extends javax.swing.JFrame {
                      JOptionPane.showMessageDialog(null, E);
 
                  }
+        		 
+        		 }
+            		else {
+                 		 JOptionPane.showMessageDialog(null, "You reached maximum credit hours !!");
+
+          			 }
             	 }
+
+        		
             	else {
            		 JOptionPane.showMessageDialog(null, "Hold present on the account due to finances.");
            	}
@@ -1197,6 +1211,9 @@ public class StellarDashboard extends javax.swing.JFrame {
       mainpanel.add(viewSchedule_panel);
       mainpanel.repaint();
       mainpanel.revalidate();
+      fetchRegClasses();
+      fetchSchudleClasses();
+      CalculateCredit();
     }                                               
 
     private void logout_buttonMouseClicked(java.awt.event.MouseEvent evt) {                                           
@@ -1237,6 +1254,10 @@ public class StellarDashboard extends javax.swing.JFrame {
       mainpanel.add(addClass_panel);
       mainpanel.repaint();
       mainpanel.revalidate();
+      fetchRegClasses();
+      fetchSchudleClasses();
+      CalculateCredit();
+
     }                                                
 
     private void home_buttonMouseClicked(java.awt.event.MouseEvent evt) {                                         
@@ -1345,13 +1366,16 @@ public class StellarDashboard extends javax.swing.JFrame {
  public void fetchRegClasses(){
 
      try{
-     	
-     	 String RegTab =  "select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id";
+         String student_id = studentidnum.getText();
+
+     	 String RegTab =  "select  classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id where panther_num = ?";
 
       /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
          		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
          		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
          pst = connection.prepareStatement(RegTab);
+         pst.setString(1, student_id);
+
          rs = pst.executeQuery();
          addedClass_table.setModel(DbUtils.resultSetToTableModel(rs));
          
@@ -1371,12 +1395,16 @@ public class StellarDashboard extends javax.swing.JFrame {
 
      try{
      	
-     	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id";
+         String student_id = studentidnum.getText();
+
+     	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id where panther_num = ? ";
 
       /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
          		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
          		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
          pst = connection.prepareStatement(RegTab);
+         pst.setString(1, student_id);
+
          rs = pst.executeQuery();
          schedule_table.setModel(DbUtils.resultSetToTableModel(rs));
          
