@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package stellar;
 
 import java.awt.Toolkit;
@@ -39,103 +44,115 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 public class StellarDashboard extends javax.swing.JFrame {
+	
+	
 
-	 private javax.swing.JLabel Schedule_label;
-	    private javax.swing.JPanel addClass_panel;
-	    private javax.swing.JButton addclass_button1;
-	    private javax.swing.JLabel addclasstitle_label;
-	    private javax.swing.JTable addedClass_table;
-	    private javax.swing.JTable classes_table;
-	    private javax.swing.JScrollPane classestable_scroll;
-	    private javax.swing.JLabel concentration_label;
-	    private javax.swing.JTextField courseid_input;
-	    private javax.swing.JLabel courseid_label;
-	    private javax.swing.JComboBox<String> credits_combobox;
-	    private javax.swing.JLabel credits_label;
-	    private javax.swing.JMenuItem dash_menu;
-	    private javax.swing.JPanel dash_panel;
-	    private javax.swing.JComboBox<String> days_combobox;
-	    private javax.swing.JLabel days_label;
-	    public static javax.swing.JLabel email;
-	    private javax.swing.JLabel email_label;
-	    private javax.swing.JLabel errorMessage;
-	    private javax.swing.JLabel exclaim_text;
-	    public static javax.swing.JLabel firstname;
-	    public static javax.swing.JLabel firstnameHeader;
-	    public static javax.swing.JLabel gpa;
-	    private javax.swing.JLabel gpa_label;
-	    private javax.swing.JButton home_button;
-	    private javax.swing.JMenu home_menu;
-	    private javax.swing.JPanel jPanel1;
-	    private javax.swing.JScrollPane jScrollPane1;
-	    private javax.swing.JScrollPane jScrollPane2;
-	    public static javax.swing.JLabel lastname;
-	    public static javax.swing.JLabel lastnameHeader;
-	    private javax.swing.JLabel lblWelcome;
-	    private javax.swing.JButton logout_button;
-	    private javax.swing.JPanel mainpanel;
-	    public static javax.swing.JLabel major;
-	    private javax.swing.JLabel major_label;
-	    private javax.swing.JPanel menu_panel;
-	    private javax.swing.JMenuBar menubar;
-	    private javax.swing.JLabel name_label;
-	    private javax.swing.JButton register_button;
-	    private javax.swing.JScrollPane registration_menu;
-	    private javax.swing.JButton remove_button;
-	    private javax.swing.JButton removeclass_button;
-	    private javax.swing.JButton reset_button1;
-	    private javax.swing.JButton schedule_button;
-	    private javax.swing.JTable schedule_table;
-	    private javax.swing.JComboBox<String> semester_combobox;
-	    private javax.swing.JLabel semester_label;
-	    private javax.swing.JMenu setting_menu;
-	    private javax.swing.JPanel sidemenu;
-	    private javax.swing.JLabel starimage;
-	    public static javax.swing.JLabel studentCon;
-	    public static javax.swing.JLabel studentFirstname;
-	    public static javax.swing.JLabel studentLastname;
-	    public static javax.swing.JLabel studentMajor;
-	    private javax.swing.JLabel studentMajor_label;
-	    public static javax.swing.JLabel studentYear;
-	    private javax.swing.JLabel studentYear_label;
-	    public static javax.swing.JLabel studentid;
-	    private javax.swing.JLabel studentid_label;
-	    public static javax.swing.JLabel studentidnum;
-	    private javax.swing.JLabel studentidnum_label;
-	    private javax.swing.JLabel studentinfo_label;
-	    private javax.swing.JLabel subject_label;
-	    private javax.swing.JList<String> subject_list;
-	    private javax.swing.JScrollPane subjectlist_scroll;
-	    private javax.swing.JLabel term_text;
-	    private javax.swing.JLabel totalcredits;
-	    private javax.swing.JLabel totalcredits_label;
-	    private javax.swing.JPanel viewSchedule_panel;
-	    private javax.swing.JLabel welcome_text;
-	    public static javax.swing.JLabel year;
-	    private javax.swing.JLabel year_label;
-	    Connection connection = null;
-	    ResultSet rs = null;  
-	    PreparedStatement pst = null;
-	    DefaultTableModel dtable;
-	
-	
-	
+    private javax.swing.JLabel Schedule_label;
+    private javax.swing.JPanel addClass_panel;
+    private javax.swing.JButton addclass_button1;
+    private javax.swing.JLabel addclasstitle_label;
+    private javax.swing.JTable addedClass_table;
+    public static javax.swing.JLabel balance;
+    private javax.swing.JLabel balance_label;
+    private javax.swing.JLabel balancemessege_label;
+    private javax.swing.JTable classes_table;
+    private javax.swing.JScrollPane classestable_scroll;
+    private javax.swing.JLabel concentration_label;
+    private javax.swing.JTextField courseid_input;
+    private javax.swing.JLabel courseid_label;
+    private javax.swing.JComboBox<String> credits_combobox;
+    private javax.swing.JLabel credits_label;
+    private javax.swing.JMenuItem dash_menu;
+    private javax.swing.JPanel dash_panel;
+    private javax.swing.JComboBox<String> days_combobox;
+    private javax.swing.JLabel days_label;
+    public static javax.swing.JLabel email;
+    private javax.swing.JLabel email_label;
+    private javax.swing.JLabel errorMessage;
+    private javax.swing.JLabel exclaim_text;
+    private javax.swing.JButton finances_button;
+    private javax.swing.JPanel finances_panel;
+    public static javax.swing.JLabel firstname;
+    public static javax.swing.JLabel firstnameHeader;
+    public static javax.swing.JLabel gpa;
+    private javax.swing.JLabel gpa_label;
+    private javax.swing.JButton home_button;
+    private javax.swing.JMenu home_menu;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JLabel lastname;
+    public static javax.swing.JLabel lastnameHeader;
+    private javax.swing.JLabel lblWelcome;
+    private javax.swing.JButton logout_button;
+    private javax.swing.JPanel mainpanel;
+    public static javax.swing.JLabel major;
+    private javax.swing.JLabel major_label;
+    private javax.swing.JPanel menu_panel;
+    private javax.swing.JMenuBar menubar;
+    private javax.swing.JLabel name_label;
+    private javax.swing.JButton register_button;
+    private javax.swing.JScrollPane registration_menu;
+    private javax.swing.JButton remove_button;
+    private javax.swing.JButton removeclass_button;
+    private javax.swing.JButton reset_button1;
+    private javax.swing.JButton schedule_button;
+    private javax.swing.JTable schedule_table;
+    private javax.swing.JComboBox<String> semester_combobox;
+    private javax.swing.JLabel semester_label;
+    private javax.swing.JMenu setting_menu;
+    private javax.swing.JPanel sidemenu;
+    private javax.swing.JLabel starimage;
+    public static javax.swing.JLabel studentCon;
+    public static javax.swing.JLabel studentFirstname;
+    public static javax.swing.JLabel studentLastname;
+    public static javax.swing.JLabel studentMajor;
+    private javax.swing.JLabel studentMajor_label;
+    public static javax.swing.JLabel studentYear;
+    private javax.swing.JLabel studentYear_label;
+    public static javax.swing.JLabel studentid;
+    private javax.swing.JLabel studentid_label;
+    public static javax.swing.JLabel studentidnum;
+    private javax.swing.JLabel studentidnum_label;
+    private javax.swing.JLabel studentinfo_label;
+    private javax.swing.JLabel subject_label;
+    private javax.swing.JList<String> subject_list;
+    private javax.swing.JScrollPane subjectlist_scroll;
+    private javax.swing.JLabel term_text;
+    private javax.swing.JLabel totalcredits;
+    private javax.swing.JLabel totalcredits_label;
+    private javax.swing.JPanel viewSchedule_panel;
+    private javax.swing.JLabel welcome_text;
+    public static javax.swing.JLabel year;
+    private javax.swing.JLabel year_label;
+    Connection connection = null;
+    ResultSet rs = null;  
+    PreparedStatement pst = null;
+    DefaultTableModel dtable;
+
+
+    
     public StellarDashboard() {
     	 connection = DatabaseConnection.dbConnector();
 
-         initComponents();
+    	  initComponents();
           setTitle("Stellar");
          setLocationRelativeTo(null);
          staricon();
          fetchClass();
          fetchRegClasses();
          fetchSchudleClasses();
+         CalculateCredit();
     }
 
-    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         menu_panel = new javax.swing.JPanel();
@@ -147,6 +164,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         home_button = new javax.swing.JButton();
         schedule_button = new javax.swing.JButton();
         addclass_button1 = new javax.swing.JButton();
+        finances_button = new javax.swing.JButton();
         mainpanel = new javax.swing.JPanel();
         dash_panel = new javax.swing.JPanel();
         starimage = new javax.swing.JLabel();
@@ -187,24 +205,27 @@ public class StellarDashboard extends javax.swing.JFrame {
         removeclass_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		 try {
-         	    	int row = schedule_table.getSelectedRow();
-         	        System.out.println(row); //the number will be the row selected - 1
-                     String CRN = (schedule_table.getValueAt(row, 1).toString());
-         	        String query = "DELETE FROM classesTaken where CRN="+CRN;
-         			pst =  connection.prepareStatement(query);
-         			pst.executeUpdate();
-         			
-         			pst.close();
-         			
-         			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
-         		    // model.setRowCount(0);
-         		     fetchRegClasses();  
-         		    fetchSchudleClasses();
-         		     JOptionPane.showMessageDialog(null, "Class Dropped!");
-         	    } catch (Exception E) {
-         			JOptionPane.showMessageDialog(null, E);
-         			
-         		}
+          	    	int row = schedule_table.getSelectedRow();
+          	        System.out.println(row); //the number will be the row selected - 1
+                      String CRN = (schedule_table.getValueAt(row, 1).toString());
+          	        String query = "DELETE FROM classesTaken where CRN="+CRN;
+          			pst =  connection.prepareStatement(query);
+          			pst.executeUpdate();
+          			
+          			pst.close();
+          			
+          			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
+          		    // model.setRowCount(0);
+          	       
+          			fetchRegClasses();  
+          		    fetchSchudleClasses();
+          			CalculateCredit();
+
+          		     JOptionPane.showMessageDialog(null, "Class Dropped!");
+          	    } catch (Exception E) {
+          			JOptionPane.showMessageDialog(null, E);
+          			
+          		}
         	}
         });
         addClass_panel = new javax.swing.JPanel();
@@ -215,6 +236,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         semester_combobox.addItemListener(new ItemListener() {
         	public void itemStateChanged(ItemEvent arg0) {
         		
+
         		//String query = semester_combobox.getSelectedItem().toString();
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
@@ -223,6 +245,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         		String query5 = credits_combobox.getSelectedItem().toString();
         		idFilter(query1,query2,query3,query4,query5);
         		//filterData(query);
+        		
         	}
         });
         subject_label = new javax.swing.JLabel();
@@ -245,7 +268,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         courseid_input = new javax.swing.JTextField();
         courseid_input.addKeyListener(new KeyAdapter() {
         	@Override
-        	public void keyReleased(KeyEvent arg0) {
+        	public void keyReleased(KeyEvent e) {
         		
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
@@ -253,6 +276,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
         		idFilter(query1,query2,query3,query4,query5);
+        		
         	}
         });
         days_label = new javax.swing.JLabel();
@@ -290,8 +314,12 @@ public class StellarDashboard extends javax.swing.JFrame {
         classes_table = new javax.swing.JTable();
         register_button = new javax.swing.JButton();
         register_button.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
+        	public void actionPerformed(ActionEvent arg0) {
+        		String s = balance.getText();
         		
+            	int b = Integer.parseInt(s);
+            	
+            	if (b <= 0){	
         		 try {
                      int row = classes_table.getSelectedRow();
 
@@ -315,17 +343,20 @@ public class StellarDashboard extends javax.swing.JFrame {
 
  // String query = "insert into classesTaken values('" + student_id + "','" + classID + "','" + semester_taken + "','" + CRN + "') ";
 
-                     String queryNew = "select * FROM classesTaken where panther_num = ? AND day = ? " +
-                             "AND start_time between ? AND ? OR end_time BETWEEN ? AND ?";
+                    String queryNew = "select * FROM classesTaken where panther_num = ? AND day = ? AND semesterTaken = ?"
+                            + "AND start_time between ? AND ? OR day = ? AND semesterTaken = ? AND end_time BETWEEN ? AND ?";
 
-                     PreparedStatement preparedStatement = connection.prepareStatement(queryNew);
+                    PreparedStatement preparedStatement = connection.prepareStatement(queryNew);
 
-                     preparedStatement.setString(1, student_id);
-                     preparedStatement.setString(2, class_day);
-                     preparedStatement.setString(3, start_time);
-                     preparedStatement.setString(4, end_time);
-                     preparedStatement.setString(5, start_time);
-                     preparedStatement.setString(6, end_time);
+                    preparedStatement.setString(1, student_id);
+                    preparedStatement.setString(2, class_day);
+                    preparedStatement.setString(3,semester_taken);
+                    preparedStatement.setString(4, start_time);
+                    preparedStatement.setString(5, end_time);
+                    preparedStatement.setString(6, class_day);
+                    preparedStatement.setString(7,semester_taken);
+                    preparedStatement.setString(8, start_time);
+                    preparedStatement.setString(9, end_time);
 
                      ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -348,45 +379,50 @@ public class StellarDashboard extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(null, "Class added for registration.");
 
                          pst.close();
-                         fetchSchudleClasses();
-                         fetchRegClasses();
                      }
 
                  } catch (Exception E) {
                      JOptionPane.showMessageDialog(null, E);
 
                  }
+            	 }
+            	else {
+           		 JOptionPane.showMessageDialog(null, "Hold present on the account due to finances.");
+           	}
+                fetchRegClasses();  
+                fetchSchudleClasses();
+                CalculateCredit();
+
         		
         	}
         });
-        
-        
-        
-        
         errorMessage = new javax.swing.JLabel();
         remove_button = new javax.swing.JButton();
         remove_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		 try {
+          	    	int row = addedClass_table.getSelectedRow();
+          	        System.out.println(row); //the number will be the row selected - 1
+                      String CRN = (addedClass_table.getValueAt(row, 1).toString());
+          	        String query = "DELETE FROM classesTaken where CRN="+CRN;
+          			pst =  connection.prepareStatement(query);
+          			pst.executeUpdate();
+          			
+          			pst.close();
+          			
+          			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
+          		    // model.setRowCount(0);
+          		     fetchRegClasses();  
+          		    fetchSchudleClasses();
+         	         CalculateCredit();
 
-       		 try {
-        	    	int row = addedClass_table.getSelectedRow();
-        	        System.out.println(row); //the number will be the row selected - 1
-                    String CRN = (addedClass_table.getValueAt(row, 1).toString());
-        	        String query = "DELETE FROM classesTaken where CRN="+CRN;
-        			pst =  connection.prepareStatement(query);
-        			pst.executeUpdate();
-        			
-        			pst.close();
-        			
-        			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
-        		    // model.setRowCount(0);
-        			fetchSchudleClasses();
-        		     fetchRegClasses();        			
-        		     JOptionPane.showMessageDialog(null, "Class Dropped!");
-        	    } catch (Exception E) {
-        			JOptionPane.showMessageDialog(null, E);
-        			
-        		}
+          		     JOptionPane.showMessageDialog(null, "Class Dropped!");
+          	    } catch (Exception E) {
+          			JOptionPane.showMessageDialog(null, E);
+          			
+          		}
+        		
+        		
         	}
         });
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -394,22 +430,19 @@ public class StellarDashboard extends javax.swing.JFrame {
         reset_button1 = new javax.swing.JButton();
         reset_button1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
         		TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
             	classes_table.setRowSorter(t);
         		fetchClass();
         	}
         });
+        finances_panel = new javax.swing.JPanel();
+        balancemessege_label = new javax.swing.JLabel();
+        balance_label = new javax.swing.JLabel();
+        balance = new javax.swing.JLabel();
         menubar = new javax.swing.JMenuBar();
         home_menu = new javax.swing.JMenu();
         dash_menu = new javax.swing.JMenuItem();
         setting_menu = new javax.swing.JMenu();
-        setting_menu.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent evt) {
-        		settings_buttonMouseClicked(evt);
-        	}
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -424,10 +457,6 @@ public class StellarDashboard extends javax.swing.JFrame {
                 logout_buttonMouseClicked(evt);
             }
         });
-        
-        
-        
-        
 
         lblWelcome.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(51, 51, 51));
@@ -445,13 +474,13 @@ public class StellarDashboard extends javax.swing.JFrame {
         menu_panelLayout.setHorizontalGroup(
         	menu_panelLayout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(menu_panelLayout.createSequentialGroup()
-        			.addContainerGap(1061, Short.MAX_VALUE)
+        			.addContainerGap(1043, Short.MAX_VALUE)
         			.addComponent(lblWelcome)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(firstnameHeader)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(lastnameHeader)
-        			.addGap(30)
+        			.addGap(48)
         			.addComponent(logout_button)
         			.addGap(22))
         );
@@ -505,6 +534,16 @@ public class StellarDashboard extends javax.swing.JFrame {
             }
         });
 
+        finances_button.setBackground(new java.awt.Color(14, 17, 45));
+        finances_button.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        finances_button.setForeground(new java.awt.Color(255, 255, 255));
+        finances_button.setText("Finances");
+        finances_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finances_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidemenuLayout = new javax.swing.GroupLayout(sidemenu);
         sidemenu.setLayout(sidemenuLayout);
         sidemenuLayout.setHorizontalGroup(
@@ -512,6 +551,7 @@ public class StellarDashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidemenuLayout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(sidemenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(finances_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addclass_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(schedule_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(home_button, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -526,6 +566,8 @@ public class StellarDashboard extends javax.swing.JFrame {
                 .addComponent(addclass_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(schedule_button, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(finances_button, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -743,7 +785,6 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         totalcredits.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         totalcredits.setForeground(new java.awt.Color(102, 102, 102));
-        totalcredits.setText("4");
 
         totalcredits_label.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         totalcredits_label.setForeground(new java.awt.Color(102, 102, 102));
@@ -778,31 +819,36 @@ public class StellarDashboard extends javax.swing.JFrame {
             .addGroup(viewSchedule_panelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(viewSchedule_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(viewSchedule_panelLayout.createSequentialGroup()
-                        .addComponent(studentMajor_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(studentMajor))
+                        .addGroup(viewSchedule_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(viewSchedule_panelLayout.createSequentialGroup()
+                                .addComponent(name_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(studentFirstname)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(studentLastname))
+                            .addGroup(viewSchedule_panelLayout.createSequentialGroup()
+                                .addComponent(totalcredits_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(totalcredits))
+                            .addComponent(Schedule_label))
+                        .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(viewSchedule_panelLayout.createSequentialGroup()
-                        .addComponent(studentYear_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(studentYear))
-                    .addGroup(viewSchedule_panelLayout.createSequentialGroup()
-                        .addComponent(name_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(studentFirstname)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(studentLastname))
-                    .addGroup(viewSchedule_panelLayout.createSequentialGroup()
-                        .addComponent(totalcredits_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalcredits))
-                    .addComponent(Schedule_label)
-                    .addGroup(viewSchedule_panelLayout.createSequentialGroup()
-                        .addComponent(concentration_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(studentCon)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGroup(viewSchedule_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewSchedule_panelLayout.createSequentialGroup()
+                                .addComponent(studentMajor_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(studentMajor))
+                            .addGroup(viewSchedule_panelLayout.createSequentialGroup()
+                                .addComponent(studentYear_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(studentYear))
+                            .addGroup(viewSchedule_panelLayout.createSequentialGroup()
+                                .addComponent(concentration_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(studentCon)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSchedule_panelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(removeclass_button)
@@ -1048,6 +1094,47 @@ public class StellarDashboard extends javax.swing.JFrame {
 
         mainpanel.add(addClass_panel, "card3");
 
+        finances_panel.setBackground(new java.awt.Color(255, 255, 255));
+
+        balancemessege_label.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        balancemessege_label.setForeground(new java.awt.Color(102, 102, 102));
+        balancemessege_label.setText("Student");
+
+        balance_label.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        balance_label.setForeground(new java.awt.Color(51, 51, 51));
+        balance_label.setText("Balance Due:");
+
+        balance.setBackground(new java.awt.Color(102, 102, 102));
+        balance.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        balance.setForeground(new java.awt.Color(102, 102, 102));
+        balance.setText("Balance");
+
+        javax.swing.GroupLayout finances_panelLayout = new javax.swing.GroupLayout(finances_panel);
+        finances_panel.setLayout(finances_panelLayout);
+        finances_panelLayout.setHorizontalGroup(
+            finances_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finances_panelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(finances_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(balance)
+                    .addComponent(balance_label)
+                    .addComponent(balancemessege_label, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(902, Short.MAX_VALUE))
+        );
+        finances_panelLayout.setVerticalGroup(
+            finances_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finances_panelLayout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(balancemessege_label)
+                .addGap(64, 64, 64)
+                .addComponent(balance_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(balance)
+                .addContainerGap(508, Short.MAX_VALUE))
+        );
+
+        mainpanel.add(finances_panel, "card5");
+
         home_menu.setText("Home");
         home_menu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -1092,11 +1179,11 @@ public class StellarDashboard extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sidemenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)))
         );
 
         pack();
-    }// </editor-fold>                        
+    }                  
 
     private void home_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                            
       mainpanel.removeAll();
@@ -1113,17 +1200,17 @@ public class StellarDashboard extends javax.swing.JFrame {
     }                                               
 
     private void logout_buttonMouseClicked(java.awt.event.MouseEvent evt) {                                           
-    	 int logout_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+        int logout_con = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
 
-         if (logout_con == 0){
-             Login log = new Login();
-             log.setVisible(true);
-             log.pack();
-             log.setLocationRelativeTo(null);
-             log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-             dispose();
+        if (logout_con == 0){
+            Login log = new Login();
+            log.setVisible(true);
+            log.pack();
+            log.setLocationRelativeTo(null);
+            log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
 
-         }
+        }
     }                                          
 
     private void home_menuActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -1163,10 +1250,19 @@ public class StellarDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                
 
+    private void finances_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                                
+      mainpanel.removeAll();
+      mainpanel.add(finances_panel);
+      mainpanel.repaint();
+      mainpanel.revalidate();
+    }            
+    
+    
+    
+    
     public void fetchClass(){
 
         try{
-        	
             String classTable = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
             		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
             		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";
@@ -1185,56 +1281,8 @@ public class StellarDashboard extends javax.swing.JFrame {
         }
 
     }
-    
-    public void fetchRegClasses(){
 
-        try{
-        	
-        	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id";
-         /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
-            		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
-            		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
-            pst = connection.prepareStatement(RegTab);
-            rs = pst.executeQuery();
-            addedClass_table.setModel(DbUtils.resultSetToTableModel(rs));
-            
-            DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
-           // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
-    	  // model.setColumnIdentifiers(col);
-
-
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-
-        }
-
-    }
-    
-    public void fetchSchudleClasses(){
-
-        try{
-        	
-        	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id";
-         /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
-            		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
-            		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
-            pst = connection.prepareStatement(RegTab);
-            rs = pst.executeQuery();
-            schedule_table.setModel(DbUtils.resultSetToTableModel(rs));
-            
-            DefaultTableModel model = (DefaultTableModel) schedule_table.getModel();
-           // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
-    	  // model.setColumnIdentifiers(col);
-
-
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-
-        }
-
-    }
-
-    
+  
     private void idFilter(String query1  ,String query2, String query3, String query4, String query5)
     {
     	
@@ -1293,12 +1341,73 @@ public class StellarDashboard extends javax.swing.JFrame {
    //Dispose just closes the pw window, not the entire program
      sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
  }
-    
+ 
+ public void fetchRegClasses(){
+
+     try{
+     	
+     	 String RegTab =  "select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id";
+
+      /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
+         		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
+         		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
+         pst = connection.prepareStatement(RegTab);
+         rs = pst.executeQuery();
+         addedClass_table.setModel(DbUtils.resultSetToTableModel(rs));
+         
+         DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
+        // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
+ 	  // model.setColumnIdentifiers(col);
+
+
+     } catch(Exception e){
+         JOptionPane.showMessageDialog(null, e);
+
+     }
+
+ }
+ 
+ public void fetchSchudleClasses(){
+
+     try{
+     	
+     	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id";
+
+      /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
+         		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
+         		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
+         pst = connection.prepareStatement(RegTab);
+         rs = pst.executeQuery();
+         schedule_table.setModel(DbUtils.resultSetToTableModel(rs));
+         
+         DefaultTableModel model = (DefaultTableModel) schedule_table.getModel();
+        // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
+ 	  // model.setColumnIdentifiers(col);
+
+
+     } catch(Exception e){
+         JOptionPane.showMessageDialog(null, e);
+
+     }
+
+ }
+    public void CalculateCredit(){
+    	   int total = 0;
+    	  for(int i = 0; i < schedule_table.getRowCount(); i++){
+    	       int Amount = (int) schedule_table.getValueAt(i, 3);
+    	        total = Amount + total;
+    	        
+    	  }
+    	  
+          totalcredits.setText(String.valueOf(total));
+
+    }
     
     
       public void staricon(){
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
     
-    }                   
-   
+    }   
+
+                  
 }
