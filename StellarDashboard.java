@@ -337,20 +337,17 @@ public class StellarDashboard extends javax.swing.JFrame {
 
  // String query = "insert into classesTaken values('" + student_id + "','" + classID + "','" + semester_taken + "','" + CRN + "') ";
 
-                    String queryNew = "select * FROM classesTaken where panther_num = ? AND day = ? AND semesterTaken = ?"
-                            + "AND start_time between ? AND ? OR day = ? AND semesterTaken = ? AND end_time BETWEEN ? AND ?";
+                     String queryNew = "select * FROM classesTaken where panther_num = ? AND day = ? " +
+                             "AND start_time between ? AND ? OR end_time BETWEEN ? AND ?";
 
-                    PreparedStatement preparedStatement = connection.prepareStatement(queryNew);
+                     PreparedStatement preparedStatement = connection.prepareStatement(queryNew);
 
-                    preparedStatement.setString(1, student_id);
-                    preparedStatement.setString(2, class_day);
-                    preparedStatement.setString(3,semester_taken);
-                    preparedStatement.setString(4, start_time);
-                    preparedStatement.setString(5, end_time);
-                    preparedStatement.setString(6, class_day);
-                    preparedStatement.setString(7,semester_taken);
-                    preparedStatement.setString(8, start_time);
-                    preparedStatement.setString(9, end_time);
+                     preparedStatement.setString(1, student_id);
+                     preparedStatement.setString(2, class_day);
+                     preparedStatement.setString(3, start_time);
+                     preparedStatement.setString(4, end_time);
+                     preparedStatement.setString(5, start_time);
+                     preparedStatement.setString(6, end_time);
 
                      ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -435,6 +432,13 @@ public class StellarDashboard extends javax.swing.JFrame {
         home_menu = new javax.swing.JMenu();
         dash_menu = new javax.swing.JMenuItem();
         setting_menu = new javax.swing.JMenu();
+        setting_menu.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent evt) {
+        		settings_buttonMouseClicked(evt);
+        		
+        	}
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -1093,38 +1097,61 @@ public class StellarDashboard extends javax.swing.JFrame {
         balancemessege_label.setForeground(new java.awt.Color(102, 102, 102));
         balancemessege_label.setText("Student");
 
-        balance_label.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        balance_label.setFont(new Font("Century Gothic", Font.BOLD, 40)); // NOI18N
         balance_label.setForeground(new java.awt.Color(51, 51, 51));
         balance_label.setText("Balance Due:");
 
         balance.setBackground(new java.awt.Color(102, 102, 102));
-        balance.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        balance.setFont(new Font("Century Gothic", Font.BOLD, 30)); // NOI18N
         balance.setForeground(new java.awt.Color(102, 102, 102));
         balance.setText("Balance");
+        
+        JLabel label = new JLabel();
+        label.setText(".00");
+        label.setForeground(new Color(102, 102, 102));
+        label.setFont(new Font("Century Gothic", Font.BOLD, 30));
+        label.setBackground(new Color(102, 102, 102));
+        
+        JLabel label_1 = new JLabel();
+        label_1.setText("$");
+        label_1.setForeground(new Color(102, 102, 102));
+        label_1.setFont(new Font("Century Gothic", Font.BOLD, 30));
+        label_1.setBackground(new Color(102, 102, 102));
 
         javax.swing.GroupLayout finances_panelLayout = new javax.swing.GroupLayout(finances_panel);
-        finances_panel.setLayout(finances_panelLayout);
         finances_panelLayout.setHorizontalGroup(
-            finances_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(finances_panelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(finances_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(balance)
-                    .addComponent(balance_label)
-                    .addComponent(balancemessege_label, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(902, Short.MAX_VALUE))
+        	finances_panelLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(finances_panelLayout.createSequentialGroup()
+        			.addGroup(finances_panelLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(finances_panelLayout.createSequentialGroup()
+        					.addGap(40)
+        					.addGroup(finances_panelLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(balance_label)
+        						.addComponent(balancemessege_label, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(finances_panelLayout.createSequentialGroup()
+        					.addGap(74)
+        					.addComponent(label_1)
+        					.addGap(1)
+        					.addComponent(balance)
+        					.addGap(1)
+        					.addComponent(label)))
+        			.addContainerGap(905, Short.MAX_VALUE))
         );
         finances_panelLayout.setVerticalGroup(
-            finances_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(finances_panelLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(balancemessege_label)
-                .addGap(64, 64, 64)
-                .addComponent(balance_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(balance)
-                .addContainerGap(508, Short.MAX_VALUE))
+        	finances_panelLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(finances_panelLayout.createSequentialGroup()
+        			.addGap(61)
+        			.addComponent(balancemessege_label)
+        			.addGap(64)
+        			.addComponent(balance_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(finances_panelLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(balance)
+        				.addComponent(label, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(508, Short.MAX_VALUE))
         );
+        finances_panel.setLayout(finances_panelLayout);
 
         mainpanel.add(finances_panel, "card5");
 
@@ -1347,10 +1374,9 @@ public class StellarDashboard extends javax.swing.JFrame {
          rs = pst.executeQuery();
          addedClass_table.setModel(DbUtils.resultSetToTableModel(rs));
          
-         DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
-        // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
- 	  // model.setColumnIdentifiers(col);
-
+         DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
+         String [] col = {"Class ID", "CRN", "Semester", "Day", "Start Time", "End Time", "Teacher Prefix", "Teacher Name"};
+   	     model.setColumnIdentifiers(col);
 
      } catch(Exception e){
          JOptionPane.showMessageDialog(null, e);
@@ -1372,8 +1398,8 @@ public class StellarDashboard extends javax.swing.JFrame {
          schedule_table.setModel(DbUtils.resultSetToTableModel(rs));
          
          DefaultTableModel model = (DefaultTableModel) schedule_table.getModel();
-        // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
- 	  // model.setColumnIdentifiers(col);
+        String [] col = {"Class ID", "CRN", "Semester", "Day", "Start Time", "End Time", "Teacher Prefix", "Teacher Name"};
+ 	   model.setColumnIdentifiers(col);
 
 
      } catch(Exception e){
@@ -1389,6 +1415,4 @@ public class StellarDashboard extends javax.swing.JFrame {
     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
     
     }   
-
-                  
 }
