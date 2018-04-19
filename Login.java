@@ -34,6 +34,11 @@ public class Login extends javax.swing.JFrame {
     Connection connection=null;
 
     
+    /**
+     * Calls the method with the login GUI components, 
+     * establishes the connection the the database, 
+     * sets the window title and icon.
+     */
     public Login() {
         login_form();
         connection= DatabaseConnection.dbConnector();
@@ -62,7 +67,17 @@ public class Login extends javax.swing.JFrame {
         loginas_label = new javax.swing.JLabel();
         admin_label = new javax.swing.JLabel();
         
-  pass_input.addKeyListener(new KeyAdapter() {
+        
+        /**Login Button Handling.
+         * This should allow the user to login by pressing the enter key
+         *  Checks the username and password. if they're correct, the dashboard will open.
+         * If the password or username is incorrect, they fields will reset. if the fields are empty they will be a message saying that
+         * the fields are empty.
+         * The user will have 4 attempts to login, after the 4th the program will terminate 
+         * This method also gets information from the database to display on the dashboard
+         */
+  
+        pass_input.addKeyListener(new KeyAdapter() {
         	
         	
         	@Override
@@ -80,10 +95,11 @@ public class Login extends javax.swing.JFrame {
                         String Year = "";
                         String Concentration = "";
                         String balance = "";
+                        Integer Balance = 0;
 
                         String passText = new String(pass_input.getPassword());
 
-//                        while (attempts != 0) {
+
 
                         if (attempts == 0) {
                             JOptionPane.showMessageDialog(null, "You ran out of login attempts." +
@@ -113,6 +129,7 @@ public class Login extends javax.swing.JFrame {
                                 Year = rs.getString("school_year");
                                 Concentration = rs.getString("concentration");
                                 balance = rs.getString("balance");
+                                Balance = rs.getInt("balance");
 
                             }
 
@@ -122,8 +139,7 @@ public class Login extends javax.swing.JFrame {
                                 stellardash.setVisible(true);
                                 stellardash.pack();
                                 stellardash.setLocationRelativeTo(null);
-                                stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                //stellardash.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                                stellardash.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
                                 StellarDashboard.firstname.setText(firstName);
                                 StellarDashboard.lastname.setText(lastName);
                                 StellarDashboard.studentidnum.setText(studentIDnum);
@@ -141,7 +157,8 @@ public class Login extends javax.swing.JFrame {
                                   StellarDashboard.lastnameHeader.setText(lastName);
                                   StellarDashboard.balance.setText(balance);
                                   
-                                  
+                                
+                               
                                   
                                   if (Concentration == null) {
                                   StellarDashboard.studentCon.setText("None"); 
@@ -194,6 +211,8 @@ public class Login extends javax.swing.JFrame {
         /**Login Button Handling. Checks the username and password. if they're correct, the dashboard will open.
          * If the password or username is incorrect, they fields will reset. if the fields are empty they will be a message saying that
          * the fields are empty.
+         * The user will have 4 attempts to login, after the 4th the program will terminate 
+         * This method also gets information from the database to display on the dashboard
          */
         login_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -486,6 +505,12 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                        
 
+    
+    /**Admin Login Button Handling. Checks the username and password. if they're correct, the admin page will open.
+     * If the password or username is incorrect, they fields will reset. if the fields are empty they will be a message saying that
+     * the fields are empty.
+     * 
+     */
     private void admin_labelMouseClicked(java.awt.event.MouseEvent evt) {                                         
          AdminLogin ad = new AdminLogin();
             ad.setVisible(true);

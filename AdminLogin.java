@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AdminLogin extends javax.swing.JFrame {
 
@@ -44,6 +46,84 @@ public class AdminLogin extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         adminPass_label = new javax.swing.JLabel();
         adminPass_input = new javax.swing.JPasswordField();
+        adminPass_input.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		if(e.getKeyCode() == KeyEvent.VK_ENTER ) {
+        		
+        			try{
+                        
+                        
+                        String passText = new String(adminPass_input.getPassword());
+   			
+                          if (adminUsername_input.getText().isEmpty() | adminPass_input.getText().isEmpty()){
+                          
+                              JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                          } else {
+                       
+                       
+                                   String query="select * from admin where username=? and password=?";
+   			PreparedStatement pst= connection.prepareStatement(query);
+   			pst.setString(1,adminUsername_input.getText());
+   			pst.setString(2, passText);
+   			ResultSet rs= pst.executeQuery();
+   			int count=0;
+                                   
+                                   while(rs.next()){
+   				count= count+1;
+                                          
+                                          
+                                         
+   			}
+   			if (count == 1)
+                                       
+   			{
+                                       
+                              
+                                       //Calls the dashboard method and sets/displays the studentname as the input of the student id.
+                                        Admin ad= new Admin() ;
+                                        ad.setVisible(true);
+                                        ad.pack();
+                                        ad.setLocationRelativeTo(null);
+                                        ad.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                        //ad.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                                        dispose();
+   			     //JOptionPane.showMessageDialog(null, "Username and password is correct");
+                                                   
+   					
+   			}
+   			else if (count >1)
+   			{
+   				JOptionPane.showMessageDialog(null, "Duplicate Username and password");
+   				                        adminUsername_input.setText("");
+                                           adminPass_input.setText("");
+
+
+   			}
+   			else {
+   				JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
+   				                        adminUsername_input.setText("");
+                                           adminPass_input.setText("");
+
+   			}
+                  
+                                   
+   			rs.close();
+   			pst.close();
+   			}
+                          }
+                   
+
+   		catch(Exception e1)
+   		{
+   			JOptionPane.showMessageDialog(null, e1);
+   		}
+        		
+        		
+        		}
+        	}
+        	
+        });
         jSeparator2 = new javax.swing.JSeparator();
         adminLogin_button = new javax.swing.JButton();
         loginasa_label = new javax.swing.JLabel();

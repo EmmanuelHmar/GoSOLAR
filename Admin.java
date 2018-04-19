@@ -18,6 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import java.awt.Font;
 //TODO: Current update class not working
 
 public class Admin extends javax.swing.JFrame {
@@ -63,16 +66,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTextField teacherFirstName_input;
     private javax.swing.JLabel teacherFirstName_label;
     private javax.swing.JLabel studentGpa_label;
-    private javax.swing.JButton classUpdateButton;
-    private javax.swing.JButton classUpdateClear;
-    private javax.swing.JLabel updateClassTitle_label;
-    private javax.swing.JLabel updateClassID_label;
-    private javax.swing.JLabel updateClassCredit_label;
-    private javax.swing.JLabel updateClassSubject_label;
-    private javax.swing.JTextField updateClassTitle_input;
-    private javax.swing.JTextField updateClassID_input;
-    private javax.swing.JTextField updateClassCredit_input;
-    private javax.swing.JTextField updateClassSubject_input;
     private javax.swing.JLabel studentLastName_label;
     private javax.swing.JTextField teacherLastName_input;
     private javax.swing.JLabel teacherLastName_label;
@@ -98,10 +91,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTable teachers_table;
     private javax.swing.JTextField teachid_input;
     private javax.swing.JLabel teachid_label;
-    private javax.swing.JScrollPane update_spanel;
-    private javax.swing.JPanel update_tab;
-    private javax.swing.JLabel updateclass_label;
-    private javax.swing.JTable updateclass_table;
     private javax.swing.JLabel studentYear_label;
     private JTextField studentLastName_input;
     private JTextField studentId_input;
@@ -125,6 +114,10 @@ public class Admin extends javax.swing.JFrame {
     PreparedStatement ps = null;
 
     private JButton delete_button;
+    private JTextField IDbox;
+    private JTextField balanceupdatebox;
+    private JButton studentdelete_button;
+    private JButton classinstructordelete_button;
   
     
     public Admin() {
@@ -193,20 +186,6 @@ public class Admin extends javax.swing.JFrame {
         studentMajor_label = new javax.swing.JLabel();
         studentYear_label = new javax.swing.JLabel();
         studentBday_label = new javax.swing.JLabel();
-        update_tab = new javax.swing.JPanel();
-        update_spanel = new javax.swing.JScrollPane();
-        updateclass_table = new javax.swing.JTable();
-        updateclass_label = new javax.swing.JLabel();
-        updateClassTitle_label = new javax.swing.JLabel();
-        updateClassTitle_input = new javax.swing.JTextField();
-        updateClassID_label = new javax.swing.JLabel();
-        updateClassID_input = new javax.swing.JTextField();
-        updateClassCredit_label = new javax.swing.JLabel();
-        updateClassCredit_input = new javax.swing.JTextField();
-        updateClassSubject_label = new javax.swing.JLabel();
-        updateClassSubject_input = new javax.swing.JTextField();
-        classUpdateClear = new javax.swing.JButton();
-        classUpdateButton = new javax.swing.JButton();
         classinstructor_tab = new javax.swing.JPanel();
         classinstructor_spanel = new javax.swing.JScrollPane();
         classinstructor_table = new javax.swing.JTable();
@@ -309,62 +288,99 @@ public class Admin extends javax.swing.JFrame {
                 fname_inputActionPerformed(evt);
             }
         });
+        
+        JButton deleteclass_button = new JButton("Delete");
+        deleteclass_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        deleteclass_button.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		int delete = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+                if (delete == 0) {
+           	 try {
+           	    	int row = classes_table.getSelectedRow();
+           	        System.out.println(row); //the number will be the row selected - 1
+           	        String value = (classes_table.getModel().getValueAt(row, 4).toString());
+           	        String query = "DELETE FROM classes where class_num="+value;
+           			ps =  conn.prepareStatement(query);
+           			ps.executeUpdate();
+           			
+           			ps.close();
+           			
+           			DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
+           		     model.setRowCount(0);
+           			fetchClasses();
+           			
+           		     JOptionPane.showMessageDialog(null, "Class deleted!");
+           	    } catch (Exception e) {
+           			JOptionPane.showMessageDialog(null, e);
+           			
+           		}
+                }
+        	}
+        });
 
         javax.swing.GroupLayout addclass_tabLayout = new javax.swing.GroupLayout(addclass_tab);
-        addclass_tab.setLayout(addclass_tabLayout);
         addclass_tabLayout.setHorizontalGroup(
-                addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                .addComponent(addclass_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                                .addGap(200, 200, 200)
-                                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(classtitle_label)
-                                                                .addComponent(classid_label)
-                                                                .addComponent(credit_label)
-                                                                .addComponent(subject_label)
-                                                                .addComponent(classtitle_input)
-                                                                .addComponent(classid_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                                                                .addComponent(credit_input)
-                                                                .addComponent(subject_input))
-                                                        .addComponent(addClass_label)))
-                                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                                .addGap(332, 332, 332)
-                                                .addComponent(clearclass_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(addClass_button)))
-                                .addGap(0, 243, Short.MAX_VALUE))
+        	addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(addclass_tabLayout.createSequentialGroup()
+        			.addComponent(addclass_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(addclass_tabLayout.createSequentialGroup()
+        					.addGap(200)
+        					.addGroup(addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(addclass_tabLayout.createParallelGroup(Alignment.LEADING, false)
+        							.addComponent(classtitle_label)
+        							.addComponent(classid_label)
+        							.addComponent(credit_label)
+        							.addComponent(subject_label)
+        							.addComponent(classtitle_input)
+        							.addComponent(classid_input, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+        							.addComponent(credit_input)
+        							.addComponent(subject_input))
+        						.addComponent(addClass_label)))
+        				.addGroup(addclass_tabLayout.createSequentialGroup()
+        					.addGap(276)
+        					.addComponent(clearclass_button)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(addClass_button)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(deleteclass_button)))
+        			.addGap(0, 462, Short.MAX_VALUE))
         );
         addclass_tabLayout.setVerticalGroup(
-                addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(addclass_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                        .addGroup(addclass_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(addClass_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(classtitle_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(classtitle_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(classid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(classid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(credit_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(credit_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(subject_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(subject_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(addclass_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearclass_button)
-                                        .addComponent(addClass_button))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	addclass_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(addclass_spanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+        		.addGroup(addclass_tabLayout.createSequentialGroup()
+        			.addGap(45)
+        			.addComponent(addClass_label)
+        			.addGap(31)
+        			.addComponent(classtitle_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(classtitle_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(classid_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(classid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(credit_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(credit_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(subject_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(subject_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(addclass_tabLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(clearclass_button)
+        				.addComponent(addClass_button)
+        				.addComponent(deleteclass_button))
+        			.addContainerGap(346, Short.MAX_VALUE))
         );
+        addclass_tab.setLayout(addclass_tabLayout);
 
         admin_tab.addTab("Add Class", addclass_tab);
 
@@ -433,6 +449,10 @@ public class Admin extends javax.swing.JFrame {
         });
         
         delete_button = new JButton("Delete");
+        delete_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
         delete_button.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -647,6 +667,41 @@ public class Admin extends javax.swing.JFrame {
         studentZip_input = new JTextField();
         studentZip_input.setForeground(new Color(51, 51, 51));
         studentZip_input.setBackground(Color.WHITE);
+        
+        studentdelete_button = new JButton("Delete");
+        studentdelete_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        studentdelete_button.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		 int delete = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+                 if (delete == 0) {
+            	 try {
+            	    	int row = student_table.getSelectedRow();
+            	        System.out.println(row); //the number will be the row selected - 1
+            	        String value = (student_table.getModel().getValueAt(row, 0).toString());
+            	        String query = "DELETE FROM students where panther_num="+value;
+            			ps =  conn.prepareStatement(query);
+            			ps.executeUpdate();
+            			
+            			ps.close();
+            			
+            			DefaultTableModel model = (DefaultTableModel) student_table.getModel();
+            		     model.setRowCount(0);
+            			fetchStudents();
+            			
+            		     JOptionPane.showMessageDialog(null, "Student deleted!");
+            	    } catch (Exception E) {
+            			JOptionPane.showMessageDialog(null, E);
+            			
+            		}
+                 }
+        		
+        	}
+        });
 
         javax.swing.GroupLayout students_tabLayout = new javax.swing.GroupLayout(students_tab);
         students_tabLayout.setHorizontalGroup(
@@ -692,10 +747,12 @@ public class Admin extends javax.swing.JFrame {
         						.addComponent(studentLastName_input, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
         						.addComponent(studentLastName_label)))
         				.addGroup(students_tabLayout.createSequentialGroup()
-        					.addGap(355)
+        					.addGap(305)
         					.addComponent(clearstudent_button)
-        					.addGap(18)
-        					.addComponent(addstudents_button)))
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(addstudents_button)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(studentdelete_button)))
         			.addGap(236))
         );
         students_tabLayout.setVerticalGroup(
@@ -768,129 +825,145 @@ public class Admin extends javax.swing.JFrame {
         					.addGap(29)
         					.addGroup(students_tabLayout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(clearstudent_button)
-        						.addComponent(addstudents_button)))
+        						.addComponent(addstudents_button)
+        						.addComponent(studentdelete_button)))
         				.addComponent(student_spanel, GroupLayout.PREFERRED_SIZE, 756, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         students_tab.setLayout(students_tabLayout);
 
         admin_tab.addTab("Students", students_tab);
-
-        update_tab.setBackground(new java.awt.Color(255, 255, 255));
-
-        updateclass_table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
-                },
-                new String[]{
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }
-        ));
-        update_spanel.setViewportView(updateclass_table);
-
-        updateclass_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
-        updateclass_label.setForeground(new java.awt.Color(51, 51, 51));
-        updateclass_label.setText("Update Class:");
-
-        updateClassTitle_label.setForeground(new java.awt.Color(51, 51, 51));
-        updateClassTitle_label.setText("Class Title:");
-
-        updateClassTitle_input.setBackground(new java.awt.Color(255, 255, 255));
-        updateClassTitle_input.setForeground(new java.awt.Color(51, 51, 51));
-        updateClassTitle_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField17ActionPerformed(evt);
-            }
+        
+        JPanel updateStud = new JPanel();
+        updateStud.setBackground(Color.WHITE);
+        admin_tab.addTab("Update Balance", null, updateStud, null);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        
+        JLabel label_3 = new JLabel();
+        label_3.setText("ID:");
+        label_3.setForeground(new Color(51, 51, 51));
+        
+        IDbox = new JTextField();
+        IDbox.setForeground(new Color(51, 51, 51));
+        IDbox.setBackground(Color.WHITE);
+        
+        JLabel updateStud_label = new JLabel();
+        updateStud_label.setText("Update Balance:");
+        updateStud_label.setForeground(new Color(51, 51, 51));
+        updateStud_label.setFont(new Font("Dialog", Font.BOLD, 14));
+        
+        JButton clearupbal = new JButton();
+        clearupbal.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		balanceupdatebox.setText("");
+        		IDbox.setText("");
+        	}
         });
+        clearupbal.setText("Clear");
+        
+        JButton btnUpdate = new JButton();
+        btnUpdate.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		try {
 
-        updateClassID_label.setForeground(new java.awt.Color(51, 51, 51));
-        updateClassID_label.setText("Class ID:");
+                    String newbal = new String(balanceupdatebox.getText());
+                    String ID = new String (IDbox.getText());
+                    final String PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{4,}$";
+                    
 
-        updateClassID_input.setBackground(new java.awt.Color(255, 255, 255));
-        updateClassID_input.setForeground(new java.awt.Color(51, 51, 51));
+                    if (balanceupdatebox.getText().isEmpty() | IDbox.getText().isEmpty()) {
 
-        updateClassCredit_label.setForeground(new java.awt.Color(51, 51, 51));
-        updateClassCredit_label.setText("Credit:");
+                        JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                    } else {
+                    	int i = Integer.parseInt(newbal);
+                        String query = "SELECT * FROM students WHERE student_id=?";
+                        PreparedStatement pst = connection.prepareStatement(query);
+                        pst.setString(1, ID);
+                        ResultSet rs = pst.executeQuery();
 
-        updateClassCredit_input.setBackground(new java.awt.Color(255, 255, 255));
-        updateClassCredit_input.setForeground(new java.awt.Color(51, 51, 51));
+                            String update = "UPDATE students SET balance = ? WHERE student_id = ?";
+                            PreparedStatement preparedStmt = connection.prepareStatement(update);
+                            preparedStmt.setInt(1, i);
+                            preparedStmt.setString(2, ID);
 
-        updateClassSubject_label.setForeground(new java.awt.Color(51, 51, 51));
-        updateClassSubject_label.setText("Subject:");
+                            preparedStmt.executeUpdate();
 
-        updateClassSubject_input.setBackground(new java.awt.Color(255, 255, 255));
-        updateClassSubject_input.setForeground(new java.awt.Color(51, 51, 51));
+                            //Calls the dashboard method and sets/displays the studentname as the input of the student id.
+                            JOptionPane.showMessageDialog(null, "Balance Updated");
 
-        classUpdateClear.setText("Clear");
 
-        classUpdateButton.setText("Update");
-        classUpdateButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                updateClasses_buttonActionPerformed(evt);
-            }
+                            //JOptionPane.showMessageDialog(null, "Username and password is correct");
 
+                        rs.close();
+                        pst.close();
+                        fetchStudents();
+                    }}
+                 catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, e1);
+        	}
+                    }
         });
-
-
-        javax.swing.GroupLayout update_tabLayout = new javax.swing.GroupLayout(update_tab);
-        update_tab.setLayout(update_tabLayout);
-        update_tabLayout.setHorizontalGroup(
-                update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(update_tabLayout.createSequentialGroup()
-                                .addComponent(update_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(200, 200, 200)
-                                .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(updateClassTitle_label)
-                                                .addComponent(updateClassID_label)
-                                                .addComponent(updateClassCredit_label)
-                                                .addComponent(updateClassSubject_label)
-                                                .addComponent(updateClassTitle_input)
-                                                .addComponent(updateClassID_input)
-                                                .addComponent(updateClassCredit_input)
-                                                .addComponent(updateClassSubject_input, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(updateclass_label)
-                                        .addGroup(update_tabLayout.createSequentialGroup()
-                                                .addGap(132, 132, 132)
-                                                .addComponent(classUpdateClear)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(classUpdateButton)))
-                                .addGap(200, 200, 200))
+        btnUpdate.setText("Update");
+        
+        JLabel lblNewAmountDue = new JLabel();
+        lblNewAmountDue.setText("New Amount Due:");
+        lblNewAmountDue.setForeground(new Color(51, 51, 51));
+        
+        balanceupdatebox = new JTextField();
+        balanceupdatebox.setForeground(new Color(51, 51, 51));
+        balanceupdatebox.setBackground(Color.WHITE);
+        GroupLayout gl_updateStud = new GroupLayout(updateStud);
+        gl_updateStud.setHorizontalGroup(
+        	gl_updateStud.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_updateStud.createSequentialGroup()
+        			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_updateStud.createSequentialGroup()
+        					.addGap(200)
+        					.addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_updateStud.createSequentialGroup()
+        							.addComponent(lblNewAmountDue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addContainerGap())
+        						.addGroup(gl_updateStud.createSequentialGroup()
+        							.addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
+        								.addComponent(updateStud_label)
+        								.addComponent(label_3))
+        							.addGap(511))
+        						.addGroup(gl_updateStud.createSequentialGroup()
+        							.addComponent(balanceupdatebox, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
+        							.addContainerGap())
+        						.addGroup(gl_updateStud.createSequentialGroup()
+        							.addComponent(IDbox, GroupLayout.PREFERRED_SIZE, 403, GroupLayout.PREFERRED_SIZE)
+        							.addContainerGap())))
+        				.addGroup(gl_updateStud.createSequentialGroup()
+        					.addGap(219)
+        					.addComponent(btnUpdate)
+        					.addGap(27)
+        					.addComponent(clearupbal)
+        					.addGap(1165))))
         );
-        update_tabLayout.setVerticalGroup(
-                update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(update_spanel, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                        .addGroup(update_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(updateclass_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(updateClassTitle_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateClassTitle_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateClassID_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateClassID_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateClassCredit_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateClassCredit_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateClassSubject_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateClassSubject_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(update_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(classUpdateClear)
-                                        .addComponent(classUpdateButton))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        gl_updateStud.setVerticalGroup(
+        	gl_updateStud.createParallelGroup(Alignment.LEADING)
+        		.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+        		.addGroup(gl_updateStud.createSequentialGroup()
+        			.addGap(45)
+        			.addComponent(updateStud_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(label_3)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(IDbox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(lblNewAmountDue)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(balanceupdatebox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(25)
+        			.addGroup(gl_updateStud.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnUpdate)
+        				.addComponent(clearupbal))
+        			.addContainerGap(558, Short.MAX_VALUE))
         );
-
-        admin_tab.addTab("Update Class", update_tab);
+        updateStud.setLayout(gl_updateStud);
 
         classinstructor_tab.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -960,73 +1033,106 @@ public class Admin extends javax.swing.JFrame {
 
         classtime_input.setBackground(new java.awt.Color(255, 255, 255));
         classtime_input.setForeground(new java.awt.Color(51, 51, 51));
+        
+        classinstructordelete_button = new JButton("Delete");
+        classinstructordelete_button.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		 int delete = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+                 if (delete == 0) {
+            	 try {
+            	    	int row = classinstructor_table.getSelectedRow();
+            	        System.out.println(row); //the number will be the row selected - 1
+            	        String value = (classinstructor_table.getModel().getValueAt(row, 1).toString());
+            	        String query = "DELETE FROM teacher_class where CRN="+value;
+            			ps =  conn.prepareStatement(query);
+            			ps.executeUpdate();
+            			
+            			ps.close();
+            			
+            			DefaultTableModel model = (DefaultTableModel) classinstructor_table.getModel();
+            		     model.setRowCount(0);
+            		     fetchClassInstructor();
+            			
+            		     JOptionPane.showMessageDialog(null, "Class deleted!");
+            	    } catch (Exception E) {
+            			JOptionPane.showMessageDialog(null, E);
+            			
+            		}
+                 }
+        		
+        	}
+        });
 
         javax.swing.GroupLayout classinstructor_tabLayout = new javax.swing.GroupLayout(classinstructor_tab);
-        classinstructor_tab.setLayout(classinstructor_tabLayout);
         classinstructor_tabLayout.setHorizontalGroup(
-                classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                .addComponent(classinstructor_spanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                                .addGap(336, 336, 336)
-                                                .addComponent(clearinstructors_button)
-                                                .addGap(30, 30, 30)
-                                                .addComponent(addinstructor_button))
-                                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                                .addGap(200, 200, 200)
-                                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(classtime_label)
-                                                        .addComponent(crn_label)
-                                                        .addComponent(teachid_label)
-                                                        .addComponent(clasid_label)
-                                                        .addComponent(semester_label)
-                                                        .addComponent(crn_input)
-                                                        .addComponent(teachid_input)
-                                                        .addComponent(clasid_input)
-                                                        .addComponent(semester_input, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                                                        .addComponent(classinstructor_label)
-                                                        .addComponent(days_label)
-                                                        .addComponent(days_input)
-                                                        .addComponent(classtime_input))))
-                                .addContainerGap())
+        	classinstructor_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        			.addComponent(classinstructor_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(classinstructor_tabLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        					.addGap(266)
+        					.addComponent(clearinstructors_button)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(addinstructor_button)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(classinstructordelete_button))
+        				.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        					.addGap(200)
+        					.addGroup(classinstructor_tabLayout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(classtime_label)
+        						.addComponent(crn_label)
+        						.addComponent(teachid_label)
+        						.addComponent(clasid_label)
+        						.addComponent(semester_label)
+        						.addComponent(crn_input)
+        						.addComponent(teachid_input)
+        						.addComponent(clasid_input)
+        						.addComponent(semester_input, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+        						.addComponent(classinstructor_label)
+        						.addComponent(days_label)
+        						.addComponent(days_input)
+        						.addComponent(classtime_input))))
+        			.addContainerGap())
         );
         classinstructor_tabLayout.setVerticalGroup(
-                classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(classinstructor_spanel)
-                        .addGroup(classinstructor_tabLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(classinstructor_label)
-                                .addGap(31, 31, 31)
-                                .addComponent(crn_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(crn_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(teachid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(teachid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clasid_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clasid_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(semester_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(semester_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(days_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(days_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(classtime_label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(classtime_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(classinstructor_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(clearinstructors_button)
-                                        .addComponent(addinstructor_button))
-                                .addContainerGap(284, Short.MAX_VALUE))
+        	classinstructor_tabLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(classinstructor_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        		.addGroup(classinstructor_tabLayout.createSequentialGroup()
+        			.addGap(45)
+        			.addComponent(classinstructor_label)
+        			.addGap(31)
+        			.addComponent(crn_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(crn_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(teachid_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(teachid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(clasid_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(clasid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(semester_label)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(semester_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(days_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(days_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(classtime_label)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(classtime_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(classinstructor_tabLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(clearinstructors_button)
+        				.addComponent(addinstructor_button)
+        				.addComponent(classinstructordelete_button)))
         );
+        classinstructor_tab.setLayout(classinstructor_tabLayout);
 
         admin_tab.addTab("Class Instructors", classinstructor_tab);
 
@@ -1087,6 +1193,9 @@ public class Admin extends javax.swing.JFrame {
     
     private void delete_buttonMouseClicked(java.awt.event.MouseEvent evt) {
     
+    	 int delete = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+         if (delete == 0) {
     	 try {
     	    	int row = teachers_table.getSelectedRow();
     	        System.out.println(row); //the number will be the row selected - 1
@@ -1101,11 +1210,12 @@ public class Admin extends javax.swing.JFrame {
     		     model.setRowCount(0);
     			fetchTeachers();
     			
-    		     JOptionPane.showMessageDialog(null, "Deleted");
+    		     JOptionPane.showMessageDialog(null, "Teacher deleted!");
     	    } catch (Exception e) {
     			JOptionPane.showMessageDialog(null, e);
     			
     		}
+         }
     }
     
     
@@ -1123,10 +1233,6 @@ public class Admin extends javax.swing.JFrame {
     }
 
     private void crn_inputActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -1224,31 +1330,6 @@ public class Admin extends javax.swing.JFrame {
         
         fetchStudents();
 
-    }
-
-    private void updateClasses_buttonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        Statement statement = null;
-
-        try {
-            statement = connection.createStatement();
-
-            String title = updateClassTitle_input.getText().trim().toUpperCase();
-            String id = updateClassID_input.getText().trim().toUpperCase();
-            int credit = Integer.parseInt(updateClassID_input.getText());
-            String subject = updateClassSubject_input.getText().trim().toUpperCase();
-
-            String sql = "INSERT or REPLACE INTO classes " + "(class_id,class_name,class_credit,class_subj) "
-                    + "VALUES('" + title + "','" + id + "','" + credit + "','" + subject + "') ";
-
-            statement.execute(sql);
-
-            JOptionPane.showMessageDialog(null, "Updated Successfully!");
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            e.printStackTrace();
-        }
     }
     
     private void addInstructor_buttonActionPerformed(java.awt.event.ActionEvent evt)
@@ -1413,7 +1494,4 @@ public class Admin extends javax.swing.JFrame {
         }
     
      }
-
-    
-    
 }
