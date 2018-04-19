@@ -1,7 +1,7 @@
 
 package stellar;
-import java.awt.Font;
-import java.awt.Toolkit;
+
+import java.awt.*;
 
 public class splash extends javax.swing.JFrame {
 
@@ -10,7 +10,7 @@ public class splash extends javax.swing.JFrame {
         staricon();
     }
 
-   
+
     @SuppressWarnings("unchecked")
     private void Splash() {
 
@@ -33,7 +33,7 @@ public class splash extends javax.swing.JFrame {
         jPanel1.add(stellar_label);
         stellar_label.setBounds(15, 225, 160, 50);
 
-        stellarbackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("StellarSplash.png"))); 
+        stellarbackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("StellarSplash.png")));
         stellarbackground.setText("jLabel1");
         jPanel1.add(stellarbackground);
         stellarbackground.setBounds(0, 0, 520, 290);
@@ -41,25 +41,25 @@ public class splash extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(516, 291));
         setLocationRelativeTo(null);
     }
 
-    
-    public void staricon(){
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
-        
-        }
 
-   
+    public void staricon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
+
+    }
+
+
     private javax.swing.JLabel stellar_label;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
