@@ -205,20 +205,19 @@ public class StellarDashboard extends javax.swing.JFrame {
         removeclass_button = new javax.swing.JButton();
         removeclass_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		/* This is the method to drop a class*/
         		 try {
           	    	int row = schedule_table.getSelectedRow();
           	        System.out.println(row); //the number will be the row selected - 1
-                      String CRN = (schedule_table.getValueAt(row, 1).toString());
-          	        String query = "DELETE FROM classesTaken where CRN="+CRN;
+                      String CRN = (schedule_table.getValueAt(row, 1).toString());// we are getting the CRN value
+          	        String query = "DELETE FROM classesTaken where CRN="+CRN; // Deleting from the classesTaken where the CRN equals the CRN we got 
           			pst =  connection.prepareStatement(query);
           			pst.executeUpdate();
           			
           			pst.close();
           			
-          			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
-          		    // model.setRowCount(0);
-          	       
-          			fetchRegClasses();  
+          			/*Refresh the tables */
+          	        fetchRegClasses();  
           		    fetchSchudleClasses();
           			CalculateCredit();
 
@@ -235,17 +234,15 @@ public class StellarDashboard extends javax.swing.JFrame {
         semester_label = new javax.swing.JLabel();
         semester_combobox = new javax.swing.JComboBox<>();
         semester_combobox.addItemListener(new ItemListener() {
+        	/*When we use the Semester combobox*/
         	public void itemStateChanged(ItemEvent arg0) {
-        		
-
-        		//String query = semester_combobox.getSelectedItem().toString();
+        		// we take the value of every filter we choose 
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
-        		idFilter(query1,query2,query3,query4,query5);
-        		//filterData(query);
+        		idFilter(query1,query2,query3,query4,query5);// apply the method idFilter
         		
         	}
         });
@@ -253,61 +250,62 @@ public class StellarDashboard extends javax.swing.JFrame {
         subjectlist_scroll = new javax.swing.JScrollPane();
         subject_list = new javax.swing.JList<>();
         subject_list.addListSelectionListener(new ListSelectionListener() {
+        	/*When a subject is selected*/
         	public void valueChanged(ListSelectionEvent arg0) {
         		
-        		//String query = subject_list.getSelectedValue().toString();
+        		// we take the value of every filter we choose 
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
-        		idFilter(query1,query2,query3,query4,query5);
-        		//filterData(query);
+        		idFilter(query1,query2,query3,query4,query5);// apply the method idFilter
         	}
         });
         courseid_label = new javax.swing.JLabel();
         courseid_input = new javax.swing.JTextField();
         courseid_input.addKeyListener(new KeyAdapter() {
         	@Override
+        	/* When inputing a course ID*/
         	public void keyReleased(KeyEvent e) {
-        		
+        		// we take the value of every filter we choose 
+
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
-        		idFilter(query1,query2,query3,query4,query5);
+        		idFilter(query1,query2,query3,query4,query5);// apply idFilter
         		
         	}
         });
         days_label = new javax.swing.JLabel();
         credits_combobox = new javax.swing.JComboBox<>();
         credits_combobox.addItemListener(new ItemListener() {
+        	/*When we pick a credit number */
         	public void itemStateChanged(ItemEvent e) {
-        		
-//        		String query = credits_combobox.getSelectedItem().toString();
+        		// we take the value of every filter we choose 
         		String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
-        		idFilter(query1,query2,query3,query4,query5);
-        	//	filterData(query);
+        		idFilter(query1,query2,query3,query4,query5);// apply idFilter
         	}
         });
         credits_label = new javax.swing.JLabel();
         days_combobox = new javax.swing.JComboBox<>();
         days_combobox.addItemListener(new ItemListener() {
+        	/*When we pick the days we want to study*/
         	public void itemStateChanged(ItemEvent e) {
-        		
-//        		String query = days_combobox.getSelectedItem().toString();
-        		String query1 = semester_combobox.getSelectedItem().toString();
+        		// we take the value of every filter we choose 
+
+            	String query1 = semester_combobox.getSelectedItem().toString();
         		String query2 = (String) subject_list.getSelectedValue();
         		String query3 = (String) courseid_input.getText().toUpperCase();
         		String query4 = days_combobox.getSelectedItem().toString();
         		String query5 = credits_combobox.getSelectedItem().toString();
-        		idFilter(query1,query2,query3,query4,query5);   
-        	//	filterData(query);
+        		idFilter(query1,query2,query3,query4,query5);  // apply idFilter 
         	}
         });
         
@@ -374,14 +372,13 @@ public class StellarDashboard extends javax.swing.JFrame {
                      }
 
                      else if (!resultSet.next()) {
-
+                    	 // Inserting the classes chosen by a student into the data base*/ 
                          String query = "insert into classesTaken values('" + student_id + "','" + classID + "','" + semester_taken + "','"
                                  + CRN + "','" + class_day + "','" + start_time + "','" + end_time + "') ";
 
                          pst = connection.prepareStatement(query);
 
                          pst.executeUpdate();
- // pst.executeQuery();
                          JOptionPane.showMessageDialog(null, "Class added for registration.");
 
                          pst.close();
@@ -403,6 +400,7 @@ public class StellarDashboard extends javax.swing.JFrame {
             	else {
            		 JOptionPane.showMessageDialog(null, "Hold present on the account due to finances.");
            	}
+            	// Refreshing the tables
                 fetchRegClasses();  
                 fetchSchudleClasses();
                 CalculateCredit();
@@ -413,19 +411,20 @@ public class StellarDashboard extends javax.swing.JFrame {
         errorMessage = new javax.swing.JLabel();
         remove_button = new javax.swing.JButton();
         remove_button.addActionListener(new ActionListener() {
+        	/*When clicking on the remove button*/
         	public void actionPerformed(ActionEvent e) {
         		 try {
-          	    	int row = addedClass_table.getSelectedRow();
+        			 
+          	    	int row = addedClass_table.getSelectedRow(); // get the selected Rows f
           	        System.out.println(row); //the number will be the row selected - 1
                       String CRN = (addedClass_table.getValueAt(row, 1).toString());
-          	        String query = "DELETE FROM classesTaken where CRN="+CRN;
+          	        String query = "DELETE FROM classesTaken where CRN="+CRN;// Deleting from the classesTaken where the CRN equals the CRN we got 
           			pst =  connection.prepareStatement(query);
           			pst.executeUpdate();
           			
           			pst.close();
-          			
-          			//DefaultTableModel model = (DefaultTableModel) addedClass_table.getModel();
-          		    // model.setRowCount(0);
+          				
+          			// Refresh the Tables
           		     fetchRegClasses();  
           		    fetchSchudleClasses();
          	         CalculateCredit();
@@ -1280,16 +1279,17 @@ public class StellarDashboard extends javax.swing.JFrame {
     
     
     
-    
+   /* Method to get the classes to select from to register*/ 
     public void fetchClass(){
-
+    	
         try{
+        	/*Query Selecting from 3 Different tables using INNER JOIN*/
             String classTable = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
             		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
             		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";
             pst = connection.prepareStatement(classTable);
             rs = pst.executeQuery();
-            classes_table.setModel(DbUtils.resultSetToTableModel(rs));
+            classes_table.setModel(DbUtils.resultSetToTableModel(rs));// Displaying the data in the table "classes_table"
             
             DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
             String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
@@ -1303,13 +1303,15 @@ public class StellarDashboard extends javax.swing.JFrame {
 
     }
 
-  
+  /*The method that filter classes using different parameters*/
     private void idFilter(String query1  ,String query2, String query3, String query4, String query5)
     {
     	
     	ArrayList<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
-    	if (query2 != null && !query2.isEmpty())
+    	
+    	if (query2 != null && !query2.isEmpty())// If the subject List is not empty and doesn't equal null
     	{
+    		// apply those filters
     	filters.add(RowFilter.regexFilter(query1, 2));
     	filters.add(RowFilter.regexFilter(query2, 7));
     	filters.add(RowFilter.regexFilter(query3, 0 ));
@@ -1318,8 +1320,9 @@ public class StellarDashboard extends javax.swing.JFrame {
 
 
     	}
-    	else
+    	else// if the subject list is empty
     	{
+    		// apply those filters
         filters.add(RowFilter.regexFilter(query1, 2));
         filters.add(RowFilter.regexFilter(query3, 0 ));
     	filters.add(RowFilter.regexFilter(query4, 3 ));
@@ -1330,58 +1333,33 @@ public class StellarDashboard extends javax.swing.JFrame {
     	TableRowSorter<TableModel>	sorter = new TableRowSorter<TableModel>(classes_table.getModel());
 
     	
-    	sorter.setRowFilter(RowFilter.andFilter(filters));	
+    	sorter.setRowFilter(RowFilter.andFilter(filters));
     	classes_table.setRowSorter(sorter);
     	
 
     }
- private void filterData(String query) {
-    	
-    	dtable = (DefaultTableModel) classes_table.getModel();
-    	
-    	TableRowSorter<DefaultTableModel> t = new TableRowSorter<DefaultTableModel>(dtable);
-    	classes_table.setRowSorter(t);
-    	
-    	
-    	if (query != "All") {
-    		
-    		t.setRowFilter(RowFilter.regexFilter(query));
-    	} else {
-    		classes_table.setRowSorter(t);
-    		
-    	}
-    	
-    	
-    }
  
- private void settings_buttonMouseClicked(java.awt.event.MouseEvent evt) { 
- 	Settings2 sett = new Settings2(this);
-     sett.setVisible(true);
-     sett.pack();
-     sett.setLocationRelativeTo(null);
-   //Dispose just closes the pw window, not the entire program
-     sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
- }
+    	
+    	
+    
+/*Method to fetch the classes that we registered for*/
  
  public void fetchRegClasses(){
 
      try{
          String student_id = studentidnum.getText();
-
+         /*This is our select query that chooses the classes using the student_id */
      	 String RegTab =  "select  classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id where panther_num = ?";
 
-      /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
-         		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
-         		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
+     
          pst = connection.prepareStatement(RegTab);
          pst.setString(1, student_id);
 
          rs = pst.executeQuery();
-         addedClass_table.setModel(DbUtils.resultSetToTableModel(rs));
+         addedClass_table.setModel(DbUtils.resultSetToTableModel(rs));// Displaying the data in addedClass_table
          
          DefaultTableModel model = (DefaultTableModel) classes_table.getModel();
-        // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
- 	  // model.setColumnIdentifiers(col);
+       
 
 
      } catch(Exception e){
@@ -1391,26 +1369,26 @@ public class StellarDashboard extends javax.swing.JFrame {
 
  }
  
+ 
+ /*Method to fetch the classes that we registered for and display it in the View schedule panel */
+
  public void fetchSchudleClasses(){
 
      try{
      	
          String student_id = studentidnum.getText();
+         /*This is our select query that chooses the classes using the student_id */
 
      	 String RegTab =  " select classesTaken.class_id, classesTaken.CRN, classesTaken.semesterTaken,classes.class_credit, classesTaken.Day, classesTaken.start_time, classesTaken.end_time, teacher.teacher_title, teacher.teacher_last_name from classesTaken INNER JOIN teacher_class on classesTaken.CRN= teacher_class.CRN INNER JOIN teacher on teacher_class.teacher_id = teacher.teacher_id INNER JOIN classes on classes.class_id = classesTaken.class_id where panther_num = ? ";
 
-      /*   String RegTab = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
-         		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
-         		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";*/
          pst = connection.prepareStatement(RegTab);
          pst.setString(1, student_id);
 
          rs = pst.executeQuery();
-         schedule_table.setModel(DbUtils.resultSetToTableModel(rs));
+         schedule_table.setModel(DbUtils.resultSetToTableModel(rs)); //Displaying the data in schedule_table
          
          DefaultTableModel model = (DefaultTableModel) schedule_table.getModel();
-        // String [] col = {"Class ID", "CRN", "Semester", "Day", "Time", "Title", "Credits", "Subject", "Teacher"};
- 	  // model.setColumnIdentifiers(col);
+     
 
 
      } catch(Exception e){
@@ -1419,14 +1397,19 @@ public class StellarDashboard extends javax.swing.JFrame {
      }
 
  }
+ 
+ /* This method calculate the number of credits a student is taking*/
     public void CalculateCredit(){
-    	   int total = 0;
+    	   int total = 0; 
+    	   // we are looping though our schedule_table
     	  for(int i = 0; i < schedule_table.getRowCount(); i++){
+    		  // the amount is the number of credit in a cell
     	       int Amount = (int) schedule_table.getValueAt(i, 3);
+    	       // we are adding the amount to total after every iteration
     	        total = Amount + total;
     	        
     	  }
-    	  
+    	  // setting the Label "totalcredits" to our final total value
           totalcredits.setText(String.valueOf(total));
 
     }
