@@ -1,22 +1,15 @@
 package stellar;
 
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 
 public class Settings2 extends javax.swing.JFrame {
-	
-	
-	
-
-    
     private javax.swing.JButton cancel_button;
     private javax.swing.JButton conf_button;
     private javax.swing.JLabel jLabel1;
@@ -34,26 +27,22 @@ public class Settings2 extends javax.swing.JFrame {
     private StellarDashboard dashboard;
     Connection connection = null;
     String studentID;
-	
-	
-	
-	
-	
+
 
     public Settings2(StellarDashboard dashboard) {
-    	this.dashboard = dashboard;
-    	connection = DatabaseConnection.dbConnector();
+        this.dashboard = dashboard;
+        connection = DatabaseConnection.dbConnector();
         settings_form();
         setTitle("Change Password");
         setLocationRelativeTo(null);
         staricon();
     }
-    
-    void setID(String I){        // GADD
-    	studentID = I;
+
+    void setID(String I) {        // GADD
+        studentID = I;
     }
 
-   
+
     @SuppressWarnings("unchecked")
     private void settings_form() {
 
@@ -71,27 +60,27 @@ public class Settings2 extends javax.swing.JFrame {
         reqs_label = new javax.swing.JLabel();
         conf_button = new javax.swing.JButton();
         cancel_button = new javax.swing.JButton();
-        
-        
+
+
         cancel_button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	dispose();
+                dispose();
             }
         });
         conf_button.addActionListener(new ActionListener() {  //GADD
             public void actionPerformed(ActionEvent e) {
-            	try {
+                try {
 
                     String new_pw_text = new String(new_password_input.getPassword());
                     String repeat_pw_Text = new String(repeat_password_input.getPassword());
                     final String PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{4,}$";
-                    
+
 
                     if (old_password_input.getText().isEmpty() | new_pw_text.isEmpty() | repeat_pw_Text.isEmpty()) {
 
                         JOptionPane.showMessageDialog(null, "Please fill in all fields");
                     } else {
-                    	String studentID2 = studentID.toString();
+                        String studentID2 = studentID.toString();
                         String query = "SELECT * FROM students WHERE student_id=? AND password=?";
                         PreparedStatement pst = connection.prepareStatement(query);
                         pst.setString(1, studentID2);
@@ -142,7 +131,7 @@ public class Settings2 extends javax.swing.JFrame {
                                     "\nRequirements: 1 upper case, 1 lower case, 1 number, >= 4 characters");
                             new_password_input.setText("");
                             repeat_password_input.setText("");
- 
+
                         } else {
                             JOptionPane.showMessageDialog(null, "Username or password is not correct. Try Again.");
                             old_password_input.setText("");
@@ -157,30 +146,26 @@ public class Settings2 extends javax.swing.JFrame {
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(null, e1);
                 }
-                
-                
-              
+
+
             }
         });
-        
-        
-       
-        
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); 
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24));
         jLabel1.setForeground(new java.awt.Color(14, 17, 45));
         jLabel1.setText("Change Password");
 
-        oldpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
+        oldpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14));
         oldpass_label.setForeground(new java.awt.Color(11, 2, 23));
         oldpass_label.setText("Old Password:");
 
         old_password_input.setBackground(new java.awt.Color(255, 255, 255));
-        old_password_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
+        old_password_input.setFont(new java.awt.Font("DialogInput", 0, 18));
         old_password_input.setBorder(null);
         old_password_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
@@ -193,16 +178,16 @@ public class Settings2 extends javax.swing.JFrame {
         new_password_input.setBorder(null);
         new_password_input.setSelectionColor(new java.awt.Color(153, 102, 255));
 
-        repeatnewpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14)); 
+        repeatnewpass_label.setFont(new java.awt.Font("Century Gothic", 1, 14));
         repeatnewpass_label.setForeground(new java.awt.Color(11, 2, 23));
         repeatnewpass_label.setText("Repeat New Password:");
 
         repeat_password_input.setBackground(new java.awt.Color(255, 255, 255));
-        repeat_password_input.setFont(new java.awt.Font("DialogInput", 0, 18)); 
+        repeat_password_input.setFont(new java.awt.Font("DialogInput", 0, 18));
         repeat_password_input.setBorder(null);
         repeat_password_input.setSelectionColor(new java.awt.Color(153, 102, 255));
-        
-        reqs_label.setFont(new java.awt.Font("Century Gothic", 1, 10)); 
+
+        reqs_label.setFont(new java.awt.Font("Century Gothic", 1, 10));
         reqs_label.setForeground(new java.awt.Color(11, 2, 23));
         reqs_label.setText("*Password must have more then three digits, must have one capital letter and one number.");
 
@@ -224,93 +209,89 @@ public class Settings2 extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(171, 171, 171))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(reqs_label)
-                        	.addComponent(repeatnewpass_label)
-                            .addComponent(newpass_label)
-                            .addComponent(oldpass_label)
-                            .addComponent(old_password_input)
-                            .addComponent(jSeparator2)
-                            .addComponent(new_password_input)
-                            .addComponent(jSeparator3)
-                            .addComponent(repeat_password_input, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                            .addComponent(jSeparator4)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cancel_button)
-                            .addComponent(conf_button))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(182, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(171, 171, 171))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(94, 94, 94)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(reqs_label)
+                                                        .addComponent(repeatnewpass_label)
+                                                        .addComponent(newpass_label)
+                                                        .addComponent(oldpass_label)
+                                                        .addComponent(old_password_input)
+                                                        .addComponent(jSeparator2)
+                                                        .addComponent(new_password_input)
+                                                        .addComponent(jSeparator3)
+                                                        .addComponent(repeat_password_input, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                                                        .addComponent(jSeparator4)))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(229, 229, 229)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(cancel_button)
+                                                        .addComponent(conf_button))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(63, 63, 63)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(oldpass_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(old_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newpass_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(new_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(repeatnewpass_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(repeat_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(reqs_label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGap(18, 18, 18)
-                .addComponent(conf_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancel_button)
-                .addContainerGap(59, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addGap(63, 63, 63)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(oldpass_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(old_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(newpass_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(new_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(repeatnewpass_label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(repeat_password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(reqs_label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
+                                .addComponent(conf_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancel_button)
+                                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
-    }                      
-
-    private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
-
-   
-    
-    public void staricon(){
-    setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
-    
     }
-    
-    
-    
 
-              
+    private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+
+    public void staricon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
+
+    }
+
+
 }

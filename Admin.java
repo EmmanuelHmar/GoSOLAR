@@ -1,32 +1,23 @@
 package stellar;
 
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.sql.*;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import java.awt.event.ActionListener;
-
 import net.proteanit.sql.DbUtils;
+
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JButton;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.Font;
+import java.sql.*;
 //TODO: Current update class not working
 
 public class Admin extends javax.swing.JFrame {
-	
-	//Variables
-	private javax.swing.JButton addClass_button;
+
+    //Variables
+    private javax.swing.JButton addClass_button;
     private javax.swing.JLabel addClass_label;
     private javax.swing.JScrollPane addclass_spanel;
     private javax.swing.JPanel addclass_tab;
@@ -109,7 +100,7 @@ public class Admin extends javax.swing.JFrame {
 
     Connection connection = null;
     Connection conn = null;
-    ResultSet rs = null;  
+    ResultSet rs = null;
     PreparedStatement pst = null;
     PreparedStatement ps = null;
 
@@ -119,7 +110,7 @@ public class Admin extends javax.swing.JFrame {
     private JButton studentdelete_button;
     private JButton classinstructordelete_button;
   
-    
+
     public Admin() {
         administrator();
         //Connects to the database
@@ -132,11 +123,11 @@ public class Admin extends javax.swing.JFrame {
         fetchStudents();
         fetchTeachers();
         fetchClasses();
-        fetchClassInstructor();    
-        }
+        fetchClassInstructor();
+    }
 
     @SuppressWarnings("unchecked")
-    
+
     private void administrator() {
 
         admin_panel = new javax.swing.JPanel();
@@ -201,9 +192,9 @@ public class Admin extends javax.swing.JFrame {
         clearinstructors_button = new javax.swing.JButton();
         addinstructor_button = new javax.swing.JButton();
         addinstructor_button.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent evt) {
-        		addInstructor_buttonActionPerformed(evt);
-        	}
+            public void actionPerformed(ActionEvent evt) {
+                addInstructor_buttonActionPerformed(evt);
+            }
         });
         days_label = new javax.swing.JLabel();
         days_input = new javax.swing.JTextField();
@@ -399,7 +390,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         teacher_spanel.setViewportView(teachers_table);
 
-        addteacher_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
+        addteacher_label.setFont(new java.awt.Font("Dialog", 1, 14));
         addteacher_label.setForeground(new java.awt.Color(51, 51, 51));
         addteacher_label.setText("Add Teacher:");
 
@@ -447,74 +438,74 @@ public class Admin extends javax.swing.JFrame {
             }
 
         });
-        
+
         delete_button = new JButton("Delete");
         delete_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         	}
         });
         delete_button.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(java.awt.event.MouseEvent evt) {
-        		delete_buttonMouseClicked(evt);
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                delete_buttonMouseClicked(evt);
 
             }
         });
 
         javax.swing.GroupLayout teachers_tabLayout = new javax.swing.GroupLayout(teachers_tab);
         teachers_tabLayout.setHorizontalGroup(
-        	teachers_tabLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(teachers_tabLayout.createSequentialGroup()
-        			.addComponent(teacher_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(200)
-        			.addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING, false)
-        					.addComponent(teacherFirstName_label)
-        					.addComponent(teacherLastName_label)
-        					.addComponent(teacherPrefix_label)
-        					.addComponent(teacherid_label)
-        					.addComponent(teacherFirstName_input)
-        					.addComponent(teacherLastName_input)
-        					.addComponent(teacherPrefix_input)
-        					.addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(addteacher_label)
-        				.addGroup(teachers_tabLayout.createSequentialGroup()
-        					.addGap(80)
-        					.addComponent(clearteacher_button)
-        					.addGap(18)
-        					.addComponent(teacher_button)
-        					.addGap(18)
-        					.addComponent(delete_button)))
-        			.addGap(200))
+                teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(teachers_tabLayout.createSequentialGroup()
+                                .addComponent(teacher_spanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(200)
+                                .addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(teachers_tabLayout.createParallelGroup(Alignment.LEADING, false)
+                                                .addComponent(teacherFirstName_label)
+                                                .addComponent(teacherLastName_label)
+                                                .addComponent(teacherPrefix_label)
+                                                .addComponent(teacherid_label)
+                                                .addComponent(teacherFirstName_input)
+                                                .addComponent(teacherLastName_input)
+                                                .addComponent(teacherPrefix_input)
+                                                .addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(addteacher_label)
+                                        .addGroup(teachers_tabLayout.createSequentialGroup()
+                                                .addGap(80)
+                                                .addComponent(clearteacher_button)
+                                                .addGap(18)
+                                                .addComponent(teacher_button)
+                                                .addGap(18)
+                                                .addComponent(delete_button)))
+                                .addGap(200))
         );
         teachers_tabLayout.setVerticalGroup(
-        	teachers_tabLayout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(teacher_spanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
-        		.addGroup(teachers_tabLayout.createSequentialGroup()
-        			.addGap(45)
-        			.addComponent(addteacher_label)
-        			.addGap(31)
-        			.addComponent(teacherFirstName_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(teacherFirstName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(teacherLastName_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(teacherLastName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(teacherPrefix_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(teacherPrefix_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(teacherid_label)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addGroup(teachers_tabLayout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(clearteacher_button)
-        				.addComponent(teacher_button)
-        				.addComponent(delete_button))
-        			.addContainerGap(346, Short.MAX_VALUE))
+                teachers_tabLayout.createParallelGroup(Alignment.LEADING)
+                        .addComponent(teacher_spanel, GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                        .addGroup(teachers_tabLayout.createSequentialGroup()
+                                .addGap(45)
+                                .addComponent(addteacher_label)
+                                .addGap(31)
+                                .addComponent(teacherFirstName_label)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(teacherFirstName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(teacherLastName_label)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(teacherLastName_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(teacherPrefix_label)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(teacherPrefix_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(teacherid_label)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(teacherid_input, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18)
+                                .addGroup(teachers_tabLayout.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(clearteacher_button)
+                                        .addComponent(teacher_button)
+                                        .addComponent(delete_button))
+                                .addContainerGap(346, Short.MAX_VALUE))
         );
         teachers_tab.setLayout(teachers_tabLayout);
 
@@ -535,7 +526,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         student_spanel.setViewportView(student_table);
 
-        addstudent_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
+        addstudent_label.setFont(new java.awt.Font("Dialog", 1, 14));
         addstudent_label.setForeground(new java.awt.Color(51, 51, 51));
         addstudent_label.setText("Add Student:");
 
@@ -591,79 +582,79 @@ public class Admin extends javax.swing.JFrame {
 
         studentBday_label.setForeground(new java.awt.Color(51, 51, 51));
         studentBday_label.setText("Birthday:");
-        
+
         studentLastName_input = new JTextField();
         studentLastName_input.setForeground(new Color(51, 51, 51));
         studentLastName_input.setBackground(Color.WHITE);
-        
+
         studentId_input = new JTextField();
         studentId_input.setForeground(new Color(51, 51, 51));
         studentId_input.setBackground(Color.WHITE);
-        
+
         studentPassword_input = new JTextField();
         studentPassword_input.setForeground(new Color(51, 51, 51));
         studentPassword_input.setBackground(Color.WHITE);
-        
+
         stellarnum_input = new JTextField();
         stellarnum_input.setForeground(new Color(51, 51, 51));
         stellarnum_input.setBackground(Color.WHITE);
-        
+
         studentEmail_input = new JTextField();
         studentEmail_input.setForeground(new Color(51, 51, 51));
         studentEmail_input.setBackground(Color.WHITE);
-        
+
         studentGpa_input = new JTextField();
         studentGpa_input.setForeground(new Color(51, 51, 51));
         studentGpa_input.setBackground(Color.WHITE);
-        
+
         studentMajor_input = new JTextField();
         studentMajor_input.setForeground(new Color(51, 51, 51));
         studentMajor_input.setBackground(Color.WHITE);
-        
+
         studentYear_input = new JTextField();
         studentYear_input.setForeground(new Color(51, 51, 51));
         studentYear_input.setBackground(Color.WHITE);
-        
+
         studentBday_input = new JTextField();
         studentBday_input.setForeground(new Color(51, 51, 51));
         studentBday_input.setBackground(Color.WHITE);
-        
+
         JLabel lblPhone = new JLabel();
         lblPhone.setText("Phone:");
         lblPhone.setForeground(new Color(51, 51, 51));
-        
+
         JLabel lblAddress = new JLabel();
         lblAddress.setText("Address:");
         lblAddress.setForeground(new Color(51, 51, 51));
-        
+
         studentPhone_input = new JTextField();
         studentPhone_input.setForeground(new Color(51, 51, 51));
         studentPhone_input.setBackground(Color.WHITE);
-        
+
         studentAddress_input = new JTextField();
         studentAddress_input.setForeground(new Color(51, 51, 51));
         studentAddress_input.setBackground(Color.WHITE);
-        
+
         JLabel lblState = new JLabel();
         lblState.setText("State:");
         lblState.setForeground(new Color(51, 51, 51));
-        
+
         JLabel lblCity = new JLabel();
         lblCity.setText("City:");
         lblCity.setForeground(new Color(51, 51, 51));
-        
+
         studentState_input = new JTextField();
         studentState_input.setForeground(new Color(51, 51, 51));
         studentState_input.setBackground(Color.WHITE);
-        
+
         studentCity_input = new JTextField();
         studentCity_input.setForeground(new Color(51, 51, 51));
         studentCity_input.setBackground(Color.WHITE);
-        
+
         JLabel lblZipcode = new JLabel();
         lblZipcode.setText("Zipcode:");
         lblZipcode.setForeground(new Color(51, 51, 51));
-        
+
         studentZip_input = new JTextField();
         studentZip_input.setForeground(new Color(51, 51, 51));
         studentZip_input.setBackground(Color.WHITE);
@@ -833,135 +824,135 @@ public class Admin extends javax.swing.JFrame {
         students_tab.setLayout(students_tabLayout);
 
         admin_tab.addTab("Students", students_tab);
-        
+
         JPanel updateStud = new JPanel();
         updateStud.setBackground(Color.WHITE);
         admin_tab.addTab("Update Balance", null, updateStud, null);
-        
+
         JScrollPane scrollPane = new JScrollPane();
-        
+
         JLabel label_3 = new JLabel();
         label_3.setText("ID:");
         label_3.setForeground(new Color(51, 51, 51));
-        
+
         IDbox = new JTextField();
         IDbox.setForeground(new Color(51, 51, 51));
         IDbox.setBackground(Color.WHITE);
-        
+
         JLabel updateStud_label = new JLabel();
         updateStud_label.setText("Update Balance:");
         updateStud_label.setForeground(new Color(51, 51, 51));
         updateStud_label.setFont(new Font("Dialog", Font.BOLD, 14));
-        
+
         JButton clearupbal = new JButton();
         clearupbal.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		balanceupdatebox.setText("");
-        		IDbox.setText("");
-        	}
+            public void actionPerformed(ActionEvent arg0) {
+                balanceupdatebox.setText("");
+                IDbox.setText("");
+            }
         });
         clearupbal.setText("Clear");
-        
+
         JButton btnUpdate = new JButton();
         btnUpdate.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		try {
+            public void actionPerformed(ActionEvent arg0) {
+                try {
 
                     String newbal = new String(balanceupdatebox.getText());
-                    String ID = new String (IDbox.getText());
+                    String ID = new String(IDbox.getText());
                     final String PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{4,}$";
-                    
+
 
                     if (balanceupdatebox.getText().isEmpty() | IDbox.getText().isEmpty()) {
 
                         JOptionPane.showMessageDialog(null, "Please fill in all fields");
                     } else {
-                    	int i = Integer.parseInt(newbal);
+                        int i = Integer.parseInt(newbal);
                         String query = "SELECT * FROM students WHERE student_id=?";
                         PreparedStatement pst = connection.prepareStatement(query);
                         pst.setString(1, ID);
                         ResultSet rs = pst.executeQuery();
 
-                            String update = "UPDATE students SET balance = ? WHERE student_id = ?";
-                            PreparedStatement preparedStmt = connection.prepareStatement(update);
-                            preparedStmt.setInt(1, i);
-                            preparedStmt.setString(2, ID);
+                        String update = "UPDATE students SET balance = ? WHERE student_id = ?";
+                        PreparedStatement preparedStmt = connection.prepareStatement(update);
+                        preparedStmt.setInt(1, i);
+                        preparedStmt.setString(2, ID);
 
-                            preparedStmt.executeUpdate();
+                        preparedStmt.executeUpdate();
 
-                            //Calls the dashboard method and sets/displays the studentname as the input of the student id.
-                            JOptionPane.showMessageDialog(null, "Balance Updated");
+                        //Calls the dashboard method and sets/displays the studentname as the input of the student id.
+                        JOptionPane.showMessageDialog(null, "Balance Updated");
 
 
-                            //JOptionPane.showMessageDialog(null, "Username and password is correct");
+                        //JOptionPane.showMessageDialog(null, "Username and password is correct");
 
                         rs.close();
                         pst.close();
                         fetchStudents();
-                    }}
-                 catch (Exception e1) {
-                    JOptionPane.showMessageDialog(null, e1);
-        	}
                     }
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, e1);
+                }
+            }
         });
         btnUpdate.setText("Update");
-        
+
         JLabel lblNewAmountDue = new JLabel();
         lblNewAmountDue.setText("New Amount Due:");
         lblNewAmountDue.setForeground(new Color(51, 51, 51));
-        
+
         balanceupdatebox = new JTextField();
         balanceupdatebox.setForeground(new Color(51, 51, 51));
         balanceupdatebox.setBackground(Color.WHITE);
         GroupLayout gl_updateStud = new GroupLayout(updateStud);
         gl_updateStud.setHorizontalGroup(
-        	gl_updateStud.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_updateStud.createSequentialGroup()
-        			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_updateStud.createSequentialGroup()
-        					.addGap(200)
-        					.addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_updateStud.createSequentialGroup()
-        							.addComponent(lblNewAmountDue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addContainerGap())
-        						.addGroup(gl_updateStud.createSequentialGroup()
-        							.addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
-        								.addComponent(updateStud_label)
-        								.addComponent(label_3))
-        							.addGap(511))
-        						.addGroup(gl_updateStud.createSequentialGroup()
-        							.addComponent(balanceupdatebox, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
-        							.addContainerGap())
-        						.addGroup(gl_updateStud.createSequentialGroup()
-        							.addComponent(IDbox, GroupLayout.PREFERRED_SIZE, 403, GroupLayout.PREFERRED_SIZE)
-        							.addContainerGap())))
-        				.addGroup(gl_updateStud.createSequentialGroup()
-        					.addGap(219)
-        					.addComponent(btnUpdate)
-        					.addGap(27)
-        					.addComponent(clearupbal)
-        					.addGap(1165))))
+                gl_updateStud.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_updateStud.createSequentialGroup()
+                                .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_updateStud.createSequentialGroup()
+                                                .addGap(200)
+                                                .addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
+                                                        .addGroup(gl_updateStud.createSequentialGroup()
+                                                                .addComponent(lblNewAmountDue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addContainerGap())
+                                                        .addGroup(gl_updateStud.createSequentialGroup()
+                                                                .addGroup(gl_updateStud.createParallelGroup(Alignment.LEADING)
+                                                                        .addComponent(updateStud_label)
+                                                                        .addComponent(label_3))
+                                                                .addGap(511))
+                                                        .addGroup(gl_updateStud.createSequentialGroup()
+                                                                .addComponent(balanceupdatebox, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
+                                                                .addContainerGap())
+                                                        .addGroup(gl_updateStud.createSequentialGroup()
+                                                                .addComponent(IDbox, GroupLayout.PREFERRED_SIZE, 403, GroupLayout.PREFERRED_SIZE)
+                                                                .addContainerGap())))
+                                        .addGroup(gl_updateStud.createSequentialGroup()
+                                                .addGap(219)
+                                                .addComponent(btnUpdate)
+                                                .addGap(27)
+                                                .addComponent(clearupbal)
+                                                .addGap(1165))))
         );
         gl_updateStud.setVerticalGroup(
-        	gl_updateStud.createParallelGroup(Alignment.LEADING)
-        		.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
-        		.addGroup(gl_updateStud.createSequentialGroup()
-        			.addGap(45)
-        			.addComponent(updateStud_label)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(label_3)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(IDbox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(lblNewAmountDue)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(balanceupdatebox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(25)
-        			.addGroup(gl_updateStud.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnUpdate)
-        				.addComponent(clearupbal))
-        			.addContainerGap(558, Short.MAX_VALUE))
+                gl_updateStud.createParallelGroup(Alignment.LEADING)
+                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+                        .addGroup(gl_updateStud.createSequentialGroup()
+                                .addGap(45)
+                                .addComponent(updateStud_label)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(label_3)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(IDbox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(lblNewAmountDue)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(balanceupdatebox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGap(25)
+                                .addGroup(gl_updateStud.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(btnUpdate)
+                                        .addComponent(clearupbal))
+                                .addContainerGap(558, Short.MAX_VALUE))
         );
         updateStud.setLayout(gl_updateStud);
 
@@ -980,7 +971,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         classinstructor_spanel.setViewportView(classinstructor_table);
 
-        classinstructor_label.setFont(new java.awt.Font("Dialog", 1, 14)); 
+        classinstructor_label.setFont(new java.awt.Font("Dialog", 1, 14));
         classinstructor_label.setForeground(new java.awt.Color(51, 51, 51));
         classinstructor_label.setText("Class Instructors:");
 
@@ -1190,9 +1181,8 @@ public class Admin extends javax.swing.JFrame {
             dispose();
         }
     }
-    
+
     private void delete_buttonMouseClicked(java.awt.event.MouseEvent evt) {
-    
     	 int delete = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
 
          if (delete == 0) {
@@ -1217,13 +1207,12 @@ public class Admin extends javax.swing.JFrame {
     		}
          }
     }
-    
-    
-    
+
 
     private void classtitle_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
+
     private void fname_inputActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -1284,20 +1273,19 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
         }
-		fetchTeachers();
+        fetchTeachers();
     }
 
 
-
     private void addStudents_buttonActionPerformed(java.awt.event.ActionEvent evt) {
-      
+
         Statement statement = null;
 
         try {
             statement = connection.createStatement();
 
             String firstName = studentFirstName_input.getText().trim().toUpperCase();
-            String lastName =  studentGpa_input.getText().trim().toUpperCase();
+            String lastName = studentGpa_input.getText().trim().toUpperCase();
             String studentID = studentId_input.getText();
             String password = studentPassword_input.getText().trim();
             String email = studentEmail_input.getText().trim();
@@ -1306,13 +1294,13 @@ public class Admin extends javax.swing.JFrame {
             String bday = studentBday_input.getText().trim().toUpperCase();
             String major = studentMajor_input.getText().trim().toUpperCase();
             String schoolYear = studentYear_input.getText().trim().toUpperCase();
-            
+
             String phone = studentPhone_input.getText().trim().toUpperCase();
             String address = studentAddress_input.getText().trim().toUpperCase();
             String state = studentState_input.getText().trim().toUpperCase();
             String city = studentCity_input.getText().trim().toUpperCase();
             int zip = Integer.parseInt(studentZip_input.getText());
-            
+
 
             String sql = "INSERT INTO students "
                     + "(panther_num, first_name, last_name, email, student_id, password, GPA, bday, major, school_year, phone, address, state, city, zipcode) "
@@ -1327,37 +1315,36 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
             e.printStackTrace();
         }
-        
+
         fetchStudents();
 
     }
-    
-    private void addInstructor_buttonActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    	 Statement statement = null;
 
-         try {
-             statement = connection.createStatement();
+    private void addInstructor_buttonActionPerformed(java.awt.event.ActionEvent evt) {
+        Statement statement = null;
 
-             String crn = crn_input.getText().trim().toUpperCase();
-             int id = Integer.parseInt(teachid_input.getText());
-             String class_id = clasid_input.getText().trim().toUpperCase();
-             String semester = semester_input.getText().trim().toUpperCase();
-             String day = days_input.getText().trim().toUpperCase();
-             String time = classtime_input.getText().trim().toUpperCase();
+        try {
+            statement = connection.createStatement();
+
+            String crn = crn_input.getText().trim().toUpperCase();
+            int id = Integer.parseInt(teachid_input.getText());
+            String class_id = clasid_input.getText().trim().toUpperCase();
+            String semester = semester_input.getText().trim().toUpperCase();
+            String day = days_input.getText().trim().toUpperCase();
+            String time = classtime_input.getText().trim().toUpperCase();
 
 
-             String sql = "INSERT INTO teacher_class " + "(CRN,teacher_id,class_id,semester,day,class_time) "
-                     + "VALUES('" + crn + "','" + id + "','" + class_id + "','" + semester + "','" + day + "','" + time + "') ";
+            String sql = "INSERT INTO teacher_class " + "(CRN,teacher_id,class_id,semester,day,class_time) "
+                    + "VALUES('" + crn + "','" + id + "','" + class_id + "','" + semester + "','" + day + "','" + time + "') ";
 
-             statement.execute(sql);
+            statement.execute(sql);
 
-             JOptionPane.showMessageDialog(null, "Added Successfully!");
+            JOptionPane.showMessageDialog(null, "Added Successfully!");
 
-         } catch (SQLException e) {
-             JOptionPane.showMessageDialog(null, e.getMessage());
-             e.printStackTrace();
-         }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void clearclass_buttonMouseClicked(java.awt.event.MouseEvent evt) {
@@ -1412,86 +1399,86 @@ public class Admin extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("StellarStarLight.png")));
 
     }
-    
-    public void fetchStudents (){
 
-        try{
-        
+    public void fetchStudents() {
+
+        try {
+
             String stdTable = "select * from students";
             pst = connection.prepareStatement(stdTable);
             rs = pst.executeQuery();
             student_table.setModel(DbUtils.resultSetToTableModel(rs));
-           
-            rs.close();
-			pst.close();
-            
-        
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        
-        }
-    
-     }
-       public void fetchTeachers (){
 
-        try{
-        
+            rs.close();
+            pst.close();
+
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
+
+    public void fetchTeachers() {
+
+        try {
+
             String teachTable = "select * from teacher";
             pst = connection.prepareStatement(teachTable);
             rs = pst.executeQuery();
             teachers_table.setModel(DbUtils.resultSetToTableModel(rs));
-            
-            rs.close();
-			pst.close();
-            
-        
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        
-        }
-    
-     }
-    
-      public void fetchClasses(){
 
-        try{
+            rs.close();
+            pst.close();
+
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
+
+    public void fetchClasses() {
+
+        try {
             String classTable = "select * from classes";
             pst = connection.prepareStatement(classTable);
             rs = pst.executeQuery();
-           classes_table.setModel(DbUtils.resultSetToTableModel(rs));
-          
-           rs.close();
-		   pst.close();
-            
-        
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        
-        }
-    
-     }
-      
-      
-       public void fetchClassInstructor(){
+            classes_table.setModel(DbUtils.resultSetToTableModel(rs));
 
-        try{
-        
-           String cinstructTable = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
-           		+ "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
-           		+ "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";
+            rs.close();
+            pst.close();
+
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }
+
+
+    public void fetchClassInstructor() {
+
+        try {
+
+            String cinstructTable = "select teacher_class.class_id, teacher_class.CRN, teacher_class.semester, teacher_class.day, teacher_class.class_time, classes.class_name, classes.class_credit, classes.class_subj, teacher.teacher_last_name "
+                    + "from teacher_class INNER JOIN classes on classes.class_id = teacher_class.class_id "
+                    + "INNER JOIN teacher on teacher.teacher_id = teacher_class.teacher_id";
             pst = connection.prepareStatement(cinstructTable);
             rs = pst.executeQuery();
             classinstructor_table.setModel(DbUtils.resultSetToTableModel(rs));
 
             rs.close();
-			pst.close();
-            
-            
-        
-        } catch(Exception e){
+            pst.close();
+
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        
+
         }
-    
-     }
+
+    }
 }
