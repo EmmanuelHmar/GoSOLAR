@@ -1,6 +1,5 @@
 package stellar;
 
-
 public class Stellar {
 
     //The main method calls the Login class and makes it visible. It also gives the window a "Nimbus look". The Nimbus look is optional.

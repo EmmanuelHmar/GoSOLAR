@@ -2,7 +2,6 @@ package stellar;
 
 import net.proteanit.sql.DbUtils;
 
-import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListSelectionEvent;
@@ -10,8 +9,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import java.awt.*;
-import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -1265,7 +1262,7 @@ public class StellarDashboard extends javax.swing.JFrame {
 
     }
 
-
+    //Fetch the classes
     public void fetchClass() {
 
         try {
@@ -1363,6 +1360,7 @@ public class StellarDashboard extends javax.swing.JFrame {
         sett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    //    Get regular classes
     public void fetchRegClasses() {
 
         try {
@@ -1395,6 +1393,7 @@ public class StellarDashboard extends javax.swing.JFrame {
      * Changes the headers titles
      */
 
+//    Fetch the class schedules
     public void fetchSchudleClasses() {
 
         try {
